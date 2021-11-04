@@ -9,7 +9,7 @@ const parse = require('parse-duration');
 const removedInfo = require('./Extras.js');
 const prettyMilliseconds = require('pretty-ms');
 
-new CronJob('0 30 6,9,13,19,21 * * 0-5', async () => {
+new CronJob('0 30 6,9,13,19 * * 0-5', async () => {
   console.log("updating description");
   let text = await generateWFDDescription();
   try {
