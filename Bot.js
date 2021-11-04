@@ -6,11 +6,11 @@ const CronJob = require('cron').CronJob;
 const qrcode = require('qrcode-terminal');
 const SESSION_FILE_PATH = './sessions/bot.json';
 const prettyMilliseconds = require('pretty-ms');
-
+require('dotenv').config();
 
 class Bot {
   constructor(timeout = undefined) {
-    this.FAKE_DATABASE = '/home/dinnerBot/whatsapp.json';
+    this.FAKE_DATABASE = process.env.PRODUCTION ? '/home/dinnerBot/whatsapp.json' : "../dinnerBot/whatsapp.json";
     this.database = JSON.parse(fs.readFileSync(this.FAKE_DATABASE)) || {};
     new CronJob('0 0 0 * * 5', () => {
       this.database.alternateWeek = !this.database.alternateWeek
