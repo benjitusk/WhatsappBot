@@ -5,8 +5,6 @@ const axios = require('axios');
 const mysql = require('mysql');
 const Bot = require('./Bot.js');
 const CronJob = require('cron').CronJob;
-
-//const removedInfo = require('./Extras.js');
 const parse = require('parse-duration');
 const removedInfo = require('./Extras.js');
 const prettyMilliseconds = require('pretty-ms');
@@ -98,7 +96,7 @@ function getMeal(meal) {
       break;
     case "dinner":
       if ((dayIndex < 6 && ((day.getHours() == 19 && day.getMinutes() >= 30) ||
-        day.getHours() > 19)) || (dayIndex >= 6 && day.getHours() > 22)) {
+          day.getHours() > 19)) || (dayIndex >= 6 && day.getHours() > 22)) {
         // get dinner for the next day
         dayIndex++;
         if (dayIndex >= 7) dayIndex -= 7;
@@ -142,17 +140,17 @@ async function generateWFDDescription() {
   for (let day of bot.database.week) {
     for (let meal of ["breakfast", "lunch", "dinner"]) {
       foodRotation += `${day} ${meal}:`;
-        if (typeof bot.database[meal].rotation[day] == "object") {
-          for (let i = 0; i < bot.database[meal].rotation[day].length; i++) {
-              foodRotation += ` ${bot.database[meal].rotation[day][i]}`;
-              if (i != bot.database[meal].rotation[day].length - 1) foodRotation += " OR";
-              else foodRotation += "\n";
-          }
+      if (typeof bot.database[meal].rotation[day] == "object") {
+        for (let i = 0; i < bot.database[meal].rotation[day].length; i++) {
+          foodRotation += ` ${bot.database[meal].rotation[day][i]}`;
+          if (i != bot.database[meal].rotation[day].length - 1) foodRotation += " OR";
+          else foodRotation += "\n";
+        }
       } else {
         foodRotation += ` ${bot.database[meal].rotation[day]}\n`;
       }
     }
-      foodRotation += "\n";
+    foodRotation += "\n";
   }
   let text = breakfast + "\n" + lunch + "\n" + dinner + "\n\n" + quote + "\n========\n" + foodRotation;
   return text;
