@@ -13,7 +13,7 @@ class Bot {
     this.FAKE_DATABASE = process.env.PRODUCTION ? '/home/dinnerBot/whatsapp.json' : "../dinnerBot/whatsapp.json";
     this.database = JSON.parse(fs.readFileSync(this.FAKE_DATABASE)) || {};
     new CronJob('0 0 0 * * 5', () => {
-      this.database.alternateWeek = !this.database.alternateWeek
+      this.database.alternateWeek = !this.database.alternateWeek;
     }, null, true);
     this.maximumLifetime = timeout; // 30 minutes
     if (timeout) setTimeout(() => {
@@ -80,9 +80,9 @@ The word "goulash" was mentioned ${database.goulashCount} times.
       "chatID": chat.id._serialized,
       "dueDate": dueDate
     };
-    console.log(`Adding the following task to the database: ${JSON.stringify(task, null, 2)}`)
+    console.log(`Adding the following task to the database: ${JSON.stringify(task, null, 2)}`);
     this.database.futureTasks.push(task);
-    this.writeChangesToFile()
+    this.writeChangesToFile();
   }
 
   newQuote(quote) {

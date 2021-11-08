@@ -136,7 +136,12 @@ async function generateWFDDescription() {
   let lunch = getMeal("lunch");
   let dinner = getMeal("dinner");
   let quote = await getQuote();
-  let foodRotation = "\n\n";
+  let text = breakfast + "\n" + lunch + "\n" + dinner + "\n\n" + quote;// + "\n========\n" + foodRotation;
+  return text;
+}
+
+function getFullMealRotation() {
+  let foodRotation = "";
   for (let day of bot.database.week) {
     for (let meal of ["breakfast", "lunch", "dinner"]) {
       foodRotation += `${day} ${meal}:`;
@@ -152,8 +157,7 @@ async function generateWFDDescription() {
     }
     foodRotation += "\n";
   }
-  let text = breakfast + "\n" + lunch + "\n" + dinner + "\n\n" + quote + "\n========\n" + foodRotation;
-  return text;
+  return foodRotation;
 }
 
 async function logMessage(msg) {
