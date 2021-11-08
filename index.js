@@ -189,7 +189,8 @@ async function logMessage(msg) {
     if (err) throw err;
   });
   // contactDisplayName
-  let cDN = msg.contactOfSender.pushname || msg.contactChat.chat_name;
+  console.log(`contactOfSender.name: ${msg.contactOfSender.name}`);
+  console.log(`contactChat.name: ${msg.contactChat.name}`);
   chatValues = {
     chatID: msg.id.remote,
     chat_name: msg.chat.name,
@@ -200,7 +201,7 @@ async function logMessage(msg) {
     last_type: msg.type,
     lastID: msg.id._serialized,
     is_group: msg.chat.isGroup,
-    contact_display_name: cDN,
+    contact_display_name: msg.contactOfSender.displayName,
     last_media_ext: ext,
   };
   con.query("INSERT INTO chats SET ? ON DUPLICATE KEY UPDATE ?", [chatValues, chatValues], err => {
@@ -219,15 +220,13 @@ function isFromAdmin(msg) {
 
 
 bot.client.on('message_create', async msg => {
-  // if (msg.fromMe) return;
-  if (msg.fromMe && includes(msg.body, "") > 0) return; // if mesage contains invisible HAIR SPACE char, return because it's automated
+  if (msg.fromMe) return;
+  // if (msg.fromMe && includes(msg.body, "") > 0) return; // if mesage contains invisible HAIR SPACE char, return because it's automated
   if (["e2e_notification", "call_log"].includes(msg.type)) return; // Don't bother with calls or end2end alerts
   msg.chat = await msg.getChat();
   msg.contactOfSender = await msg.getContact();
   msg.contactChat = await msg.contactOfSender.getChat();
-  if (!msg.contactChat) msg.contactChat = {
-    chat_name: "Torat Shraga"
-  };
+  msg.contactOfSender.displayName = msg.contactOfSender.name || msg.contactOfSender.pushname || msg.contactChat.name;
   msg.originalBody = msg.body;
   msg.body = msg.body.toLowerCase();
   msg.sender = msg.author || msg.from;
