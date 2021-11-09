@@ -180,7 +180,7 @@ async function logMessage(msg) {
     mediaID: msg.mediaKey || null,
     mentionedIds: mentions,
     chat_name: msg.chat.name,
-    pushname: msg.contactOfSender.pushname || "Torat Shraga",
+    pushname: msg.contactOfSender.pushname,
     is_group: msg.chat.isGroup,
     chatID: msg.id.remote,
     media_ext: ext,
@@ -197,7 +197,7 @@ async function logMessage(msg) {
     last_at: msg.timestamp,
     last_body: msg.originalBody,
     last_sender: msg.sender,
-    last_pushname: msg.contactOfSender.pushname || "Torat Shraga",
+    last_pushname: msg.contactOfSender.pushname,
     last_type: msg.type,
     lastID: msg.id._serialized,
     is_group: msg.chat.isGroup,
@@ -220,13 +220,15 @@ function isFromAdmin(msg) {
 
 
 bot.client.on('message_create', async msg => {
-  if (msg.fromMe) return;
-  // if (msg.fromMe && includes(msg.body, "") > 0) return; // if mesage contains invisible HAIR SPACE char, return because it's automated
+  // if (msg.fromMe) return;
+  if (msg.fromMe && includes(msg.body, "\u200B")) return; // if mesage contains invisible HAIR SPACE char, return because it's automated
   if (["e2e_notification", "call_log"].includes(msg.type)) return; // Don't bother with calls or end2end alerts
   msg.chat = await msg.getChat();
   msg.contactOfSender = await msg.getContact();
   msg.contactChat = await msg.contactOfSender.getChat();
-  msg.contactOfSender.displayName = msg.contactOfSender.name || msg.contactOfSender.pushname || msg.contactChat.name;
+  msg.contactOfSender.displayName = msg.fromMe ?
+    "YTS Bot" :
+    msg.contactOfSender.name || msg.contactOfSender.pushname || msg.contactChat.name;
   msg.originalBody = msg.body;
   msg.body = msg.body.toLowerCase();
   msg.sender = msg.author || msg.from;
