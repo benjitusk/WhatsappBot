@@ -189,8 +189,8 @@ async function logMessage(msg) {
     if (err) throw err;
   });
   // contactDisplayName
-  console.log(`contactOfSender.name: ${msg.contactOfSender.name}`);
-  console.log(`contactChat.name: ${msg.contactChat.name}`);
+  // console.log(`contactOfSender.name: ${msg.contactOfSender.name}`);
+  // console.log(`contactChat.name: ${msg.contactChat.name}`);
   chatValues = {
     chatID: msg.id.remote,
     chat_name: msg.chat.name,
