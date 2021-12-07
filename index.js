@@ -437,6 +437,12 @@ bot.client.on('message_create', async msg => {
       chat.sendMessage(replyText);
     }
     switch (msg.body) {
+      case "poll":
+        // const chat = await bot.client.getChatById(redacted.TEST_CHAT_ID);
+        const chat = msg.chat;
+        let poll = new Poll("testPoll", chat, "dinner", "mystery meat");
+        poll.publish();
+        break;
       case "wfb":
         msg.reply(getMeal("breakfast"));
         break;
