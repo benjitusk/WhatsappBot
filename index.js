@@ -27,7 +27,7 @@ new CronJob("0 45 8,12,18 * * 0-5", async () => {
   let quote = await getQuote();
   let text = breakfast + "\n" + lunch + "\n" + dinner +
     "\n\n" + quote +
-    "\n\n```This is an automated, scheduled message. Bot commands are disabled on this chat to reduce spam.```";
+    "\n\n```This is an automated, scheduled message. Bot commands are temporarily enabled on this chat.```";
   try {
     let chat = await bot.client.getChatById(redacted.WHATS_FOR_DINNER_ID);
     chat.sendMessage(text);
@@ -249,7 +249,7 @@ bot.client.on('message_create', async msg => {
 
   if (bot.database.blacklist.includes(msg.sender)) return;
   if (msg.chat.isGroup) {
-    if ([redacted.TEST_CHAT_ID, redacted.BOT_MAIN_CHAT, redacted.SHRAGA_GROUP_CHAT_ID].includes(msg.chat.id._serialized)) {
+    if ([redacted.TEST_CHAT_ID, redacted.BOT_MAIN_CHAT, redacted.SHRAGA_GROUP_CHAT_ID, redacted.WHATS_FOR_DINNER_ID].includes(msg.chat.id._serialized)) {
       if (bot.database.beta && msg.chat.id._serialized != redacted.TEST_CHAT_ID) return;
       if (includes(msg.body, "@madrichim")) {
         for (let madrich of bot.database.madrichim) {
