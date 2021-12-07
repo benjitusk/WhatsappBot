@@ -186,7 +186,7 @@ async function logMessage(msg) {
     media_ext: ext,
   };
   con.query("INSERT INTO messages SET ?", dbValues, err => {
-    if (err) throw err;
+    if (err) console.log(err.message);
   });
   // contactDisplayName
   // console.log(`contactOfSender.name: ${msg.contactOfSender.name}`);
@@ -204,8 +204,10 @@ async function logMessage(msg) {
     contact_display_name: msg.contactOfSender.displayName,
     last_media_ext: ext,
   };
-  con.query("INSERT INTO chats SET ? ON DUPLICATE KEY UPDATE ?", [chatValues, chatValues], err => {
-    if (err) throw err;
+  con.query("INSERT INTO chats SET ? ON DUPLICATE KEY UPDATE ?", [chatValues, chatValues], (err, result) => {
+    // debugger;
+    if (err) console.log(err.message);
+    // else console.log("Chat updated");
   });
 }
 
@@ -313,7 +315,7 @@ bot.client.on('message_create', async msg => {
           return;
         }
         msg.chat.setMessagesAdminsOnly(true);
-        msg.reply(`This chat will be unmuted in ${prettyMilliseconds(muteSeconds, {secondsDecimalDigits: 0})}`);
+        msg.reply(`This chat will be unmuted in ${prettyMilliseconds(muteSeconds, { secondsDecimalDigits: 0 })}`);
         if (timeout != undefined) clearTimeout(timeout);
         timeout = setTimeout(_ => {
           msg.chat.setMessagesAdminsOnly(false);
@@ -327,7 +329,7 @@ bot.client.on('message_create', async msg => {
         timeout = setTimeout(_ => {
           msg.chat.setMessagesAdminsOnly(false);
         }, unmuteSeconds);
-        if (unmuteSeconds > 0) msg.reply(`This chat will be unmuted in ${prettyMilliseconds(unmuteSeconds, {secondsDecimalDigits: 0})}`);
+        if (unmuteSeconds > 0) msg.reply(`This chat will be unmuted in ${prettyMilliseconds(unmuteSeconds, { secondsDecimalDigits: 0 })}`);
       }
 
       if (includes(msg.body, "!kick") && isFromAdmin(msg)) {
