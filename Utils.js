@@ -119,3 +119,42 @@ The word "goulash" was mentioned ${database.goulashCount} times.
 
 }
 
+// The class for polls
+/**
+ * This is the class for polls.
+ * Use this object to more easily manage active
+ * and unactive polls.
+ */
+class Poll {
+
+  // The constructor for the poll class
+  /**
+   * 
+   * @param {string} pollID 
+   * @param {WAWebJS.Chat} chat 
+   * @param {string} type 
+   * @param {string} topic 
+   */
+  constructor(pollID, chat, type, topic) {
+    this.pollID = pollID;
+    this.chat = chat;
+    this.type = type;
+    this.topic = topic;
+    this.date = Date.now();
+    this.expires = this.date + (1000 * 60 * 60 * 2); // 2 hours
+    this.body = `Please select a rating for the ${this.topic} that was served for ${this.type}.\n\nRemember, pushing a button will send a message with that text to the chat.`;
+    this.title = `${this.type} poll:`;
+    this.footer = "If you wish to vote privately, please *privately reply* to this message with the text '!vote'";
+    this.buttons = new Buttons(this.body, [
+      { id: `${this.pollID}:good`, body: "👍" },
+      { id: `${this.pollID}:meh`, body: "😐" },
+      { id: `${this.pollID}:bad`, body: "👎" },
+    ], this.title, this.footer);
+  }
+  publish() {
+    this.chat.sendMessage(this.buttons);
+  }
+
+}
+
+module.exports = { Bot, Poll };
