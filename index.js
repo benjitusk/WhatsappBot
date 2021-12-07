@@ -3,7 +3,7 @@ const fs = require('fs');
 const mime = require('mime');
 const axios = require('axios');
 const mysql = require('mysql');
-const Bot = require('./Bot.js');
+const { Bot, Poll } = require('./Utils.js');
 const CronJob = require('cron').CronJob;
 const parse = require('parse-duration');
 const removedInfo = require('./Extras.js');
@@ -42,7 +42,7 @@ new CronJob("0 45 8,12,18 * * 0-5", async () => {
 
 // GLOBALS:
 Object.defineProperty(String.prototype, 'capitalize', {
-  value: function() {
+  value: function () {
     return this.charAt(0).toUpperCase() + this.slice(1);
   },
   enumerable: false
@@ -96,7 +96,7 @@ function getMeal(meal) {
       break;
     case "dinner":
       if ((dayIndex < 6 && ((day.getHours() == 19 && day.getMinutes() >= 30) ||
-          day.getHours() > 19)) || (dayIndex >= 6 && day.getHours() > 22)) {
+        day.getHours() > 19)) || (dayIndex >= 6 && day.getHours() > 22)) {
         // get dinner for the next day
         dayIndex++;
         if (dayIndex >= 7) dayIndex -= 7;

@@ -1,23 +1,24 @@
 const fs = require('fs');
 const {
-  Client
+  Client,
+  Buttons
 } = require('whatsapp-web.js');
 const CronJob = require('cron').CronJob;
 const qrcode = require('qrcode-terminal');
-const SESSION_FILE_PATH = './sessions/bot.json';
+const SESSION_FILE_PATH = '../whatsapp/sessions/bot.json';
 const prettyMilliseconds = require('pretty-ms');
 require('dotenv').config();
 
 class Bot {
   constructor(timeout = undefined) {
-    this.FAKE_DATABASE = process.env.PRODUCTION ? '/home/dinnerBot/whatsapp.json' : "../dinnerBot/whatsapp.json";
+    this.FAKE_DATABASE = process.env.PRODUCTION ? '/home/dinnerBot/whatsapp.json' : "../dinnerSite/whatsapp.json";
     this.database = JSON.parse(fs.readFileSync(this.FAKE_DATABASE)) || {};
     new CronJob('0 0 0 * * 5', () => {
       this.database.alternateWeek = !this.database.alternateWeek;
     }, null, true);
     this.maximumLifetime = timeout; // 30 minutes
     if (timeout) setTimeout(() => {
-      console.log(`Restarting process becuase we exceeded the maximum lifetime of ${this.maximumLifetime/600} minutes`);
+      console.log(`Restarting process becuase we exceeded the maximum lifetime of ${this.maximumLifetime / 600} minutes`);
       process.exit(0);
     }, this.maximumLifetime);
     // this.database = JSON.parse(fs.readFileSync('whatsapp.json')) || {};
@@ -61,11 +62,11 @@ class Bot {
   }
 
   start() {
-    this.client.initialize();
+    return this.client.initialize();
   }
   generateStats(database) {
     return `Stats have been queried ${database.dinner.statsCount} times.
-"What's for dinner?" has been asked ${database.dinner.count} times, the most recent of which being ${prettyMilliseconds(Date.now() - database.dinner.lastMention, {secondsDecimalDigits: 0})} ago.
+"What's for dinner?" has been asked ${database.dinner.count} times, the most recent of which being ${prettyMilliseconds(Date.now() - database.dinner.lastMention, { secondsDecimalDigits: 0 })} ago.
 
 The word "schnitzel" was mentioned ${database.schnitzelCount} times.
 The words "stir fry" were mentioned ${database.stirfryCount} times.
@@ -118,4 +119,3 @@ The word "goulash" was mentioned ${database.goulashCount} times.
 
 }
 
-module.exports = Bot;
