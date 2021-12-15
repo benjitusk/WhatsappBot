@@ -456,6 +456,8 @@ bot.client.on('message_create', async msg => {
     }
     switch (msg.body) {
       case "poll":
+        if (!isFromAdmin(msg)) return;
+        let chat = bot.client.getChatById(redacted.BOT_MAIN_CHAT);
         pollManager.publish("TestPoll", chat, "dinner", "Smol Bagles");
         break;
       case "wfb":
