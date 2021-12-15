@@ -444,8 +444,11 @@ bot.client.on('message_create', async msg => {
       // get the index of the end of "poll results"
       let pollID = msg.originalBody.substr(13);
       let poll = bot.database.polls[pollID];
-      if (!poll)
-        return msg.reply(`Sorry, but I couldn't find a poll with the ID "${pollID}".`);
+      if (!poll) {
+        let polls = "";
+        for (const [name] of Object.entries(database.polls)) polls += `${name}\n`;
+        return msg.reply(`Sorry, but I couldn't find a poll with the ID "${pollID}". Here's a list of all the polls I know about:\n\n\`\`\`${polls}\`\`\``);
+      }
 
       let replyText = `${pollID} results:\n\n`;
       for (const [name, voteCount] of Object.entries(poll.results)) {
@@ -474,7 +477,7 @@ bot.client.on('message_create', async msg => {
       if (!(options.id || options.type || options.topic)) return msg.reply("Sorry, but you are missing some parameters. The correct syntax is ```!poll```\n```id: <pollID>```\n```type: <pollType>```\n```topic: <pollTopic>```\n```[test: <true/false>]```\n\n_Pro tip: A test poll privately sends you a preview of the poll, so you can test it out before sending it to the group._");
       msg.reply(`Sending a poll with the following options:\n\n${JSON.stringify(options, null, 2)}`);
       let chat = options.test ? bot.client.getChatById(redacted.TEST_CHAT_ID) : msg.chat;
-      pollManager.publish(options.id, chat, options.type, options.topic);
+      pollManager.publish(options.id, chat, options.type, options.topic, options.test);
     }
     switch (msg.body) {
       case "poll":
