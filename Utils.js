@@ -125,7 +125,7 @@ The word "goulash" was mentioned ${database.goulashCount} times.
  * Use this object to more easily manage active
  * and unactive polls.
  */
-class Poll {
+class Poll_Manager {
 
   // The constructor for the poll class
   /**
@@ -135,21 +135,36 @@ class Poll {
    * @param {string} type 
    * @param {string} topic 
    */
-  constructor(pollID, chat, type, topic) {
-    this.pollID = pollID;
-    this.chat = chat;
-    this.type = type;
-    this.topic = topic;
-    this.date = Date.now();
-    this.expires = this.date + (1000 * 60 * 60 * 2); // 2 hours
-    this.body = `Please select a rating for the ${this.topic} that was served for ${this.type}.\n\nRemember, pushing a button will send a message with that text to the chat.`;
-    this.title = `${this.type} poll:`;
-    this.footer = "If you wish to vote privately, please *privately reply* to this message with the text '!vote'";
-    this.buttons = new Buttons(this.body, [
-      { id: `${this.pollID}:good`, body: "👍" },
-      { id: `${this.pollID}:meh`, body: "😐" },
-      { id: `${this.pollID}:bad`, body: "👎" },
-    ], this.title, this.footer);
+  constructor(bot) {
+    this.bot = bot;
+    this.polls = {};
+  }
+
+  publish(pollID, chat, type, topic) {
+    let date = Date.now();
+    let expires = date + (1000 * 60 * 60 * 2); // 2 hours
+    let body = `Please select a rating for the ${topic} that was served for ${type}.\n\nRemember, pushing a button will send a message with that text to the chat.`;
+    let title = `${type} poll:`;
+    let footer = "If you wish to vote privately, please *privately reply* to this message with the text '!vote'";
+    let buttons = new Buttons(body, [
+      { id: `${pollID}:good`, body: "👍" },
+      { id: `${pollID}:meh`, body: "😐" },
+      { id: `${pollID}:bad`, body: "👎" },
+    ], title, footer);
+    chat.sendMessage(buttons);
+    this.polls[pollID] = {
+      "expires": expires.toString(),
+      "type": type,
+      "topic": topic,
+      "results": {
+        "good": 0,
+        "meh": 0,
+        "bad": 0
+      },
+      "voterIDs": [],
+    };
+    this.bot.database.polls = this.polls;
+    this.bot.writeChangesToFile();
   }
 
   /**
@@ -176,4 +191,4 @@ class Poll {
 
 }
 
-module.exports = { Bot, Poll };
+module.exports = { Bot, Poll_Manager };

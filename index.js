@@ -3,7 +3,7 @@ const fs = require('fs');
 const mime = require('mime');
 const axios = require('axios');
 const mysql = require('mysql');
-const { Bot, Poll } = require('./Utils.js');
+const { Bot, Poll_Manager } = require('./Utils.js');
 const CronJob = require('cron').CronJob;
 const parse = require('parse-duration');
 const removedInfo = require('./Extras.js');
@@ -48,6 +48,7 @@ Object.defineProperty(String.prototype, 'capitalize', {
   enumerable: false
 });
 let bot = new Bot(); //60 * 1000 * 30);
+let pollManager = new Poll_Manager(bot);
 const redacted = new removedInfo();
 var con = mysql.createConnection(redacted.DB_AUTH);
 con.connect(err => {
@@ -440,10 +441,7 @@ bot.client.on('message_create', async msg => {
     }
     switch (msg.body) {
       case "poll":
-        // const chat = await bot.client.getChatById(redacted.TEST_CHAT_ID);
-        const chat = msg.chat;
-        let poll = new Poll("testPoll", chat, "dinner", "mystery meat");
-        poll.publish();
+        pollManager.publish("TestPoll", chat, "dinner", "Smol Bagles");
         break;
       case "wfb":
         msg.reply(getMeal("breakfast"));
