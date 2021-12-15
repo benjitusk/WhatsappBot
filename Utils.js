@@ -130,13 +130,12 @@ class Poll_Manager {
   // The constructor for the poll class
   /**
    * 
-   * @param {string} pollID 
-   * @param {WAWebJS.Chat} chat 
-   * @param {string} type 
-   * @param {string} topic 
+   * @param {Bot} bot The bot object
+   * @param {mysql.Connection} database The mysql connection
    */
-  constructor(bot) {
+  constructor(bot, database) {
     this.bot = bot;
+    this.con = database;
     this.polls = {};
   }
 

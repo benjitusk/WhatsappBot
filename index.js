@@ -48,9 +48,9 @@ Object.defineProperty(String.prototype, 'capitalize', {
   enumerable: false
 });
 let bot = new Bot(); //60 * 1000 * 30);
-let pollManager = new Poll_Manager(bot);
 const redacted = new removedInfo();
 var con = mysql.createConnection(redacted.DB_AUTH);
+let pollManager = new Poll_Manager(bot, con);
 con.connect(err => {
   if (err) throw err;
   console.log("Connected!");
