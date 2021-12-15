@@ -480,11 +480,6 @@ bot.client.on('message_create', async msg => {
       pollManager.publish(options.id, chat, options.type, options.topic, options.test);
     }
     switch (msg.body) {
-      case "poll":
-        if (!isFromAdmin(msg)) return;
-        let chat = await bot.client.getChatById(redacted.BOT_MAIN_CHAT);
-        pollManager.publish("BagelPoll", chat, "dinner", "Smol Bagles");
-        break;
       case "wfb":
         msg.reply(getMeal("breakfast"));
         break;
