@@ -179,7 +179,7 @@ class Poll_Manager {
     let poll = this.polls[pollID];
     if (!poll) return;
     if (poll.voterIDs.includes(result.sender))
-      return result.chat.sendMessage("You have already voted on this poll. Subsequent votes will be discarded.");
+      return result.contactChat.sendMessage("You have already voted on this poll. Subsequent votes will be discarded.");
     let selectedButton = buttonId.split(":")[1];
 
     // Add the vote to this.polls
