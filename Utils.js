@@ -142,7 +142,7 @@ class Poll_Manager {
   publish(pollID, chat, type, topic, test = false) {
     let date = Date.now();
     let expires = date + (1000 * 60 * 60 * 2); // 2 hours
-    let body = `Please select a rating for the ${topic} that were served for ${type}.\n\nRemember, pushing a button will *send a message with that text to the chat*.`;
+    let body = `Please select a rating for the ${topic} served for ${type}.\n\nRemember, pushing a button will *send a message with that text to the chat*.`;
     let title = `${type} poll:`;
     let footer = "Once you cast your vote, subsequent votes by you will be ignored.";
     let buttons = new Buttons(body, [
