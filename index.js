@@ -471,8 +471,10 @@ bot.client.on('message_create', async msg => {
         let value = option.substr(splitIndex + 2);
         options[key] = value;
       }
-      if (!(options.id || options.type || options.topic)) return msg.reply("Sorry, but you are missing some parameters. The correct syntax is ```!poll```\n```id: <pollID>```\n```type: <pollType>```\n```topic: <pollTopic>```\n```[test: <true/false>]```");
-      msg.reply(`Making a poll with the following options:\n\n${JSON.stringify(options, null, 2)}`);
+      if (!(options.id || options.type || options.topic)) return msg.reply("Sorry, but you are missing some parameters. The correct syntax is ```!poll```\n```id: <pollID>```\n```type: <pollType>```\n```topic: <pollTopic>```\n```[test: <true/false>]```\n\n_Pro tip: A test poll privately sends you a preview of the poll, so you can test it out before sending it to the group._");
+      msg.reply(`Sending a poll with the following options:\n\n${JSON.stringify(options, null, 2)}`);
+      let chat = options.test ? bot.client.getChatById(redacted.TEST_CHAT_ID) : msg.chat;
+      pollManager.publish(options.id, chat, options.type, options.topic);
     }
     switch (msg.body) {
       case "poll":
