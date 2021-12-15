@@ -438,6 +438,21 @@ bot.client.on('message_create', async msg => {
         bot.newTask("unblockUser", msg.chat.id._serialized, msg.chat, Date.now() + ignoreSeconds);
       } else replyText += "indefinitly.";
       chat.sendMessage(replyText);
+
+
+    } else if (msg.body.startsWith("poll results")) {
+      // get the index of the end of "poll results"
+      let pollID = msg.originalBody.substr(13);
+      let poll = bot.database.polls[pollID];
+      if (!poll)
+        return msg.reply(`Sorry, but I couldn't find a poll with the ID "${pollID}".`);
+
+      let replyText = `${pollID} results:\n\n`;
+      for (const [name, voteCount] of Object.entries(poll.results)) {
+        replyText += `${name}: ${voteCount}\n`;
+      }
+
+      msg.reply(replyText);
     }
     switch (msg.body) {
       case "poll":
