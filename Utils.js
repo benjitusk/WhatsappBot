@@ -176,6 +176,8 @@ class Poll_Manager {
    * @param {WAWebJS.Message} result
    */
   handleResult(result) {
+    // get poll data from the database (JSON)
+    this.polls = this.bot.database.polls;
     // Get the relevant data from the message. This includes the user, the pollID, and the selectedButtonId.
     let buttonId = result.selectedButtonId;
     let pollID = buttonId.split(":")[0];
