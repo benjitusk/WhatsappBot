@@ -453,6 +453,25 @@ bot.client.on('message_create', async msg => {
       }
 
       msg.reply(replyText);
+    } else if (msg.body.startsWith("!poll") && isFromAdmin(msg)) {
+      // Message schema:
+      /**
+       * !poll
+       * id: <pollID>
+       * type: <pollType>
+       * topic: <pollTopic>
+       */
+      let rawOptions = msg.originalBody.substring(6);
+      let options = {};
+      for (let option of rawOptions.split("\n")) {
+        let splitIndex = option.indexOf(":");
+        if (splitIndex < 0) continue;
+        let key = option.substr(0, splitIndex);
+        let value = option.substr(splitIndex + 2);
+        options[key] = value;
+      }
+      if (!(options.id || options.type || options.topic)) return msg.reply("Sorry, but I couldn't find a poll ID. The correct syntax is ```!poll```\n```id: <pollID>```\n```type: <pollType>```\n```topic: <pollTopic>```");
+      msg.reply(`Making a poll with the following options:\n\n${JSON.stringify(options)}`);
     }
     switch (msg.body) {
       case "poll":
