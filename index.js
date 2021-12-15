@@ -446,7 +446,7 @@ bot.client.on('message_create', async msg => {
       let poll = bot.database.polls[pollID];
       if (!poll) {
         let polls = "";
-        for (const [name] of Object.entries(database.polls)) polls += `${name}\n`;
+        for (const [name] of Object.entries(bot.database.polls)) polls += `${name}\n`;
         return msg.reply(`Sorry, but I couldn't find a poll with the ID "${pollID}". Here's a list of all the polls I know about:\n\n\`\`\`${polls}\`\`\``);
       }
 
