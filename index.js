@@ -204,10 +204,8 @@ async function logMessage(msg) {
     contact_display_name: msg.contactOfSender.displayName,
     last_media_ext: ext,
   };
-  con.query("INSERT INTO chats SET ? ON DUPLICATE KEY UPDATE ?", [chatValues, chatValues], (err, result) => {
-    // debugger;
+  con.query("INSERT INTO chats SET ? ON DUPLICATE KEY UPDATE ?", [chatValues, chatValues], err => {
     if (err) console.log(err.message);
-    // else console.log("Chat updated");
   });
 }
 
