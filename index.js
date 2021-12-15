@@ -165,11 +165,11 @@ async function logMessage(msg) {
   if (msg.type == "location") msg.body = "<LOCATION>";
   let mentions = "";
   let ext = null;
-  if (msg.hasMedia) {
-    let media = await msg.downloadMedia();
-    media.toFilePath(`/home/dinnerBot/static/media/${msg.mediaKey}`);
-    ext = "." + mime.getExtension(media.mimetype);
-  }
+  // if (msg.hasMedia) {
+  //   let media = await msg.downloadMedia();
+  //   media.toFilePath(`/home/dinnerBot/static/media/${msg.mediaKey}`);
+  //   ext = "." + mime.getExtension(media.mimetype);
+  // }
   for (let id of msg.mentionedIds) mentions += (id + "|");
   let dbValues = {
     sender: msg.sender,
