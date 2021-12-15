@@ -489,27 +489,6 @@ bot.client.on('message_create', async msg => {
     Platform: ${info.platform}
     WhatsApp version: ${info.phone.wa_version}`);
         break;
-      case "in":
-        let dbValues = {
-          name: msg.contactOfSender.pushname,
-          number: msg.sender,
-          message: msg.body
-        };
-        con.query("INSERT INTO wash SET ?", dbValues, err => {
-          if (err) throw err;
-        });
-        con.query("SELECT DISTINCT number FROM wash", (err, result) => {
-          if (err) throw err;
-          msg.reply(`Thanks! we now have $${result.length * 4.5} raised to buy the washing machine`);
-        });
-        // NOTE: INDUSTRIAL MACHINE COSTS MORE
-        break;
-      case "$":
-        con.query("SELECT DISTINCT number FROM wash", (err, result) => {
-          if (err) throw err;
-          msg.reply(`We have $${result.length * 4.5} raised to buy the washing machine. We are about ${result.length}% there.`);
-        });
-        break;
       default:
         // msg.reply("Sorry, but I do not understand what you are trying to tell me. If you want to sign up for the washing machine, send me a message that contains just the word `in`. Please do not send `in` multiple times. Thank you.")
         break;
