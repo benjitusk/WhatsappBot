@@ -502,7 +502,7 @@ bot.client.on('message_create', async msg => {
         let info = bot.client.info;
         msg.reply(`*Connection info*
     User name: ${info.pushname}
-    My number: ${info.me.user}
+    My number: ${info.wid.user}
     Platform: ${info.platform}
     WhatsApp version: ${info.phone.wa_version}`);
         break;
