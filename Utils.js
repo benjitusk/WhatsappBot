@@ -164,6 +164,10 @@ class Poll_Manager {
     };
     this.bot.database.polls = this.polls;
     this.bot.writeChangesToFile();
+
+    // update the MySQL database
+    if (false)
+      this.con.query(`INSERT INTO polls (poll_id, type, topic) VALUES ("${pollID}", "${type}", "${topic}")`);
   }
 
   /**
@@ -186,6 +190,9 @@ class Poll_Manager {
     poll.voterIDs.push(result.sender);
     this.bot.database.polls = this.polls;
     this.bot.writeChangesToFile();
+    // Update the MySQL database
+    if (false)
+      this.con.query(`UPDATE polls SET ${selectedButton} = ${selectedButton} + 1 WHERE poll_id = "${pollID}"`);
   }
 
 }
