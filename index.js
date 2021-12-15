@@ -236,6 +236,10 @@ bot.client.on('message_create', async msg => {
   let replyText = "";
   let replyMentions = [];
 
+  if (msg.type == "buttons_response") {
+    pollManager.handleResult(msg);
+  }
+
   logMessage(msg);
   msg.chat.sendSeen();
   if (msg.body == "!on" && isFromAdmin(msg)) {

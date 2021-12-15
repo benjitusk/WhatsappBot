@@ -151,8 +151,27 @@ class Poll {
       { id: `${this.pollID}:bad`, body: "👎" },
     ], this.title, this.footer);
   }
-  publish() {
-    this.chat.sendMessage(this.buttons);
+
+  /**
+   * Function to handle responses to the poll,
+   * and to update the database accordingly.
+   * @param {WAWebJS.Message} result
+   */
+  handleResult(result) {
+    // Get the relevant data from the message. This includes the user, the pollID, and the selectedButtonId.
+    let buttonId = result.selectedButtonId;
+    let pollID = buttonId.split(":")[0];
+    let poll = this.polls[pollID];
+    if (!poll) return;
+    if (poll.voterIDs.includes(result.sender))
+      return result.chat.sendMessage("You have already voted on this poll. Subsequent votes will be discarded.");
+    let selectedButton = buttonId.split(":")[1];
+
+    // Add the vote to this.polls
+    poll.results[selectedButton]++;
+    poll.voterIDs.push(result.sender);
+    this.bot.database.polls = this.polls;
+    this.bot.writeChangesToFile();
   }
 
 }
