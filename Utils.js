@@ -221,7 +221,7 @@ class Poll_Manager {
     this.bot.database.polls = this.polls;
     this.bot.writeChangesToFile();
     // Update the MySQL database
-    this.con.query(`UPDATE poll_${pollID} SET
+    this.con.query(`INSERT INTO poll_${pollID} SET
                       voter_id = "${result.sender}",
                       voter_display_name = "${result.DisplayName}",
                       vote = "${selectedButton}"
