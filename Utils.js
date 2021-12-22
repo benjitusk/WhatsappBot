@@ -176,8 +176,7 @@ class Poll_Manager {
     this.bot.writeChangesToFile();
 
     // update the MySQL database
-    if (false)
-      this.con.query(`INSERT INTO polls (poll_id, type, topic) VALUES ("${pollID}", "${type}", "${topic}")`);
+    this.con.query(`INSERT INTO poll_master (poll_id, poll_name) VALUES ("${pollID}", "${type}", "${topic}")`);
   }
 
   /**
