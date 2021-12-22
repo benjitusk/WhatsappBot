@@ -223,7 +223,7 @@ class Poll_Manager {
     // Update the MySQL database
     this.con.query(`INSERT INTO poll_${pollID} SET
                       voter_id = "${result.sender}",
-                      voter_display_name = "${result.DisplayName}",
+                      voter_display_name = "${result.displayName}",
                       vote = "${selectedButton}"
     `);
     // update the poll_master table with the new vote
