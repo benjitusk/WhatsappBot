@@ -148,17 +148,19 @@ class Poll_Manager {
    * @param {string} topic The food for the poll
    * @param {string?} test Wheather or not to send it to the poll chat
   **/
-  publish(pollID, chat, type, topic, test = false) {
+  publish(pollID, chat, type, topic, allowMeh = false, test = false) {
     let date = Date.now();
     let expires = date + (1000 * 60 * 60 * 2); // 2 hours
     let body = `Please select a rating for the ${topic} served for ${type.toLowerCase()}.\n\nRemember, pushing a button will *send a message with that text to the chat*.`;
     let title = `${type} poll:`;
     let footer = "Once you cast your vote, subsequent votes by you will be ignored.";
-    let buttons = new Buttons(body, [
+    let buttonArray = [
       { id: `${pollID}:good`, body: "👍" },
       { id: `${pollID}:meh`, body: "😐" },
       { id: `${pollID}:bad`, body: "👎" },
-    ], title, footer);
+    ];
+    if (!allowMeh || allowMeh.toLowerCase() === "false") buttonArray.splice(1, 1);
+    let buttons = new Buttons(body, buttonArray, title, footer);
     chat.sendMessage(buttons);
     if (test) return;
     this.polls[pollID] = {
@@ -176,7 +178,7 @@ class Poll_Manager {
     this.bot.writeChangesToFile();
 
     // update the MySQL poll_master table
-    this.con.query(`INSERT INTO poll_master (poll_id, poll_name) VALUES ("${pollID}", "${type}", "${topic}")`);
+    this.con.query(`INSERT INTO poll_master (poll_id, poll_display_name) VALUES ("${pollID}", "${topic}")`);
     // Create a new poll_results table with the following schema:
     // +--------------------+------+------+-----+---------+----------------+
     // | Field              | Type | Null | Key | Default | Extra          |
@@ -187,7 +189,7 @@ class Poll_Manager {
     // | vote               | text | NO   |     | NULL    |                |
     // +--------------------+------+------+-----+---------+----------------+
 
-    this.con.query(`CREATE TABLE IF NOT EXIST poll_${pollID} (
+    this.con.query(`CREATE TABLE IF NOT EXISTS poll_${pollID} (
                     id int NOT NULL AUTO_INCREMENT,
                     voter_id text NOT NULL,
                     voter_display_name text NOT NULL,
@@ -219,10 +221,10 @@ class Poll_Manager {
     this.bot.database.polls = this.polls;
     this.bot.writeChangesToFile();
     // Update the MySQL database
-    this.con.query(`UPDATE poll_${pollID} SET 
-                    voter_id = "${result.sender}",
-                    voter_display_name = "${result.senderDisplayName}",
-                    vote = "${selectedButton}"
+    this.con.query(`UPDATE poll_${pollID} SET
+                      voter_id = "${result.sender}",
+                      voter_display_name = "${result.senderDisplayName}",
+                      vote = "${selectedButton}"
     `);
     // update the poll_master table with the new vote
     this.con.query(`UPDATE poll_master SET ${selectedButton} = ${selectedButton} + 1 WHERE poll_id = "${pollID}"`);
