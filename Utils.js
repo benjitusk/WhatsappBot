@@ -175,8 +175,25 @@ class Poll_Manager {
     this.bot.database.polls = this.polls;
     this.bot.writeChangesToFile();
 
-    // update the MySQL database
+    // update the MySQL poll_master table
     this.con.query(`INSERT INTO poll_master (poll_id, poll_name) VALUES ("${pollID}", "${type}", "${topic}")`);
+    // Create a new poll_results table with the following schema:
+    // +--------------------+------+------+-----+---------+----------------+
+    // | Field              | Type | Null | Key | Default | Extra          |
+    // +--------------------+------+------+-----+---------+----------------+
+    // | id                 | int  | NO   | PRI | NULL    | auto_increment |
+    // | voter_id           | text | NO   |     | NULL    |                |
+    // | voter_display_name | text | NO   |     | NULL    |                |
+    // | vote               | text | NO   |     | NULL    |                |
+    // +--------------------+------+------+-----+---------+----------------+
+
+    this.con.query(`CREATE TABLE IF NOT EXIST poll_${pollID} (
+                    id int NOT NULL AUTO_INCREMENT,
+                    voter_id text NOT NULL,
+                    voter_display_name text NOT NULL,
+                    vote text NOT NULL,
+                    PRIMARY KEY (id)
+                  ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;`);
   }
 
   /**
@@ -202,8 +219,13 @@ class Poll_Manager {
     this.bot.database.polls = this.polls;
     this.bot.writeChangesToFile();
     // Update the MySQL database
-    if (false)
-      this.con.query(`UPDATE polls SET ${selectedButton} = ${selectedButton} + 1 WHERE poll_id = "${pollID}"`);
+    this.con.query(`UPDATE poll_${pollID} SET 
+                    voter_id = "${result.sender}",
+                    voter_display_name = "${result.senderDisplayName}",
+                    vote = "${selectedButton}"
+    `);
+    // update the poll_master table with the new vote
+    this.con.query(`UPDATE poll_master SET ${selectedButton} = ${selectedButton} + 1 WHERE poll_id = "${pollID}"`);
   }
 
 }
