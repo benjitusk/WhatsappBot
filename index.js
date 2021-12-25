@@ -39,7 +39,8 @@ new CronJob("0 0 18 * * *", async _ => {
 }, null, true);
 
 /* TODO:
- * Repopulate thee database with full chat history authenticated as BENJI
+ * Reorganize the code to make it more readable
+ *  - Make cron tasks better formatted
  */
 
 // GLOBALS:
@@ -344,7 +345,7 @@ bot.client.on('message_create', async msg => {
         msg.reply(await getQuote());
         return;
       }
-      if (msg.body == "!dtp") {
+      if (msg.body == "!dtp" && bot.database.enabled) {
         msg.reply(`*${bot.database.daysToPurim} days until Purim!*`);
       }
       if (msg.body == "!stats") {
