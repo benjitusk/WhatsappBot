@@ -148,12 +148,13 @@ class Poll_Manager {
    * @param {string} topic The food for the poll
    * @param {string?} test Wheather or not to send it to the poll chat
   **/
-  publish(pollID, chat, type, topic, allowMeh = false, test = false) {
+  publish(chat, type, topic, allowMeh = false, test = false) {
     let date = Date.now();
     let expires = date + (1000 * 60 * 60 * 2); // 2 hours
     let body = `Please select a rating for the ${topic} served for ${type.toLowerCase()}.\n\nRemember, pushing a button will *send a message with that text to the chat*.`;
     let title = `${type} poll:`;
     let footer = "Once you cast your vote, subsequent votes by you will be ignored.";
+    let pollID = `${topic}_${d.getMonth() + 1}/${d.getDate() + 1}`;
     let buttonArray = [
       { id: `${pollID}:good`, body: "👍" },
       { id: `${pollID}:meh`, body: "😐" },
