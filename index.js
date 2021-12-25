@@ -1,6 +1,5 @@
 // IMPORTS:
 const fs = require('fs');
-const mime = require('mime');
 const axios = require('axios');
 const mysql = require('mysql');
 const { Bot, Poll_Manager } = require('./Utils.js');
@@ -11,7 +10,7 @@ const prettyMilliseconds = require('pretty-ms');
 
 new CronJob('0 30 6,9,13,19 * * 0-5', async () => {
   console.log("updating description");
-  let text = await generateWFDDescription();
+  let text = await generateWFDDescription(megillah = false);
   try {
     let chat = await bot.client.getChatById(redacted.WHATS_FOR_DINNER_ID);
     chat.setDescription(text);
@@ -21,12 +20,11 @@ new CronJob('0 30 6,9,13,19 * * 0-5', async () => {
 }, null, true);
 
 new CronJob("0 45 8,12,18 * * 0-5", async () => {
-  let breakfast = getMeal("breakfast");
-  let lunch = getMeal("lunch");
-  let dinner = getMeal("dinner");
-  let quote = await getQuote();
-  let text = breakfast + "\n" + lunch + "\n" + dinner +
-    "\n\n" + quote +
+  // let breakfast = getMeal("breakfast");
+  // let lunch = getMeal("lunch");
+  // let dinner = getMeal("dinner");
+  // let quote = await getQuote();
+  let text = await generateWFDDescription(megillah = true) +
     "\n\n```This is an automated, scheduled message. Bot commands are temporarily enabled on this chat.```";
   try {
     let chat = await bot.client.getChatById(redacted.WHATS_FOR_DINNER_ID);
@@ -47,6 +45,19 @@ Object.defineProperty(String.prototype, 'capitalize', {
   },
   enumerable: false
 });
+
+function removeTags(str) {
+  if ((str === null) || (str === ''))
+    return false;
+  else
+    str = str.toString();
+
+  // Regular expression to identify HTML tags in 
+  // the input string. Replacing the identified 
+  // HTML tag with a null string.
+  return str.replace(/(<([^>]+)>)/ig, '');
+}
+
 let bot = new Bot(); //60 * 1000 * 30);
 const redacted = new removedInfo();
 var con = mysql.createConnection(redacted.DB_AUTH);
@@ -70,6 +81,33 @@ async function getQuote(ignoreQueue = false) {
     let response = await axios.get("https://zenquotes.io/api/random");
     return `${response.data[0].q} - ${response.data[0].a}`;
   }
+}
+
+async function getEstherPasuk() {
+  let response = await axios.get(`https://www.sefaria.org/api/texts/Esther.${bot.database.megillah.perek}.${bot.database.megillah.pasuk}?context=0`);
+  data = response.data;
+  if (data.error) {
+    if (data.error == "Esther Chapter must be greater than 0") {
+      bot.database.megillah.perek++;
+      response = await getEstherPasuk();
+    } else if (data.error === "Esther Verse must be greater than 0") {
+      bot.database.megillah.pasuk++;
+      response = await getEstherPasuk();
+    }
+  }
+  if (data.he === '') {
+    // The pasuk does not exist in this perek.
+    // Increase the perek count and set the pasuk to 1
+    bot.database.megillah.perek++;
+    bot.database.megillah.pasuk = 1;
+    return await getEstherPasuk();
+  }
+  if (data.he) {
+    bot.database.megillah.pasuk++;
+    return removeTags(data.he);
+  }
+  else
+    return await getQuote();
 }
 
 function getMeal(meal) {
@@ -132,12 +170,13 @@ function updateDescription(chat, newContent) {
   chat.setDescription(fullMsg);
 }
 
-async function generateWFDDescription() {
+async function generateWFDDescription(megillah = true) {
   let breakfast = getMeal("breakfast");
   let lunch = getMeal("lunch");
   let dinner = getMeal("dinner");
-  let quote = await getQuote();
-  let text = breakfast + "\n" + lunch + "\n" + dinner + "\n\n" + quote;// + "\n========\n" + foodRotation;
+  let additionalContent = megillah ? await getEstherPasuk() : await getQuote();
+  let daysToPurim = bot.database.daysToPurim;
+  let text = `*${daysToPurim} days to Purim*\n` + breakfast + "\n" + lunch + "\n" + dinner + "\n\n" + additionalContent;// + "\n========\n" + foodRotation;
   return text;
 }
 
@@ -460,7 +499,6 @@ bot.client.on('message_create', async msg => {
       // Message schema:
       /**
        * !poll
-       * id: <pollID>
        * type: <pollType>
        * topic: <pollTopic>
        * [allowMeh: <true/false>]
@@ -475,10 +513,10 @@ bot.client.on('message_create', async msg => {
         let value = option.substr(splitIndex + 2);
         options[key] = value;
       }
-      if (!(options.id || options.type || options.topic)) return msg.reply("Sorry, but you are missing some parameters. The correct syntax is\n```!poll```\n```id: <pollID>```\n```type: <pollType>```\n```topic: <pollTopic>```\n```[test: <true/false>]```\n\n_Pro tip: A test poll privately sends you a preview of the poll, so you can test it out before sending it to the group._");
+      if (!(options.type || options.topic)) return msg.reply("Sorry, but you are missing some parameters. The correct syntax is\n```!poll```\n```type: <pollType>```\n```topic: <pollTopic>```\n```[test: <true/false>]```\n\n_Pro tip: A test poll privately sends you a preview of the poll, so you can test it out before sending it to the group._");
       msg.reply(`Sending a poll with the following options:\n\n${JSON.stringify(options, null, 2)}`);
       let chat = options.test ? msg.chat : await bot.client.getChatById(redacted.BOT_MAIN_CHAT);
-      pollManager.publish(options.id, chat, options.type, options.topic, options.allowMeh, options.test);
+      pollManager.publish(chat, options.type, options.topic, options.allowMeh, options.test);
     }
     switch (msg.body) {
       case "wfb":
