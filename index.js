@@ -33,6 +33,10 @@ new CronJob("0 45 8,12,18 * * 0-5", async () => {
     console.error("There was an error sending the message:\n" + err);
   }
 }, null, true);
+new CronJob("0 0 18 * * *", async _ => {
+  bot.database.daysToPurim--;
+  bot.writeChangesToFile();
+}, null, true);
 
 /* TODO:
  * Repopulate thee database with full chat history authenticated as BENJI
@@ -340,7 +344,9 @@ bot.client.on('message_create', async msg => {
         msg.reply(await getQuote());
         return;
       }
-
+      if (msg.body == "!dtp") {
+        msg.reply(`*${bot.database.daysToPurim} days until Purim!*`);
+      }
       if (msg.body == "!stats") {
         msg.reply("Sorry, but to reduce spam on the chat, I will only reply with stats if you PM me.", msg.contactOfSender.id._serialized);
       }
