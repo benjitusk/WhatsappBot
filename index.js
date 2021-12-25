@@ -174,7 +174,7 @@ function updateDescription(chat, newContent) {
   chat.setDescription(fullMsg);
 }
 
-async function generateWFDDescription(megillah = true) {
+async function generateWFDDescription(megillah = false) {
   let breakfast = getMeal("breakfast");
   let lunch = getMeal("lunch");
   let dinner = getMeal("dinner");
