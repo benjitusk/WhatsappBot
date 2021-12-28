@@ -523,7 +523,7 @@ bot.client.on('message_create', async msg => {
       if (!(options.type || options.topic)) return msg.reply("Sorry, but you are missing some parameters. The correct syntax is\n```!poll```\n```type: <pollType>```\n```topic: <pollTopic>```\n```[test: <true/false>]```\n\n_Pro tip: A test poll privately sends you a preview of the poll, so you can test it out before sending it to the group._");
       msg.reply(`Sending a poll with the following options:\n\n${JSON.stringify(options, null, 2)}`);
       let chat = options.test ? msg.chat : await bot.client.getChatById(redacted.BOT_MAIN_CHAT);
-      pollManager.publish(chat, options.type, options.topic, options.allowMeh, options.test);
+      pollManager.publish(chat, options.type, options.topic, options.allowMeh, options.test, options.publish);
     }
     switch (msg.body) {
       case "wfb":

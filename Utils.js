@@ -148,7 +148,7 @@ class Poll_Manager {
    * @param {string} topic The food for the poll
    * @param {string?} test Wheather or not to send it to the poll chat
   **/
-  publish(chat, type, topic, allowMeh = false, test = false) {
+  publish(chat, type, topic, allowMeh = false, test = false, publish = true) {
     let date = new Date();
     let expires = date.getTime() + (1000 * 60 * 60 * 2); // 2 hours
     let body = `Please select a rating for the ${topic} served for ${type.toLowerCase()}.\n\nRemember, pushing a button will *send a message with that text to the chat*.`;
@@ -162,7 +162,7 @@ class Poll_Manager {
     ];
     if (!allowMeh || allowMeh.toLowerCase() === "false") buttonArray.splice(1, 1);
     let buttons = new Buttons(body, buttonArray, title, footer);
-    chat.sendMessage(buttons);
+    if (publish) chat.sendMessage(buttons);
     if (test) return;
     this.polls[pollID] = {
       "expires": expires.toString(),
