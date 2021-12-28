@@ -179,7 +179,7 @@ class Poll_Manager {
     this.bot.writeChangesToFile();
 
     // update the MySQL poll_master table
-    this.con.query(`INSERT INTO poll_master (poll_id, poll_display_name) VALUES ("${pollID}", "${topic}")`);
+    this.con.query(`INSERT INTO poll_master (poll_id, poll_display_name) VALUES ("${pollID}", "${topic}");`);
     // Create a new poll_results table with the following schema:
     // +--------------------+------+------+-----+---------+----------------+
     // | Field              | Type | Null | Key | Default | Extra          |
@@ -190,13 +190,7 @@ class Poll_Manager {
     // | vote               | text | NO   |     | NULL    |                |
     // +--------------------+------+------+-----+---------+----------------+
 
-    this.con.query(`CREATE TABLE IF NOT EXISTS poll_${pollID} (
-                    id int NOT NULL AUTO_INCREMENT,
-                    voter_id text NOT NULL,
-                    voter_display_name text NOT NULL,
-                    vote text NOT NULL,
-                    PRIMARY KEY (id)
-                  ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;`);
+    this.con.query(`CREATE TABLE IF NOT EXISTS poll_${pollID} (id int NOT NULL AUTO_INCREMENT, voter_id text NOT NULL, voter_display_name text NOT NULL, vote text NOT NULL, PRIMARY KEY (id)) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;`);
   }
 
   /**
@@ -222,13 +216,9 @@ class Poll_Manager {
     this.bot.database.polls = this.polls;
     this.bot.writeChangesToFile();
     // Update the MySQL database
-    this.con.query(`INSERT INTO poll_${pollID} SET
-                      voter_id = "${result.sender}",
-                      voter_display_name = "${result.displayName}",
-                      vote = "${selectedButton}"
-    `);
+    this.con.query(`INSERT INTO poll_${pollID} SET voter_id = "${result.sender}", voter_display_name = "${result.displayName}", vote = "${selectedButton}";`);
     // update the poll_master table with the new vote
-    this.con.query(`UPDATE poll_master SET ${selectedButton} = ${selectedButton} + 1 WHERE poll_id = "${pollID}"`);
+    this.con.query(`UPDATE poll_master SET ${selectedButton} = ${selectedButton} + 1 WHERE poll_id = "${pollID}";`);
   }
 
 }
