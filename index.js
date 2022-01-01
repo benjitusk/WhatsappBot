@@ -181,7 +181,9 @@ async function generateWFDDescription(megillah = false) {
   let dinner = getMeal("dinner");
   let additionalContent = megillah ? await getEstherPasuk() : await getQuote();
   let daysToPurim = bot.database.daysToPurim;
-  let text = `*${daysToPurim} days to Purim*\n` + breakfast + "\n" + lunch + "\n" + dinner + "\n\n" + additionalContent;// + "\n========\n" + foodRotation;
+  let text =
+    // `*${daysToPurim} days to Purim*\n` +
+    breakfast + "\n" + lunch + "\n" + dinner + "\n\n" + additionalContent;// + "\n========\n" + foodRotation;
   return text;
 }
 
