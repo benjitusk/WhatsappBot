@@ -107,8 +107,9 @@ async function getQuote(ignoreQueue = false) {
   }
 }
 
-async function getMishnaYomi(book, perek, mishna) {
-  let response = await axios.get(`GET https://www.sefaria.org/api/texts/Mishnah_${book}.${perek}.${mishna}?context=0`);
+async function getMishnaYomi(bookIndex, perek, mishna) {
+  let response = await axios.get(
+    `GET https://www.sefaria.org/api/texts/Mishnah_${bot.database.mishnaYomi.book[bookIndex]}.${perek}.${mishna}?context=0`);
   let data = response.data;
   if (data.error) {
     if (data.error.includes("Mishnah must be greater than 0")) {
