@@ -35,9 +35,26 @@ new CronJob("0 45 8,12,18 * * 0-5", async () => {
     console.error("There was an error sending the message:\n" + err);
   }
 }, null, true);
-new CronJob("0 0 18 * * *", async _ => {
+new CronJob("0 0 18 * * *", async () => {
   bot.database.daysToPurim--;
   bot.writeChangesToFile();
+}, null, true);
+new CronJob("0 30 8 * * 0-5", async () => {
+  // Really, this should be a task saved in the database,
+  // as there is the possibility that the bot will be offline
+  // during the scheduled time.
+  console.log("Sending Mishna Yomi");
+  let chat = await bot.client.getChatById(redacted.WHATS_FOR_DINNER_ID);
+  // perform the following action twice, because we want to send both mishnayot.
+  for (let i = 0; i < 2; i++) {
+    let mishna = await getMishnaYomi(
+      bot.database.mishnaYomi.book,
+      bot.database.mishnaYomi.perek,
+      bot.database.mishnaYomi.mishna
+    );
+    let text = `*This Mishna Yomi message is powered by Sefaria.org*\n\n_${mishna.hebrewName}_\n${mishna.hebrew}\n\n_${mishna.englishName}_\n${mishna.english}`;
+    await chat.sendMessage(text);
+  }
 }, null, true);
 
 /* TODO:
