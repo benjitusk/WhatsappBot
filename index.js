@@ -107,6 +107,57 @@ async function getQuote(ignoreQueue = false) {
   }
 }
 
+async function getMishnaYomi(book, perek, mishna) {
+  let response = await axios.get(`GET https://www.sefaria.org/api/texts/Mishnah_${book}.${perek}.${mishna}?context=0`);
+  let data = response.data;
+  if (data.error) {
+    if (data.error.includes("Mishnah must be greater than 0")) {
+      // Somehow the given mishna is 0. Increase the mishna count and try again.
+      bot.database.mishnaYomi.mishna++;
+    } else if (data.error.includes("Chapter must be greater than 0")) {
+      // Somehow the given perek is 0. Increase the perek count, set the mishna to 1, and try again.
+      bot.database.mishnaYomi.perek++;
+      bot.database.mishnaYomi.mishna = 1;
+    } else if (data.error.includes("ends at Chapter")) {
+      // The perek does not exist in this book.
+      // Increase the book count and set the mishna and perek to 1
+      bot.database.mishnaYomi.book++;
+      bot.database.mishnaYomi.perek = 1;
+      bot.database.mishnaYomi.mishna = 1;
+    }
+
+    return await getMishnaYomi(bot.database.mishnaYomi.book, bot.database.mishnaYomi.perek, bot.database.mishnaYomi.mishna);
+  }
+  if (data.text === "") {
+    // The mishna does not exist in this perek.
+    // Increase the perek count and set the mishna to 1, and try again.
+    bot.database.mishnaYomi.perek++;
+    bot.database.mishnaYomi.mishna = 1;
+    return await getMishnaYomi(bot.database.mishnaYomi.book, bot.database.mishnaYomi.perek, bot.database.mishnaYomi.mishna);
+  }
+  englishMishna = data.text
+    .replaceAll("<b>", "*") // Replace bold tags with *
+    .replaceAll("</b>", "*")
+    .replaceAll("<i>", "_") // Replace italic tags with _
+    .replaceAll("</i>", "_")
+    .replaceAll(/(<([^>]+)>)/ig, '') // Remove all leftover tags
+  hebrewMishna = data.he
+    .replaceAll(/(<([^>]+)>)/ig, '') // Remove all HTML tags
+
+  // Increase the mishna count
+  bot.database.mishnaYomi.mishna++;
+  // Save changes to file
+  bot.writeChangesToFile();
+
+  // Return the mishna
+  return {
+    hebrewName: data.heRef,
+    englishName: data.ref,
+    english: englishMishna,
+    hebrew: hebrewMishna
+  };
+}
+
 async function getEstherPasuk() {
   let response = await axios.get(`https://www.sefaria.org/api/texts/Esther.${bot.database.megillah.perek}.${bot.database.megillah.pasuk}?context=0`);
   data = response.data;
