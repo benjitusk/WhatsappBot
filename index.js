@@ -8,6 +8,7 @@ const removedInfo = require('./Extras.js');
 const prettyMilliseconds = require('pretty-ms');
 const { Bot, Poll_Manager } = require('./Utils.js');
 
+/*
 new CronJob('0 30 6,9,13,19 * * 0-5', async () => {
   console.log("updating description");
   let text = await generateWFDDescription(megillah = false);
@@ -18,6 +19,7 @@ new CronJob('0 30 6,9,13,19 * * 0-5', async () => {
     console.error("There was an error setting the description. This is likely due to puppeteer not being fully initialized.");
   }
 }, null, true);
+*/
 
 new CronJob("0 45 8,12,18 * * 0-5", async () => {
   // let breakfast = getMeal("breakfast");
