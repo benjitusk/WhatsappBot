@@ -2,11 +2,11 @@
 const fs = require('fs');
 const axios = require('axios');
 const mysql = require('mysql');
-const { Bot, Poll_Manager } = require('./Utils.js');
 const CronJob = require('cron').CronJob;
 const parse = require('parse-duration');
 const removedInfo = require('./Extras.js');
 const prettyMilliseconds = require('pretty-ms');
+const { Bot, Poll_Manager } = require('./Utils.js');
 
 new CronJob('0 30 6,9,13,19 * * 0-5', async () => {
   console.log("updating description");
