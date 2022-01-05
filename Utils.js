@@ -156,7 +156,7 @@ class Poll_Manager {
     let body = `Please select a rating for the ${topic} served for ${type.toLowerCase()}.\n\nRemember, pushing a button will *send a message with that text to the chat*.`;
     let title = `${type} poll:`;
     let footer = "Once you cast your vote, subsequent votes by you will be ignored.";
-    let pollID = `${topic.replace(" ", "_")}_${date.getMonth() + 1}/${date.getDate() + 1}`;
+    let pollID = `${topic.replaceAll(" ", "_")}_${date.getMonth() + 1}/${date.getDate() + 1}`;
     let buttonArray = [
       { id: `${pollID}:good`, body: "👍" },
       { id: `${pollID}:meh`, body: "😐" },
