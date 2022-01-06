@@ -1,5 +1,5 @@
 // IMPORTS:
-import "fs";
+const fs = require("fs");
 const axios = require('axios');
 const mysql = require('mysql');
 const CronJob = require('cron').CronJob;
