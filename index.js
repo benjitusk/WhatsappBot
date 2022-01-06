@@ -1,5 +1,5 @@
 // IMPORTS:
-const fs = require('fs');
+import "fs";
 const axios = require('axios');
 const mysql = require('mysql');
 const CronJob = require('cron').CronJob;
@@ -109,7 +109,7 @@ async function getQuote(ignoreQueue = false) {
 
 async function getMishnaYomi(bookIndex, perek, mishna) {
   let response = await axios.get(
-    `GET https://www.sefaria.org/api/texts/Mishnah_${bot.database.mishnaYomi.book[bookIndex]}.${perek}.${mishna}?context=0`);
+    `https://www.sefaria.org/api/texts/Mishnah_${bot.database.mishnaYomi.books[bookIndex]}.${perek}.${mishna}?context=0`);
   let data = response.data;
   if (data.error) {
     if (data.error.includes("Mishnah must be greater than 0")) {
@@ -141,9 +141,9 @@ async function getMishnaYomi(bookIndex, perek, mishna) {
     .replaceAll("</b>", "*")
     .replaceAll("<i>", "_") // Replace italic tags with _
     .replaceAll("</i>", "_")
-    .replaceAll(/(<([^>]+)>)/ig, '') // Remove all leftover tags
+    .replaceAll(/(<([^>]+)>)/ig, ''); // Remove all leftover tags
   hebrewMishna = data.he
-    .replaceAll(/(<([^>]+)>)/ig, '') // Remove all HTML tags
+    .replaceAll(/(<([^>]+)>)/ig, ''); // Remove all HTML tags
 
   // Increase the mishna count
   bot.database.mishnaYomi.mishna++;
