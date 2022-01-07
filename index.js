@@ -44,7 +44,7 @@ new CronJob("0 30 8 * * 0-5", async () => {
   // as there is the possibility that the bot will be offline
   // during the scheduled time.
   console.log("Sending Mishna Yomi");
-  let chat = await bot.client.getChatById(redacted.WHATS_FOR_DINNER_ID);
+  let chat = await bot.client.getChatById(redacted.MISHNA_YOMI_CHAT_ID);
   // perform the following action twice, because we want to send both mishnayot.
   for (let i = 0; i < 2; i++) {
     let mishna = await getMishnaYomi(
