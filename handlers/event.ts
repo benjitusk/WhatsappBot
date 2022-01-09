@@ -1,9 +1,16 @@
 import { Client } from 'whatsapp-web.js';
 import { readdirSync } from 'fs';
 
-// We are exporting a function that will be called by the bot
-//
-module.exports = (client: Client) => {
+/**
+ * @param {Client} client
+ * @returns {void}
+ *
+ * @description
+ * We are exporting a function that will be called index.js
+ * This function is going to receive the client as a parameter
+ * and assign the approriate event handlers to the given client.
+ */
+module.exports = (client: Client): void => {
   const eventFolders = readdirSync('./event/');
   // The event handlers are sorted by types into folders, such as `message` and `opening`.
   for (const folder of eventFolders) {
