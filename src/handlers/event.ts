@@ -11,13 +11,11 @@ import { readdirSync } from 'fs';
  * @returns {void}
  */
 module.exports = (client: Client): void => {
-	const eventFolders = readdirSync('./event/');
+	const eventFolders = readdirSync('./event');
 	// The event handlers are sorted by types into folders, such as `message` and `opening`.
 	for (const folder of eventFolders) {
 		// Get all js files in the folder. These files are the event handlers.
-		const eventFiles = readdirSync(`./event/${folder}`).filter((file) =>
-			file.endsWith('.js')
-		);
+		const eventFiles = readdirSync(`./event/${folder}`).filter((file) => file.endsWith('.js'));
 		for (const file of eventFiles) {
 			// Load the event handler.
 			const event = require(`./event/${folder}/${file}`);
