@@ -3,7 +3,7 @@ import { existsSync } from 'fs';
 const sessionPath = '../sessions/bot.json';
 const client = new Client({
 	puppeteer: {
-		headless: false,
+		headless: true,
 	},
 	session: existsSync(sessionPath) ? require(sessionPath) : undefined,
 });
