@@ -5,3 +5,5 @@ media/
 *.json
 Extras.js
 shell.js
+*.d.ts
+*.map
