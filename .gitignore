@@ -7,3 +7,4 @@ Extras.js
 shell.js
 *.d.ts
 *.map
+bin/
