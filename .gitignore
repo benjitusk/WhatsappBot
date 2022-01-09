@@ -8,3 +8,4 @@ shell.js
 *.d.ts
 *.map
 bin/
+!tsconfig.json
