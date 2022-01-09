@@ -18,7 +18,7 @@ module.exports = (client: Client): void => {
 		const eventFiles = readdirSync(`./event/${folder}`).filter((file) => file.endsWith('.js'));
 		for (const file of eventFiles) {
 			// Load the event handler.
-			const event = require(`./event/${folder}/${file}`);
+			const event = require(`../event/${folder}/${file}`);
 			if (event.once) {
 				// Set a one time handler
 				client.once(event.name, (...args) => event.execute(...args, client));
