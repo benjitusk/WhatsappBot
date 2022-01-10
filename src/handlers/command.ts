@@ -8,7 +8,10 @@ module.exports = (client: Client): void => {
 		const commandFiles = readdirSync(`./commands/${folder}`).filter((file) => file.endsWith('.js'));
 		for (const file of commandFiles) {
 			const command = require(`../commands/${folder}/${file}`) as Command;
-			client.commands.set(command.name, command);
+			if (command.enabled) {
+				client.commands.set(command.name, command);
+				console.log(`[Command] ${command.name} is enabled.`);
+			}
 		}
 	}
 };

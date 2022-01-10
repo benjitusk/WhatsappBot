@@ -18,13 +18,14 @@ module.exports = (client: Client): void => {
 };
 
 function generateTaskFunction(task: Task, client: Client): () => void {
+	console.log(`[Schedule] ${task.name} is enabled.`);
 	return function () {
-		console.log('[Schedule] Executing task: ' + task.name);
+		console.log(`[${task.name}] Executing task`);
 		try {
 			task.execute(client);
-		} catch (e) {
+		} catch (err) {
 			console.error(`[Schedule] Error executing task: ${task.name}`);
-			console.error(e);
+			console.error(err);
 		}
 	};
 }
