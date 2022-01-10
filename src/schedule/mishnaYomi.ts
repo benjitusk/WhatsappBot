@@ -10,28 +10,35 @@ interface MishnaTracker {
 }
 
 module.exports = {
+	name: 'Mishna Yomi',
+	// 8:30am every day
+	enabled: true,
 	seconds: '*',
 	minutes: '30',
 	hours: '8',
 	dayMonth: '*',
 	month: '*',
 	dayWeek: '*',
-	// 8:30am every day
-	enabled: true,
 	execute: async function (client: Client) {
 		let persistance = new PersistantStorage();
 		let mishnayot: MishnaYomi[] = [];
+
+		// Get 2 mishnayot
 		for (let i = 0; i < 2; i++) {
+			// Get the counter object
 			let mishnaTracker = persistance.get('mishnaYomi') as MishnaTracker;
+			// Get the mishna
 			let mishnaYomi = await getMishnaYomi(
 				mishnaTracker.books[mishnaTracker.book],
 				mishnaTracker.perek,
 				mishnaTracker.mishna
 			);
+
+			// Handle any errors
 			let retryCount = 0;
 			while (typeof mishnaYomi === 'string') {
 				if (retryCount > 5) {
-					console.error("[MishnaYomi] Couldn't get mishnaYomi");
+					console.error("[Mishna Yomi] Couldn't get mishnaYomi");
 				}
 
 				// An error occured.
@@ -66,7 +73,7 @@ module.exports = {
 				);
 			}
 
-			// Increment and save the mishna tracker
+			// update the mishna tracker
 			mishnaTracker.mishna++;
 			persistance.set('mishnaYomi', mishnaTracker);
 
@@ -86,5 +93,6 @@ module.exports = {
 			let text = `*This Mishna Yomi message is powered by Sefaria.org*\n\n_${mishnaYomi.hebrewName}_\n${mishnaYomi.hebrew}\n\n_${mishnaYomi.englishName}_\n${mishnaYomi.english}`;
 			await chat.sendMessage(text);
 		}
+		console.log('[Mishna Yomi] Sent Mishna Yomi successfully');
 	},
 };
