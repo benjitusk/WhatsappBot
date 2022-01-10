@@ -1,0 +1,90 @@
+import { Client, WAState } from 'whatsapp-web.js';
+import { getMishnaYomi, PersistantStorage, MishnaYomi } from '../utils';
+import { chats } from '../removedInfo';
+
+interface MishnaTracker {
+	book: number;
+	perek: number;
+	mishna: number;
+	books: [string];
+}
+
+module.exports = {
+	seconds: '*',
+	minutes: '30',
+	hours: '8',
+	dayMonth: '*',
+	month: '*',
+	dayWeek: '*',
+	// 8:30am every day
+	enabled: true,
+	execute: async function (client: Client) {
+		let persistance = new PersistantStorage();
+		let mishnayot: MishnaYomi[] = [];
+		for (let i = 0; i < 2; i++) {
+			let mishnaTracker = persistance.get('mishnaYomi') as MishnaTracker;
+			let mishnaYomi = await getMishnaYomi(
+				mishnaTracker.books[mishnaTracker.book],
+				mishnaTracker.perek,
+				mishnaTracker.mishna
+			);
+			let retryCount = 0;
+			while (typeof mishnaYomi === 'string') {
+				if (retryCount > 5) {
+					console.error("[MishnaYomi] Couldn't get mishnaYomi");
+				}
+
+				// An error occured.
+				retryCount++;
+				// An error occured.
+				if (mishnaYomi === 'Mishnah not in chapter') {
+					// The mishna is not in the chapter.
+					// Increase the perek and mishna, and try again.
+					mishnaTracker.perek++;
+					mishnaTracker.mishna = 1;
+				} else if (mishnaYomi.includes('Mishnah must be greater than 0')) {
+					// The mishna is 0. Increase the mishna and try again.
+					mishnaTracker.mishna++;
+				} else if (mishnaYomi.includes('Chapter must be greater than 0')) {
+					// The perek is 0. Increase the perek, set the mishna to 1, and try again.
+					mishnaTracker.perek++;
+					mishnaTracker.mishna = 1;
+				} else if (mishnaYomi.includes('ends at Chapter')) {
+					// The perek does not exist in this book.
+					// Increase the book count, set the mishna and perek to 1
+					mishnaTracker.book++;
+					mishnaTracker.perek = 1;
+					mishnaTracker.mishna = 1;
+				}
+				// save the new mishna tracker
+				persistance.set('mishnaYomi', mishnaTracker);
+				// and try again
+				mishnaYomi = await getMishnaYomi(
+					mishnaTracker.books[mishnaTracker.book],
+					mishnaTracker.perek,
+					mishnaTracker.mishna
+				);
+			}
+
+			// Increment and save the mishna tracker
+			mishnaTracker.mishna++;
+			persistance.set('mishnaYomi', mishnaTracker);
+
+			// Prepare the mishnah for sending
+			mishnayot.push(mishnaYomi as MishnaYomi);
+		}
+		// Make sure it's not Shabbat.
+		if (new Date().getDay() === 6) return;
+		// Make sure the bot is in the correct state before sending the message.
+		if ((await client.getState()) != WAState.CONNECTED) return;
+
+		// get the chat object
+		let chat = await client.getChatById(chats.MISHNA_YOMI_CHAT_ID);
+
+		// Send both mishnayot
+		for (let mishnaYomi of mishnayot) {
+			let text = `*This Mishna Yomi message is powered by Sefaria.org*\n\n_${mishnaYomi.hebrewName}_\n${mishnaYomi.hebrew}\n\n_${mishnaYomi.englishName}_\n${mishnaYomi.english}`;
+			await chat.sendMessage(text);
+		}
+	},
+};
