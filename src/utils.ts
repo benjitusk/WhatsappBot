@@ -10,17 +10,19 @@ export interface MishnaYomi {
 
 export class PersistantStorage {
 	private data: any;
+	private path: string;
 	constructor() {
-		this.data = JSON.parse(readFileSync('../persistantStorage.json') as any);
+		this.path = '../persistantStorage.json';
+		this.data = JSON.parse(readFileSync(this.path) as any);
 	}
 
 	get(key: string) {
-		this.data = JSON.parse(readFileSync('../persistantStorage.json') as any);
+		this.data = JSON.parse(readFileSync(this.path) as any);
 		return this.data[key];
 	}
 
 	set(key: string, value: any): void {
-		writeFileSync(this.data, JSON.stringify(this.data, null, 2));
+		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
 		this.data[key] = value;
 	}
 }
