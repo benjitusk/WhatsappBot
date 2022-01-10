@@ -9,3 +9,4 @@ shell.js
 *.map
 bin/
 !tsconfig.json
+src/removedInfo.ts
