@@ -10,6 +10,6 @@ const client = new Client({
 
 client.initialize();
 
-['event'].forEach((handler) => {
+['event', 'schedule'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client);
 });
