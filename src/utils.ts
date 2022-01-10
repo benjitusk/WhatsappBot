@@ -1,16 +1,11 @@
 import axios from 'axios';
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 
 export interface MishnaYomi {
 	hebrewName: string;
 	englishName: string;
 	english: string;
 	hebrew: string;
-	next: {
-		book: string;
-		perek: number;
-		mishna: number;
-	};
 }
 
 export class PersistantStorage {
@@ -20,10 +15,12 @@ export class PersistantStorage {
 	}
 
 	get(key: string) {
+		this.data = JSON.parse(readFileSync('../persistantStorage.json') as any);
 		return this.data[key];
 	}
 
-	set(key: string, value: any) {
+	set(key: string, value: any): void {
+		writeFileSync(this.data, JSON.stringify(this.data, null, 2));
 		this.data[key] = value;
 	}
 }
@@ -59,10 +56,5 @@ export async function getMishnaYomi(
 		englishName: data.ref,
 		english: englishMishna,
 		hebrew: hebrewMishna,
-		next: {
-			book,
-			perek,
-			mishna,
-		},
 	};
 }
