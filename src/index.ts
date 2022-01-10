@@ -1,5 +1,6 @@
 import { Client } from 'whatsapp-web.js';
 import { existsSync } from 'fs';
+import { Collection } from '@discordjs/collection';
 const sessionPath = '../sessions/bot.json';
 const client = new Client({
 	// puppeteer: {
@@ -8,8 +9,10 @@ const client = new Client({
 	session: existsSync(sessionPath) ? require(sessionPath) : undefined,
 });
 
+client.commands = new Collection();
+
 client.initialize();
 
-['event', 'schedule'].forEach((handler) => {
+['event', 'schedule', 'command'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client);
 });
