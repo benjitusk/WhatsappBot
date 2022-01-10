@@ -1,4 +1,6 @@
+const prefix = '!';
 import WAWebJS from 'whatsapp-web.js';
+import { Command } from '../../utils';
 module.exports = {
 	name: 'message',
 	once: false,
@@ -21,5 +23,22 @@ module.exports = {
 		 * 3. Handle poll responses.
 		 *
 		 */
+
+		// 1. Log the message to MySQL.
+		// I'll do this later.
+
+		// 2. Handle commands.
+		if (!message.body.startsWith(prefix)) return;
+		let args = message.body.trim().split(/ +/);
+		const commandName = args[0].slice(prefix.length).toLowerCase();
+		let commandExists =
+			client.commands.get(commandName) ||
+			client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
+		if (!commandExists || commandExists === '') {
+			message.reply('Looks the commands is invalid.');
+			return;
+		}
+		const command = commandExists as Command;
+		command.execute(message, client);
 	},
 };
