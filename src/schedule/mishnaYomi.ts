@@ -1,5 +1,5 @@
 import { Client, WAState } from 'whatsapp-web.js';
-import { getMishnaYomi, PersistantStorage, MishnaYomi } from '../utils';
+import { getMishnaYomi, PersistantStorage, MishnaYomi, Task } from '../utils';
 import { chats } from '../removedInfo';
 
 interface MishnaTracker {
@@ -9,7 +9,7 @@ interface MishnaTracker {
 	books: [string];
 }
 
-module.exports = {
+const task: Task = {
 	name: 'Mishna Yomi',
 	// 8:30am every day
 	enabled: true,
@@ -98,3 +98,5 @@ module.exports = {
 		console.log('[Mishna Yomi] Sent Mishna Yomi successfully');
 	},
 };
+
+module.exports = task;

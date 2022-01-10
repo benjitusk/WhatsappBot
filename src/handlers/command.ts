@@ -1,12 +1,6 @@
 import { readdirSync } from 'fs';
 import { Client, Message } from 'whatsapp-web.js';
-
-interface Command {
-	name: string;
-	aliases?: string[];
-	cooldown?: number;
-	execute: (message: Message, client: Client) => void;
-}
+import { Command } from '../utils';
 
 module.exports = (client: Client): void => {
 	const commandFolders = readdirSync(`./commands`).filter((file) => file.endsWith('.js'));
