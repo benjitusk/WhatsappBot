@@ -38,13 +38,14 @@ module.exports = {
 			let retryCount = 0;
 			while (typeof mishnaYomi === 'string') {
 				if (retryCount > 5) {
-					console.error("[Mishna Yomi] Couldn't get mishnaYomi");
+					console.error(`[Mishna Yomi] Couldn't get mishnaYomi. ${mishnaYomi}`);
+					return;
 				}
 
 				// An error occured.
 				retryCount++;
 				// An error occured.
-				if (mishnaYomi === 'Mishnah not in chapter') {
+				if (mishnaYomi === 'Mishna not in chapter') {
 					// The mishna is not in the chapter.
 					// Increase the perek and mishna, and try again.
 					mishnaTracker.perek++;
@@ -91,7 +92,8 @@ module.exports = {
 		// Send both mishnayot
 		for (let mishnaYomi of mishnayot) {
 			let text = `*This Mishna Yomi message is powered by Sefaria.org*\n\n_${mishnaYomi.hebrewName}_\n${mishnaYomi.hebrew}\n\n_${mishnaYomi.englishName}_\n${mishnaYomi.english}`;
-			await chat.sendMessage(text);
+			// await chat.sendMessage(text);
+			console.log(text);
 		}
 		console.log('[Mishna Yomi] Sent Mishna Yomi successfully');
 	},
