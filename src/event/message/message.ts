@@ -35,7 +35,7 @@ module.exports = {
 			client.commands.get(commandName) ||
 			client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 		if (!commandExists || commandExists === '') {
-			message.reply('Looks the commands is invalid.');
+			// message.reply('Looks the commands is invalid.');
 			return;
 		}
 		const command = commandExists as Command;
