@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.9.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.8.2...v3.9.0) (2022-01-11)
+
+
+### Features
+
+* improved response of meal request ([4863c7b](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/4863c7b9c3761d9c9290b6c067440502fe89e87c))
+
 ### [3.8.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.8.1...v3.8.2) (2022-01-11)
 
 ### [3.8.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.8.0...v3.8.1) (2022-01-11)
