@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.8.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.7.0...v3.8.0) (2022-01-11)
+
+
+### Features
+
+* added alternateweek task ([172a2e0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/172a2e0cec688a339b757b11a82b8756f015dbf4))
+* Added load and dump commands ([1a21f36](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/1a21f3668135b249dd3a9416dcb42fedaa23ba86))
+* added quote command ([68d1778](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/68d1778dab65f9a01009b0fe61a15a651d279d74))
+
 ## [3.7.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.6.1...v3.7.0) (2022-01-11)
 
 
