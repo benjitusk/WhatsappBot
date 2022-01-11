@@ -13,8 +13,9 @@ export interface Task {
 }
 
 export interface Command {
-	enabled: boolean;
 	name: string;
+	enabled: boolean;
+	admin: boolean;
 	aliases?: string[];
 	cooldown?: number;
 	execute: (message: Message, client: Client) => void;
