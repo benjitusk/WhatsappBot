@@ -1,5 +1,6 @@
 import { Message } from 'whatsapp-web.js';
 import { Command } from '../../types';
+import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'wfd',
@@ -8,7 +9,28 @@ const command: Command = {
 	cooldown: 60,
 	admin: false,
 	execute: function (message: Message): void {
-		message.reply('This command will be implemented in v3.5.0');
+		let tomorrow = new Date().getHours() >= 19 && new Date().getMinutes() >= 30;
+		let persistantStorage = new PersistantStorage();
+		let food = persistantStorage.get('food');
+
+		// Check if we are in an alternate week.
+		let weekNumber = food.alternateWeek as number;
+
+		// Get the day of the week as a number.
+		let dayOfWeekIndex = new Date().getDay();
+
+		// If it's past 19:30, increment the dayOfWeekIndex
+		// to get the dinner for tomorrow
+		if (tomorrow) dayOfWeekIndex++;
+
+		let dayOfWeek = food.days[dayOfWeekIndex] as string;
+		// Get the food for the day.
+		let dinner = food.dinner[dayOfWeek];
+
+		// check if dinner is an array.
+		if (Array.isArray(dinner)) dinner = dinner[weekNumber];
+
+		message.reply(`Dinner for to${tomorrow ? 'morrow ' : ''}night is ${dinner}`);
 	},
 };
 
