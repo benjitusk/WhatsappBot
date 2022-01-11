@@ -1,6 +1,6 @@
 const prefix = '!';
 import WAWebJS from 'whatsapp-web.js';
-import { Command } from '../../utils';
+import { Command } from '../../types';
 module.exports = {
 	name: 'message',
 	once: false,

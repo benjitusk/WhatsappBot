@@ -1,7 +1,7 @@
 import { Client } from 'whatsapp-web.js';
 import { readdirSync } from 'fs';
 import { CronJob } from 'cron';
-import { Task } from '../utils';
+import { Task } from '../types';
 
 module.exports = (client: Client): void => {
 	// Get all js files in the folder. These files are the event handlers.

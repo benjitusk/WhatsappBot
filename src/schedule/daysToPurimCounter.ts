@@ -1,5 +1,5 @@
 import { PersistantStorage } from '../utils';
-import { Task } from '../utils';
+import { Task } from '../types';
 
 const task: Task = {
 	name: 'DTP Countdown',

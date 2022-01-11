@@ -1,6 +1,7 @@
 import { Client, WAState } from 'whatsapp-web.js';
-import { getMishnaYomi, PersistantStorage, MishnaYomi, Task } from '../utils';
+import { getMishnaYomi, PersistantStorage } from '../utils';
 import { chats } from '../removedInfo';
+import { MishnaYomi, Task } from '../types';
 
 interface MishnaTracker {
 	book: number;

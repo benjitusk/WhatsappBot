@@ -1,33 +1,6 @@
 import axios from 'axios';
 import { readFileSync, writeFileSync } from 'fs';
-import { Message, Client } from 'whatsapp-web.js';
-
-export interface Task {
-	name: string;
-	enabled: any;
-	seconds: any;
-	minutes: any;
-	hours: any;
-	dayMonth: any;
-	month: any;
-	dayWeek: any;
-	execute: (client: Client) => void;
-}
-
-export interface Command {
-	enabled: boolean;
-	name: string;
-	aliases?: string[];
-	cooldown?: number;
-	execute: (message: Message, client: Client) => void;
-}
-
-export interface MishnaYomi {
-	hebrewName: string;
-	englishName: string;
-	english: string;
-	hebrew: string;
-}
+import { MishnaYomi } from './types';
 
 export class PersistantStorage {
 	private data: any;
@@ -45,6 +18,14 @@ export class PersistantStorage {
 	set(key: string, value: any): void {
 		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
 		this.data[key] = value;
+	}
+
+	load(): void {
+		this.data = JSON.parse(readFileSync(this.path) as any);
+	}
+
+	save(): void {
+		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
 	}
 }
 

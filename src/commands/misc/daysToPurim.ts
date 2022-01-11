@@ -1,5 +1,6 @@
 import { Message, Client } from 'whatsapp-web.js';
-import { Command, PersistantStorage } from '../../utils';
+import { Command } from '../../types';
+import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'daysToPurim',
