@@ -60,3 +60,28 @@ export async function getMishnaYomi(
 		hebrew: hebrewMishna,
 	};
 }
+
+export function getMeal(threshhold: number, meal: string): string {
+	let tomorrow = threshhold < new Date().getTime();
+	let persistantStorage = new PersistantStorage();
+	let storage = persistantStorage.get();
+
+	// Check if we are in an alternate week.
+	let weekNumber = storage.alternateWeek as number;
+
+	// Get the day of the week as a number.
+	let dayOfWeekIndex = new Date().getDay();
+
+	if (tomorrow) dayOfWeekIndex++;
+
+	let dayOfWeek = storage.days[dayOfWeekIndex] as string;
+	// Get the food for the day.
+	let meals = storage.food[meal] as { [key: string]: string | string[] };
+	let food = meals[dayOfWeek];
+
+	// check if food is an array.
+	if (Array.isArray(food)) food = food[weekNumber];
+
+	// return the food.
+	return food;
+}
