@@ -48,8 +48,8 @@ module.exports = {
 			const command = commandExists as Command;
 
 			// Check if the user has permission to use the command.
+			let contact = await message.getContact();
 			if (command.admin) {
-				let contact = await message.getContact();
 				if (chats.admins.includes(contact.id._serialized)) {
 					command.execute(message, client);
 				} else {
@@ -64,7 +64,7 @@ module.exports = {
 				// Execute the command.
 				command.execute(message, client);
 			}
-			console.log(`[Command - ${command.name}] Executed by ${message.author || message.from}`);
+			console.log(`[Command - ${command.name}] Executed by ${contact.pushname}`);
 		}
 	},
 };
