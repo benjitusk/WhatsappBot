@@ -4,7 +4,8 @@
   "description": "whatsapp bot",
   "main": "bin/index.js",
   "scripts": {
-    "build": "tsc --build --clean"
+    "build": "tsc --build --clean",
+    "release": "standard-version"
   },
   "nodemonConfig": {
     "ignore": [
@@ -39,6 +40,7 @@
     "@types/mysql": "^2.15.20",
     "@types/node-fetch": "^3.0.3",
     "@types/qrcode-terminal": "^0.12.0",
-    "husky": "^7.0.4"
+    "husky": "^7.0.4",
+    "standard-version": "^9.3.2"
   }
 }
