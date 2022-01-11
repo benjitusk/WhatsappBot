@@ -9,7 +9,7 @@ const command: Command = {
 	cooldown: 60,
 	admin: false,
 	execute: function (message: Message): void {
-		let tomorrow = new Date().getHours() >= 19 && new Date().getMinutes() >= 30;
+		let tomorrow = new Date().setHours(19, 30) < new Date().getTime();
 		let persistantStorage = new PersistantStorage();
 		let storage = persistantStorage.get();
 
