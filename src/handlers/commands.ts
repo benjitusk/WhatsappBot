@@ -1,5 +1,5 @@
 import { readdirSync } from 'fs';
-import { Client, Message } from 'whatsapp-web.js';
+import { Client } from 'whatsapp-web.js';
 import { Command } from '../types';
 
 module.exports = (client: Client): void => {
@@ -11,6 +11,8 @@ module.exports = (client: Client): void => {
 			if (command.enabled) {
 				client.commands.set(command.name, command);
 				console.log(`[Command] ${command.name} is enabled.`);
+			} else {
+				console.log(`[Command] ${command.name} is disabled.`);
 			}
 		}
 	}
