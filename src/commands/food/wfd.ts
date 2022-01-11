@@ -4,7 +4,7 @@ import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'wfd',
-	aliases: [],
+	aliases: ['dinner'],
 	enabled: true,
 	cooldown: 60,
 	admin: false,
