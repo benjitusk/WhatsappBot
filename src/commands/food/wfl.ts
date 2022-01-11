@@ -9,7 +9,7 @@ const command: Command = {
 	cooldown: 60,
 	admin: false,
 	execute: function (message: Message): void {
-		let food = getMeal(new Date().setHours(13, 30), 'breakfast');
+		let food = getMeal('lunch', new Date().setHours(13, 30));
 		message.reply(food);
 	},
 };
