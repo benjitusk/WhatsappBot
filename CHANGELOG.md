@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.7.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.6.1...v3.7.0) (2022-01-11)
+
+
+### Features
+
+* Added alias for dinner ([842d261](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/842d2611964e6b2bd8591c37ff7469ed2a690416))
+* Added breakfast and lunch commands ([4d385d2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/4d385d29172dd75aab510fbb4ce0023fe42f888f))
+
 ### [3.6.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.6.0...v3.6.1) (2022-01-11)
 
 
