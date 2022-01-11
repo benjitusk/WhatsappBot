@@ -10,3 +10,5 @@ sessions/
 WWebJS/
 media/
 bin/
+.husky/commit-msg
+commitlint.config.js
