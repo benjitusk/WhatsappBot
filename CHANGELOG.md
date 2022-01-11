@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.6.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.6.0...v3.6.1) (2022-01-11)
+
+
+### Bug Fixes
+
+* corrected time threshhold check ([3cc92ea](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/3cc92ea7fd52297149367659e5981871d931788f))
+
 ## [3.6.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.5.0...v3.6.0) (2022-01-11)
 
 
