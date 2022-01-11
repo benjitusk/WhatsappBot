@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.5.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.4.6...v3.5.0) (2022-01-11)
+
+
+### Features
+
+* implemented wfd command ([84764d2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/84764d236d3cc371ccd1e157702931471bdbafc1))
+
+
+### Bug Fixes
+
+* commands now show pushname of user ([db06057](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/db06057044697923c00bc6a64fbe04ff886ea502))
+
 ### [3.4.6](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v1.2.0...v3.4.6) (2022-01-11)
 
 ## [1.2.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v1.1.1...v1.2.0) (2022-01-11)
