@@ -13,6 +13,6 @@ client.commands = new Collection();
 
 client.initialize();
 
-['event', 'schedule', 'command'].forEach((handler) => {
+['events', 'schedules', 'commands'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client);
 });
