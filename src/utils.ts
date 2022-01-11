@@ -16,8 +16,8 @@ export class PersistantStorage {
 	}
 
 	set(key: string, value: any): void {
-		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
 		this.data[key] = value;
+		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
 	}
 
 	load(): void {
