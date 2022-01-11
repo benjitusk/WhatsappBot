@@ -10,8 +10,7 @@ export class PersistantStorage {
 	}
 
 	get() {
-		let data = JSON.parse(readFileSync(this.path) as any) as PersistantData;
-		return data;
+		return JSON.parse(readFileSync(this.path) as any) as PersistantData;
 	}
 
 	set(data: PersistantData): void {
