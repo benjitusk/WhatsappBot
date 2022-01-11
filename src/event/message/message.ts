@@ -1,6 +1,7 @@
 const prefix = '!';
 import WAWebJS from 'whatsapp-web.js';
 import { Command } from '../../types';
+import { chats } from '../../removedInfo';
 module.exports = {
 	name: 'message',
 	once: false,
@@ -28,17 +29,33 @@ module.exports = {
 		// I'll do this later.
 
 		// 2. Handle commands.
-		if (!message.body.startsWith(prefix)) return;
-		let args = message.body.trim().split(/ +/);
-		const commandName = args[0].slice(prefix.length).toLowerCase();
-		let commandExists =
-			client.commands.get(commandName) ||
-			client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
-		if (!commandExists || commandExists === '') {
-			// message.reply('Looks the commands is invalid.');
-			return;
+		if (message.body.startsWith(prefix)) {
+			// Split the message wherever there are one or more spaces.
+			let args = message.body.trim().split(/ +/);
+			// Remove the prefix from the first argument. and lowercase it.
+			const commandName = args[0].slice(prefix.length).toLowerCase();
+
+			// Get the command if it exists.
+			let commandExists =
+				client.commands.get(commandName) ||
+				client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
+
+			// If it doesn't exist, return.
+			if (!commandExists || commandExists === '') return;
+
+			// If it does exist, check if the user has permission to use it.
+			const command = commandExists as Command;
+
+			if (command.admin) {
+				let contact = await message.getContact();
+				if (chats.admins.includes(contact.id._serialized)) {
+					command.execute(message, client);
+				} else {
+					// send a private message to the user.
+					let contactChat = await contact.getChat();
+					contactChat.sendMessage(`You don't have permission to use this command.`);
+				}
+			} else command.execute(message, client);
 		}
-		const command = commandExists as Command;
-		command.execute(message, client);
 	},
 };
