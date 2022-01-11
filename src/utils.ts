@@ -81,6 +81,9 @@ export function getMeal(meal: string, threshhold: number = 0): string {
 	// check if food is an array.
 	if (Array.isArray(food)) food = food[weekNumber];
 
+	// capitalize the first letter of the meal
+	let mealCap = meal.charAt(0).toUpperCase() + meal.slice(1);
+
 	// return the food.
-	return food;
+	return `${mealCap} for to${tomorrow ? 'morrow' : 'day'} is ${food}.`;
 }
