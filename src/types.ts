@@ -38,7 +38,12 @@ export interface PersistantData {
 	};
 
 	days: string[];
-
+	quotes: [
+		{
+			content: string;
+			author: string;
+		}
+	];
 	daysToPurim: number;
 
 	mishnaYomi: {
