@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.6.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.5.0...v3.6.0) (2022-01-11)
+
+
+### Features
+
+* Log on process start and stop ([f95af60](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/f95af6047cd863c6be5f54d2788326ebbef67a3d))
+
 ## [3.5.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.4.6...v3.5.0) (2022-01-11)
 
 
