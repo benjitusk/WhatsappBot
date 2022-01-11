@@ -29,16 +29,11 @@ export interface MishnaYomi {
 }
 
 export interface PersistantData {
+	alternateWeek: number;
 	food: {
-		alternateWeek: number;
-		breakfast: {
-			[key: string]: string;
-		};
-		lunch: {
-			[key: string]: string | string[];
-		};
-		dinner: {
-			[key: string]: string | string[];
+		[key: string]: {
+			// breakfast/lunch/dinner
+			[key: string]: string | string[]; // food/rotation
 		};
 	};
 
