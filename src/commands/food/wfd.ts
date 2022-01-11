@@ -9,6 +9,7 @@ const command: Command = {
 	cooldown: 60,
 	admin: false,
 	execute: function (message: Message): void {
+		// If it's past 19:30, make the appropriate changes.
 		let tomorrow = new Date().setHours(19, 30) < new Date().getTime();
 		let persistantStorage = new PersistantStorage();
 		let storage = persistantStorage.get();
@@ -19,8 +20,6 @@ const command: Command = {
 		// Get the day of the week as a number.
 		let dayOfWeekIndex = new Date().getDay();
 
-		// If it's past 19:30, increment the dayOfWeekIndex
-		// to get the dinner for tomorrow
 		if (tomorrow) dayOfWeekIndex++;
 
 		let dayOfWeek = storage.days[dayOfWeekIndex] as string;
