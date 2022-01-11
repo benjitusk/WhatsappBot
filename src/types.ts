@@ -27,3 +27,29 @@ export interface MishnaYomi {
 	english: string;
 	hebrew: string;
 }
+
+export interface PersistantData {
+	food: {
+		alternateWeek: number;
+		breakfast: {
+			[key: string]: string;
+		};
+		lunch: {
+			[key: string]: string | string[];
+		};
+		dinner: {
+			[key: string]: string | string[];
+		};
+	};
+
+	days: string[];
+
+	daysToPurim: number;
+
+	mishnaYomi: {
+		bookIndex: number;
+		perek: number;
+		mishna: number;
+		books: string[];
+	};
+}
