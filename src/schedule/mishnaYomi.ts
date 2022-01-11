@@ -3,13 +3,6 @@ import { getMishnaYomi, PersistantStorage } from '../utils';
 import { chats } from '../removedInfo';
 import { MishnaYomi, Task } from '../types';
 
-interface MishnaTracker {
-	book: number;
-	perek: number;
-	mishna: number;
-	books: [string];
-}
-
 const task: Task = {
 	name: 'Mishna Yomi',
 	// 8:30am every day
@@ -22,17 +15,16 @@ const task: Task = {
 	dayWeek: '*',
 	execute: async function (client: Client) {
 		let persistance = new PersistantStorage();
+		let storage = persistance.get();
 		let mishnayot: MishnaYomi[] = [];
 
 		// Get 2 mishnayot
 		for (let i = 0; i < 2; i++) {
-			// Get the counter object
-			let mishnaTracker = persistance.get('mishnaYomi') as MishnaTracker;
 			// Get the mishna
 			let mishnaYomi = await getMishnaYomi(
-				mishnaTracker.books[mishnaTracker.book],
-				mishnaTracker.perek,
-				mishnaTracker.mishna
+				storage.mishnaYomi.books[storage.mishnaYomi.bookIndex],
+				storage.mishnaYomi.perek,
+				storage.mishnaYomi.mishna
 			);
 
 			// Handle any errors
@@ -49,35 +41,35 @@ const task: Task = {
 				if (mishnaYomi === 'Mishna not in chapter') {
 					// The mishna is not in the chapter.
 					// Increase the perek and mishna, and try again.
-					mishnaTracker.perek++;
-					mishnaTracker.mishna = 1;
+					storage.mishnaYomi.perek++;
+					storage.mishnaYomi.mishna = 1;
 				} else if (mishnaYomi.includes('Mishnah must be greater than 0')) {
 					// The mishna is 0. Increase the mishna and try again.
-					mishnaTracker.mishna++;
+					storage.mishnaYomi.mishna++;
 				} else if (mishnaYomi.includes('Chapter must be greater than 0')) {
 					// The perek is 0. Increase the perek, set the mishna to 1, and try again.
-					mishnaTracker.perek++;
-					mishnaTracker.mishna = 1;
+					storage.mishnaYomi.perek++;
+					storage.mishnaYomi.mishna = 1;
 				} else if (mishnaYomi.includes('ends at Chapter')) {
 					// The perek does not exist in this book.
 					// Increase the book count, set the mishna and perek to 1
-					mishnaTracker.book++;
-					mishnaTracker.perek = 1;
-					mishnaTracker.mishna = 1;
+					storage.mishnaYomi.bookIndex++;
+					storage.mishnaYomi.perek = 1;
+					storage.mishnaYomi.mishna = 1;
 				}
 				// save the new mishna tracker
-				persistance.set('mishnaYomi', mishnaTracker);
+				persistance.set(storage);
 				// and try again
 				mishnaYomi = await getMishnaYomi(
-					mishnaTracker.books[mishnaTracker.book],
-					mishnaTracker.perek,
-					mishnaTracker.mishna
+					storage.mishnaYomi.books[storage.mishnaYomi.bookIndex],
+					storage.mishnaYomi.perek,
+					storage.mishnaYomi.mishna
 				);
 			}
 
 			// update the mishna tracker
-			mishnaTracker.mishna++;
-			persistance.set('mishnaYomi', mishnaTracker);
+			storage.mishnaYomi.mishna++;
+			persistance.set(storage);
 
 			// Prepare the mishnah for sending
 			mishnayot.push(mishnaYomi as MishnaYomi);

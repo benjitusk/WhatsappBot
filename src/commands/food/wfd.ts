@@ -11,10 +11,10 @@ const command: Command = {
 	execute: function (message: Message): void {
 		let tomorrow = new Date().getHours() >= 19 && new Date().getMinutes() >= 30;
 		let persistantStorage = new PersistantStorage();
-		let food = persistantStorage.get('food');
+		let storage = persistantStorage.get();
 
 		// Check if we are in an alternate week.
-		let weekNumber = food.alternateWeek as number;
+		let weekNumber = storage.food.alternateWeek as number;
 
 		// Get the day of the week as a number.
 		let dayOfWeekIndex = new Date().getDay();
@@ -23,9 +23,9 @@ const command: Command = {
 		// to get the dinner for tomorrow
 		if (tomorrow) dayOfWeekIndex++;
 
-		let dayOfWeek = food.days[dayOfWeekIndex] as string;
+		let dayOfWeek = storage.days[dayOfWeekIndex] as string;
 		// Get the food for the day.
-		let dinner = food.dinner[dayOfWeek];
+		let dinner = storage.food.dinner[dayOfWeek];
 
 		// check if dinner is an array.
 		if (Array.isArray(dinner)) dinner = dinner[weekNumber];

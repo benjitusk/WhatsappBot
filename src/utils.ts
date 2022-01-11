@@ -1,23 +1,21 @@
 import axios from 'axios';
 import { readFileSync, writeFileSync } from 'fs';
-import { MishnaYomi } from './types';
+import { MishnaYomi, PersistantData } from './types';
 
 export class PersistantStorage {
 	private data: any;
 	private path: string;
 	constructor() {
 		this.path = '../persistantStorage.json';
-		this.data = JSON.parse(readFileSync(this.path) as any);
 	}
 
-	get(key: string) {
-		this.data = JSON.parse(readFileSync(this.path) as any);
-		return this.data[key];
+	get() {
+		let data = JSON.parse(readFileSync(this.path) as any) as PersistantData;
+		return data;
 	}
 
-	set(key: string, value: any): void {
-		this.data[key] = value;
-		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
+	set(data: PersistantData): void {
+		writeFileSync(this.path, JSON.stringify(data, null, 2));
 	}
 
 	load(): void {

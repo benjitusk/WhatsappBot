@@ -12,9 +12,9 @@ const task: Task = {
 	dayWeek: '*',
 	execute: async function () {
 		const persistantStorage = new PersistantStorage();
-		let dtp = persistantStorage.get('daysToPurim');
-		dtp--;
-		persistantStorage.set('daysToPurim', dtp);
+		let storage = persistantStorage.get();
+		storage.daysToPurim--;
+		persistantStorage.set(storage);
 	},
 };
 
