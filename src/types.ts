@@ -2,13 +2,13 @@ import { Client, Message } from 'whatsapp-web.js';
 
 export interface Task {
 	name: string;
-	enabled: any;
-	seconds: any;
-	minutes: any;
-	hours: any;
-	dayMonth: any;
-	month: any;
-	dayWeek: any;
+	enabled: boolean;
+	seconds: string;
+	minutes: string;
+	hours: string;
+	dayMonth: string;
+	month: string;
+	dayWeek: string;
 	execute: (client: Client) => void;
 }
 
