@@ -1,0 +1,41 @@
+{
+  "name": "whatsapp",
+  "version": "1.0.0",
+  "description": "whatsapp bot",
+  "main": "bin/index.js",
+  "scripts": {
+    "build": "tsc --build --clean"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "*.json"
+    ]
+  },
+  "keywords": [
+    "node",
+    "whatsapp",
+    "bot",
+    "typescript"
+  ],
+  "author": "benjitusk",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/collection": "^0.4.0",
+    "axios": "^0.24.0",
+    "cron": "^1.8.2",
+    "dotenv": "^10.0.0",
+    "emoji-unicode": "^2.0.1",
+    "mysql": "^2.18.1",
+    "parse-duration": "^1.0.1",
+    "pretty-ms": "^7.0.1",
+    "puppeteer": "^10.4.0",
+    "qrcode-terminal": "^0.12.0",
+    "whatsapp-web.js": "^1.15.3"
+  },
+  "devDependencies": {
+    "@types/cron": "^1.7.3",
+    "@types/mysql": "^2.15.20",
+    "@types/node-fetch": "^3.0.3",
+    "@types/qrcode-terminal": "^0.12.0"
+  }
+}
