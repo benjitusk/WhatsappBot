@@ -2,6 +2,7 @@ const prefix = '!';
 import WAWebJS from 'whatsapp-web.js';
 import { Command } from '../../types';
 import { chats } from '../../removedInfo';
+import { Collection } from '@discordjs/collection';
 module.exports = {
 	name: 'message',
 	once: false,
@@ -41,11 +42,12 @@ module.exports = {
 				client.commands.find((cmd) => cmd.aliases && cmd.aliases.includes(commandName));
 
 			// If it doesn't exist, return.
-			if (!commandExists || commandExists === '') return;
+			if (!commandExists) return;
 
 			// If it does exist, check if the user has permission to use it.
 			const command = commandExists as Command;
 
+			// Check if the user has permission to use the command.
 			if (command.admin) {
 				let contact = await message.getContact();
 				if (chats.admins.includes(contact.id._serialized)) {
@@ -55,7 +57,14 @@ module.exports = {
 					let contactChat = await contact.getChat();
 					contactChat.sendMessage(`You don't have permission to use this command.`);
 				}
-			} else command.execute(message, client);
+			} else {
+				// Check if the user is on cooldown.
+				// I'll do this later.
+
+				// Execute the command.
+				command.execute(message, client);
+			}
+			console.log(`[Command - ${command.name}] Executed by ${message.author || message.from}`);
 		}
 	},
 };

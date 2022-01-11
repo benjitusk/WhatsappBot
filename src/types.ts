@@ -16,8 +16,8 @@ export interface Command {
 	name: string;
 	enabled: boolean;
 	admin: boolean;
-	aliases?: string[];
-	cooldown?: number;
+	aliases: string[];
+	cooldown: number;
 	execute: (message: Message, client: Client) => void;
 }
 
