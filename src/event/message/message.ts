@@ -2,7 +2,7 @@ const prefix = '!';
 import WAWebJS from 'whatsapp-web.js';
 import { Command } from '../../types';
 import { chats } from '../../removedInfo';
-import { Collection } from '@discordjs/collection';
+import prettyMilliseconds from 'pretty-ms';
 module.exports = {
 	name: 'message',
 	once: false,
@@ -49,22 +49,41 @@ module.exports = {
 
 			// Check if the user has permission to use the command.
 			let contact = await message.getContact();
+
 			if (command.admin) {
-				if (chats.admins.includes(contact.id._serialized)) {
-					command.execute(message, client);
-				} else {
+				if (!chats.admins.includes(contact.id._serialized)) {
 					// send a private message to the user.
 					let contactChat = await contact.getChat();
-					contactChat.sendMessage(`You don't have permission to use this command.`);
+					message.reply(
+						`You don't have permission to use this command.`,
+						contactChat.id._serialized
+					);
+					return;
 				}
 			} else {
-				// Check if the user is on cooldown.
-				// I'll do this later.
+				// Check if a cooldown is in effect.
+				if (client.cooldowns.has(command.name)) {
+					const now = Date.now();
+					// Get the cooldown.
+					const commandCooldown = client.cooldowns.get(command.name);
 
-				// Execute the command.
+					// Check if there is an active cooldown.
+					if (commandCooldown && commandCooldown > now) {
+						// Get the time remaining.
+						const timeRemaining = commandCooldown - now;
+						const prettyTime = prettyMilliseconds(timeRemaining, { secondsDecimalDigits: 0 });
+						// Send a message to the user.
+						message.reply(`You need to wait ${prettyTime} before using this command again.`);
+						return;
+					}
+					// Set a cooldown for the command, as we are about to execute it.
+				} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
+				// Cooldown check: 		PASSED.
+				// Permission check: 	PASSED.
+				// Execute the command
 				command.execute(message, client, args);
+				console.log(`[Command] ${contact.pushname} executed command: ${command.name} `);
 			}
-			console.log(`[Command] ${contact.pushname} executed command: ${command.name} `);
 		}
 	},
 };
