@@ -49,6 +49,7 @@ module.exports = {
 
 			// Check if the user has permission to use the command.
 			let contact = await message.getContact();
+			let shouldExecute = true;
 
 			if (command.admin) {
 				if (!chats.admins.includes(contact.id._serialized)) {
@@ -58,7 +59,7 @@ module.exports = {
 						`You don't have permission to use this command.`,
 						contactChat.id._serialized
 					);
-					return;
+					shouldExecute = false;
 				}
 			} else {
 				// Check if a cooldown is in effect.
@@ -74,20 +75,21 @@ module.exports = {
 						const prettyTime = prettyMilliseconds(timeRemaining, { secondsDecimalDigits: 0 });
 						// Send a message to the user.
 						message.reply(`You need to wait ${prettyTime} before using this command again.`);
-						return;
-					}
+						shouldExecute = false;
+					} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
 					// Set a cooldown for the command, as we are about to execute it.
 				} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
-				// Cooldown check: 		PASSED.
-				// Permission check: 	PASSED.
-				// Execute the command
-				command.execute(message, client, args);
-				console.log(
-					`[Command] ${contact.name || contact.pushname || contact.number} executed${
-						command.admin ? ' [ADMIN] ' : ' '
-					}command: ${command.name}`
-				);
 			}
+			if (!shouldExecute) return;
+			// Cooldown check: 		PASSED.
+			// Permission check: 	PASSED.
+			// Execute the command
+			command.execute(message, client, args);
+			console.log(
+				`[Command] ${contact.name || contact.pushname || contact.number} executed${
+					command.admin ? ' [ADMIN] ' : ' '
+				}command: ${command.name}`
+			);
 		}
 	},
 };
