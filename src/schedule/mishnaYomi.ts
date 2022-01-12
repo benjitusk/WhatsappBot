@@ -85,7 +85,7 @@ const task: Task = {
 		// Send both mishnayot
 		for (let mishnaYomi of mishnayot) {
 			let text = `*This Mishna Yomi message is powered by Sefaria.org*\n\n_${mishnaYomi.hebrewName}_\n${mishnaYomi.hebrew}\n\n_${mishnaYomi.englishName}_\n${mishnaYomi.english}`;
-			await chat.sendMessage(text);
+			await chat.sendMessage(text, { linkPreview: false });
 		}
 		console.log('[Mishna Yomi] Sent Mishna Yomi successfully');
 	},
