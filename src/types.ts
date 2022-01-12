@@ -36,9 +36,9 @@ export interface MishnaYomi {
 export interface PersistantData {
 	alternateWeek: number;
 	food: {
-		[key: string]: {
+		[meal: string]: {
 			// breakfast/lunch/dinner
-			[key: string]: string | string[]; // food/rotation
+			[day: string]: string | string[]; // food/rotation
 		};
 	};
 
@@ -56,5 +56,18 @@ export interface PersistantData {
 		perek: number;
 		mishna: number;
 		books: string[];
+	};
+
+	polls: {
+		[name: string]: {
+			id: string;
+			expiration: number;
+			votes: {
+				good: number;
+				meh: number;
+				bad: number;
+			};
+			voters: string[];
+		};
 	};
 }
