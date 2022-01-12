@@ -31,8 +31,8 @@ module.exports = {
 
 		// 2. Handle commands.
 		if (message.body.startsWith(prefix)) {
-			// Split the message wherever there are one or more spaces.
-			let args = message.body.trim().split(/ +/);
+			// Split the message wherever there are one or more spaces or newlines.
+			let args = message.body.trim().split(/[ \n]+/);
 			// Remove the prefix from the first argument. and lowercase it.
 			const commandName = args[0].slice(prefix.length).toLowerCase();
 
