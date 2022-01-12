@@ -82,7 +82,11 @@ module.exports = {
 				// Permission check: 	PASSED.
 				// Execute the command
 				command.execute(message, client, args);
-				console.log(`[Command] ${contact.pushname} executed command: ${command.name} `);
+				console.log(
+					`[Command] ${contact.name || contact.pushname || contact.number} executed command: ${
+						command.name
+					} `
+				);
 			}
 		}
 	},
