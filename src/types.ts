@@ -62,7 +62,7 @@ export interface PersistantData {
 		[name: string]: {
 			expiration: number;
 			votes: {
-				[id: string]: number;
+				[votes: string]: number;
 				good: number;
 				meh: number;
 				bad: number;
