@@ -13,12 +13,17 @@ export interface Task {
 }
 
 export interface Command {
+	/** The primary trigger and name of the command */
 	name: string;
+	/** A toggle to easily disable a command */
 	enabled: boolean;
+	/** A toggle to require admin permission to execute */
 	admin: boolean;
+	/** A list of aliases for the command */
 	aliases: string[];
+	/** Time to wait between executions, in seconds */
 	cooldown: number;
-	execute: (message: Message, client: Client, args?: string[]) => void;
+	execute: (message: Message, client: Client, args: string[]) => void;
 }
 
 export interface MishnaYomi {
