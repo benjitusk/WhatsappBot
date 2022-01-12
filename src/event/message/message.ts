@@ -62,7 +62,7 @@ module.exports = {
 				// I'll do this later.
 
 				// Execute the command.
-				command.execute(message, client);
+				command.execute(message, client, args);
 			}
 			console.log(`[Command] ${contact.pushname} executed command: ${command.name} `);
 		}

@@ -18,7 +18,7 @@ export interface Command {
 	admin: boolean;
 	aliases: string[];
 	cooldown: number;
-	execute: (message: Message, client: Client) => void;
+	execute: (message: Message, client: Client, args?: string[]) => void;
 }
 
 export interface MishnaYomi {
