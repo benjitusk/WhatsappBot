@@ -3,6 +3,7 @@ import WAWebJS from 'whatsapp-web.js';
 import { Command } from '../../types';
 import { chats } from '../../removedInfo';
 import prettyMilliseconds from 'pretty-ms';
+import { PersistantStorage } from '../../utils';
 module.exports = {
 	name: 'message',
 	once: false,
@@ -90,6 +91,40 @@ module.exports = {
 					command.admin ? ' [ADMIN] ' : ' '
 				}command: ${command.name}`
 			);
+		}
+
+		// 3. Handle poll responses.
+		if (message.type === 'buttons_response') {
+			const persistance = new PersistantStorage();
+			const storage = persistance.get();
+			const pollID = message.selectedButtonId!;
+			const vote = pollID.split('_')[1];
+			const contact = await message.getContact();
+			const contactChat = await contact.getChat();
+
+			let poll = storage.polls[pollID];
+
+			// If the poll is expired, delete it and notify the user.
+			if (!poll || poll.expiration < Date.now()) {
+				delete storage.polls[pollID];
+				persistance.set(storage);
+				message.reply('This poll has expired.', contactChat.id._serialized);
+				return;
+			}
+
+			// If the poll is not expired, check if the user has already voted.
+			if (poll.voters.includes(message.author!)) {
+				// Privately reply to the user.
+				message.reply(`You don't have permission to use this command.`, contactChat.id._serialized);
+				return;
+			}
+
+			// If the user has not voted, add them to the list of voters.
+			poll.voters.push(message.author!);
+			// Add the vote to the poll.
+			poll.votes[vote]++;
+			// Save the poll.
+			persistance.set(storage);
 		}
 	},
 };
