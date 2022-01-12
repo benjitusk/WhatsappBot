@@ -63,7 +63,7 @@ module.exports = {
 				}
 			} else {
 				// Check if a cooldown is in effect.
-				if (client.cooldowns.has(command.name)) {
+				if (!chats.admins.includes(contact.id._serialized) && client.cooldowns.has(command.name)) {
 					const now = Date.now();
 					// Get the cooldown.
 					const commandCooldown = client.cooldowns.get(command.name);
