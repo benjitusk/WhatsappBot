@@ -10,9 +10,9 @@ module.exports = (client: Client): void => {
 			const command = require(`../commands/${folder}/${file}`) as Command;
 			if (command.enabled) {
 				client.commands.set(command.name, command);
-				console.log(`[Command] ${command.name} is enabled.`);
+				console.log(`[Command] enabled ${command.name}.`);
 			} else {
-				console.log(`[Command] ${command.name} is disabled.`);
+				console.log(`[Command] DISABLED ${command.name}.`);
 			}
 		}
 	}

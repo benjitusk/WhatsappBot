@@ -10,15 +10,15 @@ module.exports = (client: Client): void => {
 		// Load the event handler.
 		const task: Task = require(`../schedule/${file}`);
 		if (task.enabled) {
+			console.log(`[Schedule] enabled ${task.name}`);
 			// Create a new cron job
 			let timeString = `${task.seconds} ${task.minutes} ${task.hours} ${task.dayMonth} ${task.month} ${task.dayWeek}`;
 			new CronJob(timeString, generateTaskFunction(task, client), null, true, 'Asia/Jerusalem');
-		}
+		} else console.log(`[Schedule] DISABLED ${task.name}`);
 	}
 };
 
 function generateTaskFunction(task: Task, client: Client): () => void {
-	console.log(`[Schedule] ${task.name} is enabled.`);
 	return function () {
 		console.log(`[${task.name}] Executing task`);
 		try {

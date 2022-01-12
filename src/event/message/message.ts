@@ -83,9 +83,9 @@ module.exports = {
 				// Execute the command
 				command.execute(message, client, args);
 				console.log(
-					`[Command] ${contact.name || contact.pushname || contact.number} executed command: ${
-						command.name
-					} `
+					`[Command] ${contact.name || contact.pushname || contact.number} executed${
+						command.admin ? ' [ADMIN] ' : ' '
+					}command: ${command.name}`
 				);
 			}
 		}
