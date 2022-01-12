@@ -60,9 +60,9 @@ export interface PersistantData {
 
 	polls: {
 		[name: string]: {
-			id: string;
 			expiration: number;
 			votes: {
+				[id: string]: number;
 				good: number;
 				meh: number;
 				bad: number;
