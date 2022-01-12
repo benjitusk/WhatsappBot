@@ -1,6 +1,7 @@
 import { Client, Message, Buttons } from 'whatsapp-web.js';
 import { chats } from '../../removedInfo';
 import { Command } from '../../types';
+import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'poll',
@@ -9,6 +10,8 @@ const command: Command = {
 	aliases: [],
 	cooldown: 0,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
+		const persistance = new PersistantStorage();
+		let storage = persistance.get();
 		/**
 		 * Parse the arguments
 		 * the are in the following of:
@@ -44,9 +47,9 @@ const command: Command = {
 			: await client.getChatById((chats[argsDict.chat] as string) || chats.BOT_MAIN_CHAT);
 		// Prepare the buttons
 		const buttonArray = [
-			{ id: pollID + 'good', body: '👍' },
-			{ id: pollID + 'meh', body: '🤷' },
-			{ id: pollID + 'bad', body: '👎' },
+			{ id: pollID + '_good', body: '👍' },
+			{ id: pollID + '_meh', body: '🤷' },
+			{ id: pollID + '_bad', body: '👎' },
 		];
 		// remove the meh button if the option is not allowed
 		if (!argsDict.allowMeh) buttonArray.splice(1, 1);
@@ -58,6 +61,18 @@ const command: Command = {
 
 		// Send the poll
 		chat.sendMessage(buttons);
+
+		// Save the poll
+		const poll = {
+			expiration: new Date().getTime() + 1000 * 60 * 60 * 3, // 3 hours
+			votes: {
+				good: 0,
+				meh: 0,
+				bad: 0,
+			},
+			voters: [],
+		};
+		storage.polls[pollID] = poll;
 	},
 };
 
