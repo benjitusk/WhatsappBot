@@ -21,6 +21,9 @@ const command: Command = {
 				'https://api.quotable.io/random?tags=friendship|happiness|wisdom'
 			);
 			let quote = response.data as { content: string; author: string };
+			// remove the first and last characters IF they are a quote mark
+			if (quote.content.charAt(0) === '"' && quote.content.charAt(quote.content.length - 1) === '"')
+				quote.content = quote.content.substring(1, quote.content.length - 1);
 			message.reply(`"${quote.content}"\n- ${quote.author}`);
 		}
 	},
