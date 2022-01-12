@@ -5,12 +5,12 @@ const command: Command = {
 	name: 'binny',
 	enabled: true,
 	admin: false,
-	aliases: ['bindog'],
-	cooldown: 0,
+	aliases: ['bindog', 'bunny'],
+	cooldown: 20,
 	// 🌭 🐰
 	execute: function (message: Message): void {
 		// pick a random number between 1 and 3
-		let random = 3; //Math.floor(Math.random() * 3) + 1;
+		let random = Math.floor(Math.random() * 3) + 1;
 		switch (random) {
 			case 1:
 				message.reply('🌭');
@@ -20,7 +20,7 @@ const command: Command = {
 				break;
 			case 3:
 				let media = MessageMedia.fromFilePath('../media/binny.ogg');
-				message.reply(media);
+				message.reply(media, undefined, { sendAudioAsVoice: true });
 		}
 	},
 };
