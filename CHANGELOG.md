@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.11.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.11.1...v3.11.2) (2022-01-12)
+
+
+### Bug Fixes
+
+* bypass cooldown if user is admin ([865b582](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/865b58257d0b9a365da9d594ef22033eb8c98338))
+
 ### [3.11.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.11.0...v3.11.1) (2022-01-12)
 
 ## [3.11.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.10.1...v3.11.0) (2022-01-12)
