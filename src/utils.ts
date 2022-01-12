@@ -60,7 +60,7 @@ export async function getMishnaYomi(
 	};
 }
 
-export function getMeal(meal: string, threshhold: number = 0): string {
+export function getMeal(meal: string, threshhold: number): string {
 	let tomorrow = threshhold < new Date().getTime();
 	let persistantStorage = new PersistantStorage();
 	let storage = persistantStorage.get();
