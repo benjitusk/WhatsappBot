@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.10.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.9.2...v3.10.0) (2022-01-12)
+
+
+### Features
+
+* Added aliases and voice note to !binny ([3ac9eeb](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/3ac9eeb889dd47f8862d3a6fa7cc3981ea350d9e))
+* added binny command ([66121c8](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/66121c88e2301cd98ac4fc360c4edbe5be85e6bc))
+* Enforce command cooldowns ([b5bf3e7](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/b5bf3e75b192cbb2447a69b066c8daf3d0894fa9))
+* ugraded reload command ([0dfb0e2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/0dfb0e235d68860199fc7ede6d42d0d8f4f88842))
+
+
+### Bug Fixes
+
+* Do not show link preview for mishna yomi ([005b362](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/005b3623d2989ea79ec75ce68cc41a4700baa1f8))
+* strip open and closing quote marks from quote ([a58b2a8](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/a58b2a80c117d2be749e319c4f4cbb66b403c653))
+
 ### [3.9.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.9.1...v3.9.2) (2022-01-12)
 
 ### [3.9.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.9.0...v3.9.1) (2022-01-12)
