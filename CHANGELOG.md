@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.11.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.10.1...v3.11.0) (2022-01-12)
+
+
+### Features
+
+* Added ability to create polls on demand ([0ec32bd](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/0ec32bdf8b16c4d60ddbf887f26b214942bff317))
+
+
+### Bug Fixes
+
+* Added fallback for logging executor ([6c2013b](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/6c2013bff11d6335b3e6a1b68bb2ce223615642f))
+* corrected bug in permission check ([07fae69](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/07fae69f503d20ce1dff92c0c54d05b2778063b1))
+* improved handling of argument delimiting ([a5a527e](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/a5a527e09aa2f9cda7c1439fd208e5fe84b572af))
+* updated tsconfig to update JS output version ([c320c7a](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/c320c7add81551e703c4e572a7d0a04f774362d3))
+
 ### [3.10.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.10.0...v3.10.1) (2022-01-12)
 
 ## [3.10.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.9.2...v3.10.0) (2022-01-12)
