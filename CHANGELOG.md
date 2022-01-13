@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.12.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.12.0...v3.12.1) (2022-01-13)
+
+
+### Bug Fixes
+
+* fixed bug where cron sent out every second ([484fc20](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/484fc20be8a2f37c46541f0764b18aa616f44a20))
+
 ## [3.12.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.11.2...v3.12.0) (2022-01-12)
 
 
