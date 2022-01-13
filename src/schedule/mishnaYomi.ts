@@ -7,7 +7,7 @@ const task: Task = {
 	name: 'Mishna Yomi',
 	// 8:30am every day
 	enabled: true,
-	seconds: '*',
+	seconds: '0',
 	minutes: '30',
 	hours: '8',
 	dayMonth: '*',
