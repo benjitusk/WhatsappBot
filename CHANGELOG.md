@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.13.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.13.1...v3.13.2) (2022-01-13)
+
+
+### Bug Fixes
+
+* set leib command to be enabled ([a68c42c](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/a68c42cc11e1b5453cbd4f6910318d353cb24336))
+
 ### [3.13.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.13.0...v3.13.1) (2022-01-13)
 
 
