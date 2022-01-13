@@ -14,3 +14,5 @@ const command: Command = {
 		message.reply(emoji);
 	},
 };
+
+module.exports = command;
