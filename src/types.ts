@@ -49,7 +49,7 @@ export interface PersistantData {
 			author: string;
 		}
 	];
-	daysToPurim: number;
+	purimTimestamp: number;
 
 	mishnaYomi: {
 		bookIndex: number;

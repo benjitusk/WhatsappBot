@@ -1,3 +1,4 @@
+import prettyMilliseconds from 'pretty-ms';
 import { Message } from 'whatsapp-web.js';
 import { Command } from '../../types';
 import { PersistantStorage } from '../../utils';
@@ -11,10 +12,12 @@ const command: Command = {
 	execute(message: Message): void {
 		const persistantStorage = new PersistantStorage();
 		const storage = persistantStorage.get();
-		const daysToPurim: number = storage.daysToPurim;
-		if (daysToPurim > 0) message.reply(`*${daysToPurim} days until Purim!*\n🥂 Lchaim!`);
-		else if (daysToPurim === 0) message.reply(`It's Purim!\n🥂⬇️ L- *hiccup* - Lchaim! - *hiccup*`);
-		else if (daysToPurim < 0) message.reply(`${daysToPurim + 355} days until Purim!\n🥂 Lchaim!`);
+		const timeToPurim: number = storage.purimTimestamp - Date.now();
+		const prettyTimeToPurim: string = prettyMilliseconds(timeToPurim, { secondsDecimalDigits: 0 });
+		if (timeToPurim > 0) message.reply(`*${timeToPurim} days until Purim!*\n🥂 Lchaim!`);
+		else if (timeToPurim <= 0 && timeToPurim > -86400000)
+			message.reply(`It's Purim!\n🥂⬇️ L- *hiccup* - Lchaim! - *hiccup*`);
+		// else message.reply(`${timeToPurim + 355} days until Purim!\n🥂 Lchaim!`);
 	},
 };
 
