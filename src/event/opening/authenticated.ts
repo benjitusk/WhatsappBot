@@ -5,7 +5,7 @@ module.exports = {
 	once: false,
 	async execute(session: ClientSession, client: Client) {
 		let sessionString = JSON.stringify(session);
-		writeFile('../sessions/bot.js', sessionString, (err) => {
+		writeFile('../sessions/bot.json', sessionString, (err) => {
 			if (err) console.error(err);
 		});
 		console.log('[Client] Authenticated');
