@@ -42,9 +42,9 @@ const command: Command = {
 			new Date().getDate() + 1
 		}`;
 
-		const chat = argsDict.test
-			? await message.getChat()
-			: await client.getChatById((chats[argsDict.chat] as string) || chats.BOT_MAIN_CHAT);
+		const chat = await client.getChatById(
+			argsDict.test ? chats.TEST_CHAT_ID : (chats[argsDict.chat] as string) || chats.BOT_MAIN_CHAT
+		);
 		// Prepare the buttons
 		const buttonArray = [
 			{ id: pollID + '_good', body: '👍' },
