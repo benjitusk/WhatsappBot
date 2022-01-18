@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.15.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.14.1...v3.15.0) (2022-01-18)
+
+
+### Features
+
+* **commands:** added weisswisdom ([adfbe0d](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/adfbe0d24b615d3a052228be94f67efc25c093c9))
+* **dtp:** now responds with precise time ([089140b](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/089140bddd0a0d55fb18610ac4bbdcfabc6e16af))
+
 ### [3.14.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.14.0...v3.14.1) (2022-01-18)
 
 
