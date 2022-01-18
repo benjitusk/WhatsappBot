@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.14.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.13.2...v3.14.0) (2022-01-18)
+
+
+### Features
+
+* dtp now replies with time remaining ([5389570](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/53895706ac07d1e61ebfbfc6a111b3106fab2511))
+* **poll:** allow custom chat ([bc0ea0c](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/bc0ea0c0dbe72f5dceb15d3bb504c65f0f8d1c65))
+
 ### [3.13.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.13.1...v3.13.2) (2022-01-13)
 
 
