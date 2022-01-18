@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.14.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.14.0...v3.14.1) (2022-01-18)
+
+
+### Bug Fixes
+
+* **auth:** typo in session filename ([f334421](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/f33442179278bc2550a4ccc74db3eb0ac1085769))
+
 ## [3.14.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.13.2...v3.14.0) (2022-01-18)
 
 
