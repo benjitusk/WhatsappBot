@@ -70,4 +70,11 @@ export interface PersistantData {
 			voters: string[];
 		};
 	};
+
+	amiQuotes: [
+		{
+			submitter: string;
+			quote: string;
+		}
+	];
 }
