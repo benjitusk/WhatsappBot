@@ -24,6 +24,9 @@ const command: Command = {
 				require('../../handlers/schedules')(client);
 				console.log('[SCHEDULES] reloaded');
 				break;
+			default:
+				message.reply('Invalid operation!');
+				return;
 		}
 		message.reply(`Reloaded ${operation}.`);
 	},

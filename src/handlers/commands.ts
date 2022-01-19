@@ -1,8 +1,11 @@
+import Collection from '@discordjs/collection';
 import { readdirSync } from 'fs';
 import { Client } from 'whatsapp-web.js';
 import { Command } from '../types';
 
 module.exports = (client: Client): void => {
+	// clear existing commands
+	client.commands = new Collection();
 	const commandFolders = readdirSync(`./commands`);
 	for (const folder of commandFolders) {
 		const commandFiles = readdirSync(`./commands/${folder}`).filter((file) => file.endsWith('.js'));
