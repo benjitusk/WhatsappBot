@@ -3,7 +3,7 @@ import { Command } from '../../types';
 
 const command: Command = {
 	name: 'leib',
-	enabled: true,
+	enabled: false,
 	admin: false,
 	aliases: [],
 	cooldown: 0,
