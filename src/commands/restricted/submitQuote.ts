@@ -10,17 +10,11 @@ const command: Command = {
 	aliases: [],
 	cooldown: 0,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
-		// If we are in a group chat, ignore
-		if ((await message.getChat()).isGroup) return;
+		// Make sure the command was sent to the authorised chat
+		if ((await message.getChat()).id._serialized != chats.AMI_QUOTES_CHAT) return;
 
 		// Contact of sender
 		const contact = await message.getContact();
-
-		// Make sure they are authorized to use this command
-		if (!chats.quoteSubmitters.includes(contact.id._serialized)) {
-			message.reply('You are not authorized to use this command!');
-			return;
-		}
 
 		// remove the first argument, which is the command name
 		args.shift();
