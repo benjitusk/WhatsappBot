@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.16.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.15.0...v3.16.0) (2022-01-19)
+
+
+### Features
+
+* **qotes:** allow trusted users to submit quotes ([0a1ef30](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/0a1ef308dcae9dfbb28215f1d52587dfd035396f))
+
+
+### Bug Fixes
+
+* **reload:** reset commands on reload ([8a179ff](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/8a179ff3aa76a508be472937872b86626fa328b7))
+
 ## [3.15.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.14.1...v3.15.0) (2022-01-18)
 
 
