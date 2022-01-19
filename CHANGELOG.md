@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.17.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.16.0...v3.17.0) (2022-01-19)
+
+
+### Features
+
+* **commands:** created dedicated chat for quotes ([3e6c43e](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/3e6c43edaf3b332d0ca858fb0943242da78a0d5d))
+
+
+### Bug Fixes
+
+* **commands:** added alias for weisswisdom ([162097a](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/162097a19a69af37dc6b1c81c7c67f8ad342497f))
+
 ## [3.16.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.15.0...v3.16.0) (2022-01-19)
 
 
