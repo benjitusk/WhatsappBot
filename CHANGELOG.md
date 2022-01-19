@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.17.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.17.0...v3.17.1) (2022-01-19)
+
 ## [3.17.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.16.0...v3.17.0) (2022-01-19)
 
 
