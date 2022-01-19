@@ -6,7 +6,7 @@ const command: Command = {
 	name: 'weisswisdom',
 	enabled: true,
 	admin: false,
-	aliases: ['amiadvice'],
+	aliases: ['amiadvice', 'amiquote'],
 	cooldown: 15,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		// load persistent storage
