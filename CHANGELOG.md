@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.19.5](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.4...v3.19.5) (2022-01-20)
+
+
+### Bug Fixes
+
+* **commands:** disabled ami command ([753300c](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/753300cb7f6ac79d78dea6d563253161dc5b1106))
+
 ### [3.19.4](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.3...v3.19.4) (2022-01-20)
 
 
