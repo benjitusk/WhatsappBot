@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.19.6](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.5...v3.19.6) (2022-01-20)
+
+
+### Bug Fixes
+
+* **commands:** disabled birnbaum command ([3018766](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/30187660239594372960d9fdd60608ef4f932e5f))
+
 ### [3.19.5](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.4...v3.19.5) (2022-01-20)
 
 
