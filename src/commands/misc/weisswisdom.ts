@@ -4,7 +4,7 @@ import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'weisswisdom',
-	enabled: true,
+	enabled: false,
 	admin: false,
 	aliases: ['amiadvice', 'amiquote'],
 	cooldown: 120,
