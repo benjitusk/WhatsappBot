@@ -12,3 +12,4 @@ media/
 bin/
 .husky/
 commitlint.config.js
+whatsapp.json
