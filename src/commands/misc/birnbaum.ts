@@ -4,7 +4,7 @@ import textToSpeech from '@google-cloud/text-to-speech';
 
 const command: Command = {
 	name: 'birnbaum',
-	enabled: true,
+	enabled: false,
 	admin: false,
 	aliases: ["bri'ish", 'british'],
 	cooldown: 120,
