@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.18.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.17.1...v3.18.0) (2022-01-20)
+
+
+### Features
+
+* **commands:** added accent command ([2be3b61](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/2be3b6187ee68465efd3b9f7ea607b2ef77b1e1e))
+
 ### [3.17.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.17.0...v3.17.1) (2022-01-19)
 
 ## [3.17.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.16.0...v3.17.0) (2022-01-19)
