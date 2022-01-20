@@ -7,7 +7,7 @@ const command: Command = {
 	enabled: true,
 	admin: false,
 	aliases: ['amiadvice', 'amiquote'],
-	cooldown: 15,
+	cooldown: 120,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		// load persistent storage
 		const persistance = new PersistantStorage();
