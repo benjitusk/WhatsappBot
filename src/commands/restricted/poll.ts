@@ -10,8 +10,24 @@ const command: Command = {
 	aliases: [],
 	cooldown: 0,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
-		// Rewrite the entire thing here
-		// Reply with emoji of construction cones and a message that the command is under construction
+		/*/ Remove the command from the args
+		const options = message.body.split('!poll\n')[1];
+		// Arguments will be in the format of:
+		// title: <string>
+		// body: <string>
+		// button1: <string>
+		// button2: <string>
+		// [button3: <string>]
+
+		// split the args by newlines
+		const argsArray = options.split('\n');
+		// Create a dictionary of the args
+		const argsDict = argsArray.reduce((acc, curr) => {
+			const [key, value] = curr.split(': ');
+			acc[key] = value;
+			return acc;
+		}, {});
+		*/
 		message.reply('⚠️This command is under construction⚠️');
 	},
 };

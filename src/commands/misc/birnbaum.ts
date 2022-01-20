@@ -4,10 +4,10 @@ import textToSpeech from '@google-cloud/text-to-speech';
 
 const command: Command = {
 	name: 'birnbaum',
-	enabled: false,
+	enabled: true,
 	admin: false,
 	aliases: ["bri'ish", 'british'],
-	cooldown: 0,
+	cooldown: 120,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		const fs = require('fs');
 		const util = require('util');
