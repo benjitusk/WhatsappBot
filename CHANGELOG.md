@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.18.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.18.0...v3.18.1) (2022-01-20)
+
+
+### Bug Fixes
+
+* **commands:** updated cred file ([eb49b3c](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/eb49b3cf37be54af7d565cbb771d4bc5f42b0d16))
+
 ## [3.18.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.17.1...v3.18.0) (2022-01-20)
 
 
