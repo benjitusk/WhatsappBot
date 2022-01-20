@@ -22,6 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/collection": "^0.4.0",
+    "@google-cloud/text-to-speech": "^3.4.0",
     "axios": "^0.24.0",
     "cron": "^1.8.2",
     "dotenv": "^10.0.0",
