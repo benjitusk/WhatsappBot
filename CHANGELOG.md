@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.19.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.1...v3.19.2) (2022-01-20)
+
+
+### Bug Fixes
+
+* **commands:** enabled command and timeout ([f3b11b1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/f3b11b1147e3ea03c36690a219379792bd7a062a))
+
 ### [3.19.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.0...v3.19.1) (2022-01-20)
 
 ## [3.19.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.18.2...v3.19.0) (2022-01-20)
