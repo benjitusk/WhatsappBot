@@ -11,9 +11,11 @@ const task: Task = {
 	month: '*',
 	dayWeek: '6',
 	execute: function (): void {
-		let storage = new PersistantStorage().get();
-		// Toggle alternate week
+		const persistance = new PersistantStorage();
+		let storage = persistance.get();
+		// Toggle alternate week between 0 and 1
 		storage.alternateWeek = storage.alternateWeek === 0 ? 1 : 0;
+		persistance.set(storage);
 	},
 };
 
