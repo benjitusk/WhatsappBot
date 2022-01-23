@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.19.7](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.6...v3.19.7) (2022-01-23)
+
+
+### Bug Fixes
+
+* **schedule:** forgot to save changes to disk ([9409f59](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/9409f59b7bfce27c94a55dfb94a61467a9b7a58a))
+
 ### [3.19.6](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.5...v3.19.6) (2022-01-20)
 
 
