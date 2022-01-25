@@ -4,16 +4,22 @@ import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'weisswisdom',
-	enabled: false,
+	enabled: true,
 	admin: false,
 	aliases: ['amiadvice', 'amiquote'],
-	cooldown: 120,
-	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
+	cooldown: 60 * 60 * 10, // 10 hour cooldown
+	execute: async function (
+		message: Message,
+		client: Client,
+		args: string[]
+	): Promise<void> {
 		// load persistent storage
 		const persistance = new PersistantStorage();
 		const storage = persistance.get();
 		// get a random quote
-		const quote = storage.amiQuotes[Math.floor(Math.random() * storage.amiQuotes.length)].quote;
+		const quote =
+			storage.amiQuotes[Math.floor(Math.random() * storage.amiQuotes.length)]
+				.quote;
 		message.reply(`^_^\n\n${quote}`);
 	},
 };
