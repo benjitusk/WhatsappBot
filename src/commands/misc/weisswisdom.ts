@@ -7,7 +7,7 @@ const command: Command = {
 	enabled: true,
 	admin: false,
 	aliases: ['amiadvice', 'amiquote'],
-	cooldown: 60 * 60 * 10, // 10 hour cooldown
+	cooldown: 60 * 60 * 6, // 6 hour cooldown
 	execute: async function (
 		message: Message,
 		client: Client,
