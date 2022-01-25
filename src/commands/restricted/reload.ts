@@ -4,11 +4,17 @@ import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'reload',
+	helpText: 'Reload various components of the bot',
+	syntax: 'reload {storage | commands | schedules}',
 	enabled: true,
 	admin: true,
 	aliases: ['load'],
 	cooldown: 0,
-	execute: function (message: Message, client: Client, args: string[] = []): void {
+	execute: function (
+		message: Message,
+		client: Client,
+		args: string[] = []
+	): void {
 		let operation: string;
 		args.length > 1 ? (operation = args[1]) : (operation = 'storage');
 		switch (operation) {

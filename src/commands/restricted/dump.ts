@@ -4,6 +4,8 @@ import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'dump',
+	helpText: 'Dump the persistant data',
+	syntax: 'dump',
 	enabled: true,
 	admin: true,
 	aliases: [],

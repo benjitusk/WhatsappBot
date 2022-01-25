@@ -5,11 +5,17 @@ import { Command } from '../../types';
 
 const command: Command = {
 	name: 'poll',
+	helpText: 'Create a poll',
+	syntax: 'poll <question>',
 	enabled: true,
 	admin: true,
 	aliases: [],
 	cooldown: 0,
-	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
+	execute: async function (
+		message: Message,
+		client: Client,
+		args: string[]
+	): Promise<void> {
 		/*/ Remove the command from the args
 		const options = message.body.split('!poll\n')[1];
 		// Arguments will be in the format of:

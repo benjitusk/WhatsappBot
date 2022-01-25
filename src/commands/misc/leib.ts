@@ -3,6 +3,8 @@ import { Command } from '../../types';
 
 const command: Command = {
 	name: 'leib',
+	helpText: 'Welcome Leib to Shraga!',
+	syntax: 'leib',
 	enabled: false,
 	admin: false,
 	aliases: [],

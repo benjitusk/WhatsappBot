@@ -5,13 +5,21 @@ import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'ami',
+	helpText:
+		'Submit a quote to the Ami Weiss Wisdom Database (TM). _This command is restricted to members of the Ami Weiss foundation._',
+	syntax: 'ami <quote>',
 	enabled: true,
 	admin: false,
 	aliases: [],
 	cooldown: 0,
-	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
+	execute: async function (
+		message: Message,
+		client: Client,
+		args: string[]
+	): Promise<void> {
 		// Make sure the command was sent to the authorised chat
-		if ((await message.getChat()).id._serialized != chats.AMI_QUOTES_CHAT) return;
+		if ((await message.getChat()).id._serialized != chats.AMI_QUOTES_CHAT)
+			return;
 
 		// Contact of sender
 		const contact = await message.getContact();
@@ -37,7 +45,9 @@ const command: Command = {
 		});
 		persistance.set(storage);
 		// Reply to the user
-		message.reply(`Quote submitted! There are now ${storage.amiQuotes.length} quotes saved.`);
+		message.reply(
+			`Quote submitted! There are now ${storage.amiQuotes.length} quotes saved.`
+		);
 	},
 };
 

@@ -4,6 +4,8 @@ import { PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'weisswisdom',
+	helpText: 'Get a random quote from the Ami Weiss Wisdom Database (TM)',
+	syntax: 'weisswisdom',
 	enabled: true,
 	admin: false,
 	aliases: ['amiadvice', 'amiquote'],

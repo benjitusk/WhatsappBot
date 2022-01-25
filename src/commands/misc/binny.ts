@@ -3,6 +3,8 @@ import { Command } from '../../types';
 
 const command: Command = {
 	name: 'binny',
+	helpText: 'Operation B.I.N.D.O.G.',
+	syntax: '{binny | bindog | bunny}',
 	enabled: true,
 	admin: false,
 	aliases: ['bindog', 'bunny'],

@@ -4,6 +4,8 @@ import { getMeal } from '../../utils';
 
 const command: Command = {
 	name: 'wfd',
+	helpText: 'Retreive the next dinner from the WFD Database',
+	syntax: 'wfd',
 	aliases: ['dinner'],
 	enabled: true,
 	cooldown: 60,

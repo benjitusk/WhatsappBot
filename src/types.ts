@@ -15,6 +15,10 @@ export interface Task {
 export interface Command {
 	/** The primary trigger and name of the command */
 	name: string;
+	/** A description of the command */
+	helpText: string;
+	/** Correct syntax for the command */
+	syntax: string;
 	/** A toggle to easily disable a command */
 	enabled: boolean;
 	/** A toggle to require admin permission to execute */
