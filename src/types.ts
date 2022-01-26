@@ -27,7 +27,10 @@ export interface Command {
 	aliases: string[];
 	/** Time to wait between executions, in seconds */
 	cooldown: number;
+	/** The function to execute when the command is triggered */
 	execute: (message: Message, client: Client, args: string[]) => void;
+	/** A variable that is true when there is no module.exports */
+	__esModule?: boolean;
 }
 
 export interface MishnaYomi {
