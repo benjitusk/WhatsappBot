@@ -10,21 +10,25 @@ const command: Command = {
 	aliases: [],
 	cooldown: 60 * 60 * 1, // 1 hour
 	execute: function (message: Message, client: Client, args: string[]): void {
+		let text = 'These are the commands currently supported:\n';
+		text += "_Here's how to interpret the syntax:_\n";
+		text += '```<required> [optional] {reqired | choices}```\n\n\n';
 		// For each command, format the help text
 		// But only include aliases if there are any
 		const responseText = client.commands.map((command: Command) => {
-			let text =
+			let commandText =
 				`*!${command.name}* - ${command.helpText}` +
-				`\n\tSyntax: \`\`\`${command.syntax}\`\`\`` +
-				`\n\tEnabled: ${command.enabled}`;
+				`\n\tSyntax: \`\`\`${command.syntax}\`\`\``;
 
 			if (command.aliases.length > 0)
-				text += `\n\tAliases: [${command.aliases.join(', ')}]`;
-			if (command.admin) text += `\n\t_Reserved command_`;
-			return text;
+				commandText += `\n\tAliases: [${command.aliases.join(', ')}]`;
+			if (command.admin) commandText += `\n\t_Reserved command_`;
+			return commandText;
 		});
 		// Send the help text
-		message.reply(responseText.join('\n\n'), undefined, { linkPreview: false });
+		message.reply(text + responseText.join('\n\n'), undefined, {
+			linkPreview: false,
+		});
 	},
 };
 
