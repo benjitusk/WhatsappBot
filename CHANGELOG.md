@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.20.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.11...v3.20.0) (2022-01-26)
+
+
+### Features
+
+* **commands:** added help and syntax docs ([a9bca40](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/a9bca40343f9b5b7a7642c47bdfe98761f350e93))
+* **commands:** added help command ([ce72ff7](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/ce72ff7e7479896a75f1cd3ae2a6f7dab516a866))
+
+
+### Bug Fixes
+
+* changed  branch to deal with whatsapp update ([da08e32](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/da08e326d88e817aef0899d4bf0f25277b2d2f3c))
+
 ### [3.19.11](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.10...v3.19.11) (2022-01-25)
 
 ### [3.19.10](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.9...v3.19.10) (2022-01-25)
