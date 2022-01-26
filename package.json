@@ -32,7 +32,7 @@
     "pretty-ms": "^7.0.1",
     "puppeteer": "^10.4.0",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.15.3"
+    "whatsapp-web.js": "github:ReforwardDev/whatsapp-web.js#main"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.0.2",
