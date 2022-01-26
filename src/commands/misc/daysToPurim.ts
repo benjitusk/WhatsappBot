@@ -8,7 +8,7 @@ const command: Command = {
 	helpText: 'Get the time remaining until Purim',
 	syntax: 'dtp',
 	enabled: true,
-	aliases: ['dtp'],
+	aliases: [],
 	admin: false,
 	cooldown: 0,
 	execute(message: Message): void {
