@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.22.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.21.1...v3.22.0) (2022-01-27)
+
+
+### Features
+
+* **commands:** ignore command name case ([b086e1f](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/b086e1fb5f5cb209a1c7825cd2c7a4286760fac5))
+
+
+### Bug Fixes
+
+* **commands:** added alias for dtp ([656899b](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/656899ba2667e6e400f5b8fa4f33ffd9ab282b0b))
+
 ### [3.21.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.21.0...v3.21.1) (2022-01-27)
 
 ## [3.21.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.20.1...v3.21.0) (2022-01-27)
