@@ -16,7 +16,7 @@ module.exports = (client: Client): void => {
 			if (command.__esModule)
 				throw new Error(`commands/${folder}/${file} is missing module.exports`);
 			if (command.enabled) {
-				client.commands.set(command.name, command);
+				client.commands.set(command.name.toLowerCase(), command);
 				console.log(`[Command] enabled ${command.name}.`);
 			} else {
 				console.log(`[Command] DISABLED ${command.name}.`);
