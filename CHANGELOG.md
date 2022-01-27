@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.21.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.20.1...v3.21.0) (2022-01-27)
+
+
+### Features
+
+* **commands:** created command to kick gavi ([8913b3b](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/8913b3bf45642e7f2a20367f48691de29b322cb0))
+* **handlers:** throws err when no module exports ([27da897](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/27da897904935753807a2752252b5b0f39a9b983))
+
+
+### Bug Fixes
+
+* **commands:** fixed command syntax err ([ffed45f](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/ffed45f55ab8f0dd08379011acb7506143e87c60))
+* **commands:** removed tc command ([0f491e1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/0f491e10ad8603b01010d1d53448ae5b7148b2d5))
+* **help:** revamped help command ([455b6a9](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/455b6a93608497c8cb4bdf92014ea028ff81b24a))
+
 ### [3.20.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.20.0...v3.20.1) (2022-01-26)
 
 ## [3.20.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.19.11...v3.20.0) (2022-01-26)
