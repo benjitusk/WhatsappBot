@@ -6,7 +6,7 @@ const command: Command = {
 	name: 'weisswisdom',
 	helpText: 'Get a random quote from the Ami Weiss Wisdom Database (TM)',
 	syntax: 'weisswisdom',
-	enabled: true,
+	enabled: false,
 	admin: false,
 	aliases: ['amiadvice', 'amiquote'],
 	cooldown: 60 * 60 * 6, // 6 hour cooldown
