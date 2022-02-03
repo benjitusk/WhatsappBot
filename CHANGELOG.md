@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.22.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.22.1...v3.22.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* **commands:** added funny disabled message ([f0caecb](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/f0caecbab788c3f305818b733e4d74fbe83fec38))
+
 ### [3.22.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.22.0...v3.22.1) (2022-02-03)
 
 
