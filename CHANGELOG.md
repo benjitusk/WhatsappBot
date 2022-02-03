@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.22.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.22.0...v3.22.1) (2022-02-03)
+
+
+### Bug Fixes
+
+* **commands:** disabled weisswisdom ([e88c72d](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/e88c72d48261328c6297313b99eea8e572e84272))
+
 ## [3.22.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.21.1...v3.22.0) (2022-01-27)
 
 
