@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.23.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.22.2...v3.23.0) (2022-02-09)
+
+
+### Features
+
+* **commands:** readded tc command ([e545558](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/e54555857cf76d30f6dce27d6dc9e55ab3354c46))
+
 ### [3.22.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.22.1...v3.22.2) (2022-02-03)
 
 
