@@ -57,6 +57,7 @@ export interface PersistantData {
 		}
 	];
 	purimTimestamp: number;
+	pesachTimestamp: number;
 
 	mishnaYomi: {
 		bookIndex: number;
