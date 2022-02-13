@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.24.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.23.0...v3.24.0) (2022-02-13)
+
+
+### Features
+
+* **commands:** added pesach countdown ([1a27d72](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/1a27d72b0feb81eb27e95437aee7c2e194030248))
+
 ## [3.23.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.22.2...v3.23.0) (2022-02-09)
 
 
