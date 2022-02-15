@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.25.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.24.0...v3.25.0) (2022-02-15)
+
+
+### Features
+
+* Added filters ([6545fed](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/6545fedaf57e47e0a72d41815c6991801eb3322e))
+* added framework for filters ([4872d4e](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/4872d4ec2e2edfbd19b741ad4cc4d0ea1a84bc57))
+
 ## [3.24.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.23.0...v3.24.0) (2022-02-13)
 
 
