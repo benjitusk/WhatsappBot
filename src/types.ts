@@ -1,5 +1,16 @@
 import { Client, Message } from 'whatsapp-web.js';
 
+export interface Filter {
+	name: string;
+	enabled: boolean;
+	cooldown: number;
+	timeout: number;
+	tolerance: number;
+	reason: string;
+	test: (message: Message) => Promise<boolean>;
+	__esModule?: boolean;
+}
+
 export interface Task {
 	name: string;
 	enabled: boolean;
@@ -9,6 +20,7 @@ export interface Task {
 	dayMonth: string;
 	month: string;
 	dayWeek: string;
+	silent: boolean;
 	execute: (client: Client) => void;
 }
 
@@ -78,6 +90,15 @@ export interface PersistantData {
 			voters: string[];
 		};
 	};
+
+	tasks: [
+		{
+			action: string;
+			userID: string;
+			chatID: string;
+			dueDate: number;
+		}
+	];
 
 	amiQuotes: [
 		{

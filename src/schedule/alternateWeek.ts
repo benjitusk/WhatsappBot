@@ -10,6 +10,7 @@ const task: Task = {
 	dayMonth: '*',
 	month: '*',
 	dayWeek: '6',
+	silent: false,
 	execute: function (): void {
 		const persistance = new PersistantStorage();
 		let storage = persistance.get();

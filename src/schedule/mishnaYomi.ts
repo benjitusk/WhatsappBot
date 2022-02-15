@@ -13,6 +13,7 @@ const task: Task = {
 	dayMonth: '*',
 	month: '*',
 	dayWeek: '*',
+	silent: false,
 	execute: async function (client: Client) {
 		let persistance = new PersistantStorage();
 		let storage = persistance.get();
