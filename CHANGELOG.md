@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.25.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.25.0...v3.25.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* **filter:** remove participant on trigger ([c99550f](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/c99550f117a7bb7d7826d04c9c39195b223d6d1f))
+
 ## [3.25.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.24.0...v3.25.0) (2022-02-15)
 
 
