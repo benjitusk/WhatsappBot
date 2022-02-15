@@ -7,7 +7,7 @@ const command: Command = {
 	helpText: 'Say it with Indian accent',
 	syntax: 'indian <text>',
 	enabled: true,
-	admin: true,
+	admin: false,
 	aliases: [],
 	cooldown: 120,
 	execute: async function (

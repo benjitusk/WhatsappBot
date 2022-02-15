@@ -1,6 +1,6 @@
 const prefix = '!';
-import WAWebJS from 'whatsapp-web.js';
-import { Command } from '../../types';
+import WAWebJS, { GroupChat } from 'whatsapp-web.js';
+import { Command, Filter } from '../../types';
 import { chats } from '../../removedInfo';
 import prettyMilliseconds from 'pretty-ms';
 import { PersistantStorage } from '../../utils';
@@ -24,14 +24,32 @@ module.exports = {
 		 *
 		 * Here are the processes that will be executed:
 		 *
-		 * 1. Log the message to MySQL.
+		 * 1. Check message against content filters.
 		 * 2. Handle commands.
 		 * 3. Handle poll responses.
 		 *
 		 */
 
-		// 1. Log the message to MySQL.
-		// I'll do this later.
+		// 1. Check message against content filters.
+		client.filters.forEach(async (filter: Filter) => {
+			if (await filter.test(message)) {
+				// Remove the sender from the group.
+				const contact = await message.getContact();
+				const chat = (await message.getChat()) as GroupChat;
+				const name = contact.name || contact.pushname || contact.number;
+				await chat.sendMessage(
+					`${name} ${filter.reason}: *${filter.timeout / 60} minutes*.`
+				);
+				client.sendMessage(
+					chats.BENJI_TUSK,
+					`${name} has triggered the "${filter.name}" filter.`
+				);
+
+				// chat.removeParticipants([contact.id._serialized]);
+				// ToDo: Add the ability to automatically add the sender back after the timeout.
+				// This will be done by using a json file that stores the users, chats, and their timeouts.
+			}
+		});
 
 		// 2. Handle commands.
 		if (message.body.startsWith(prefix)) {
