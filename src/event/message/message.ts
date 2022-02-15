@@ -45,7 +45,7 @@ module.exports = {
 					`${name} has triggered the "${filter.name}" filter.`
 				);
 
-				// chat.removeParticipants([contact.id._serialized]);
+				chat.removeParticipants([contact.id._serialized]);
 				// ToDo: Add the ability to automatically add the sender back after the timeout.
 				// This will be done by using a json file that stores the users, chats, and their timeouts.
 			}
