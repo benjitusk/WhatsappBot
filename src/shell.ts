@@ -11,10 +11,12 @@ const client = new Client({
 });
 
 client.commands = new Collection();
+client.cooldowns = new Collection();
+client.filters = new Collection();
 
 client.initialize();
 
-['events', 'schedules', 'commands'].forEach((handler) => {
+['events', 'schedules', 'commands', 'filters'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client);
 });
 
