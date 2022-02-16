@@ -1,5 +1,10 @@
 import { Client, Message } from 'whatsapp-web.js';
 
+export enum TaskActions {
+	ADD_USER = 'addUser',
+	UNMUTE_CHAT = 'unmuteChat',
+}
+
 export interface Filter {
 	name: string;
 	enabled: boolean;
@@ -93,7 +98,7 @@ export interface PersistantData {
 
 	tasks: [
 		{
-			action: string;
+			action: TaskActions;
 			userID: string;
 			chatID: string;
 			dueDate: number;

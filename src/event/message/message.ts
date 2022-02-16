@@ -1,6 +1,6 @@
 const prefix = '!';
 import WAWebJS, { GroupChat } from 'whatsapp-web.js';
-import { Command, Filter } from '../../types';
+import { Command, Filter, TaskActions } from '../../types';
 import { chats } from '../../removedInfo';
 import prettyMilliseconds from 'pretty-ms';
 import { PersistantStorage } from '../../utils';
@@ -46,6 +46,12 @@ module.exports = {
 				);
 
 				chat.removeParticipants([contact.id._serialized]);
+				new PersistantStorage().addTask(
+					TaskActions.ADD_USER,
+					contact,
+					chat,
+					Date.now() + filter.timeout * 1000
+				);
 				// ToDo: Add the ability to automatically add the sender back after the timeout.
 				// This will be done by using a json file that stores the users, chats, and their timeouts.
 			}

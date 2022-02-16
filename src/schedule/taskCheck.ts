@@ -33,6 +33,7 @@ const task: Task = {
 				}
 				storage.tasks.splice(storage.tasks.indexOf(task), 1);
 				didModifyStorage = true;
+				console.log('Task completed: ' + task.action + ' on ' + task.chatID);
 			}
 		}
 		if (didModifyStorage) persistance.set(storage);
