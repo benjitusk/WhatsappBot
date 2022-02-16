@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.26.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.25.1...v3.26.0) (2022-02-16)
+
+
+### Features
+
+* **filters:** filter spam of any stickers ([76e49fa](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/76e49fa25856c87eec12bebd823a9ca1dbd5bfdc))
+* **tasks:** implemented OTF tasks ([094d9de](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/094d9dee862ed7eada52e2b26f79f43972cecee5))
+
 ### [3.25.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.25.0...v3.25.1) (2022-02-15)
 
 
