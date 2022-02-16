@@ -1,28 +1,39 @@
 import axios from 'axios';
 import { readFileSync, writeFileSync } from 'fs';
-import { MishnaYomi, PersistantData } from './types';
+import { Contact, GroupChat } from 'whatsapp-web.js';
+import { MishnaYomi, PersistantData, TaskActions } from './types';
 
 export class PersistantStorage {
-	private data: any;
+	private data: PersistantData;
 	private path: string;
 	constructor() {
 		this.path = '../persistantStorage.json';
+		this.data = this.get();
 	}
 
 	get() {
-		return JSON.parse(readFileSync(this.path) as any) as PersistantData;
+		this.data = JSON.parse(readFileSync(this.path) as any) as PersistantData;
+		return this.data;
 	}
 
 	set(data: PersistantData): void {
-		writeFileSync(this.path, JSON.stringify(data, null, 2));
-	}
-
-	load(): void {
-		this.data = JSON.parse(readFileSync(this.path) as any);
-	}
-
-	save(): void {
+		this.data = data;
 		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
+	}
+
+	addTask(
+		action: TaskActions,
+		user: Contact,
+		chat: GroupChat,
+		dueDate: number
+	): void {
+		this.data.tasks.push({
+			action,
+			userID: user.id._serialized,
+			chatID: chat.id._serialized,
+			dueDate,
+		});
+		this.set(this.data);
 	}
 }
 
