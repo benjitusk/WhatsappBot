@@ -2,11 +2,11 @@
   "name": "whatsapp",
   "version": "3.26.0",
   "description": "whatsapp bot",
-  "main": "bin/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc --build --clean",
     "release": "standard-version",
-    "test": "jest"
+    "test": "cd dist && jest"
   },
   "nodemonConfig": {
     "ignore": [

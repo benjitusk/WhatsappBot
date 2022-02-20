@@ -14,4 +14,4 @@ sessions/
 .husky/
 WWebJS/
 media/
-bin/
+dist/
