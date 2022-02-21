@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.27.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.26.0...v3.27.0) (2022-02-21)
+
+
+### Features
+
+* **commands:** added some neat commands ([ea42c50](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/ea42c50c426cc9d0ec893af027717b5d7e9975db))
+* **tests:** wrote tests for meals ([cbce174](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/cbce174a996a706d8217b71c0f6e74cc8c8a2738))
+
+
+### Bug Fixes
+
+* **filter:** only execute filter if group chat ([2bd7155](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/2bd715525ed084db00b02860fe5f5606919a8000))
+
 ## [3.26.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.25.1...v3.26.0) (2022-02-16)
 
 
