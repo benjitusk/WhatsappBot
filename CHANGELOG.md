@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.28.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.27.1...v3.28.0) (2022-02-21)
+
+
+### Features
+
+* **filter:** added flexible way to ban stickers ([478119c](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/478119c9eecec268aecc7925d403a6a3cd69c8a4))
+
+
+### Bug Fixes
+
+* fixed issue with relative paths ([56e8361](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/56e8361774dc0e237358061bac3d596d877516f2))
+
 ### [3.27.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.27.0...v3.27.1) (2022-02-21)
 
 ## [3.27.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.26.0...v3.27.0) (2022-02-21)
