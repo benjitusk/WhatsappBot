@@ -3,6 +3,13 @@ import { Client, Message } from 'whatsapp-web.js';
 export enum TaskActions {
 	ADD_USER = 'addUser',
 	UNMUTE_CHAT = 'unmuteChat',
+	TEST = 'test',
+}
+
+export enum Meal {
+	BREAKFAST = 'breakfast',
+	LUNCH = 'lunch',
+	DINNER = 'dinner',
 }
 
 export interface Filter {
@@ -67,12 +74,10 @@ export interface PersistantData {
 	};
 
 	days: string[];
-	quotes: [
-		{
-			content: string;
-			author: string;
-		}
-	];
+	quotes: {
+		content: string;
+		author: string;
+	}[];
 	purimTimestamp: number;
 	pesachTimestamp: number;
 
@@ -96,19 +101,15 @@ export interface PersistantData {
 		};
 	};
 
-	tasks: [
-		{
-			action: TaskActions;
-			userID: string;
-			chatID: string;
-			dueDate: number;
-		}
-	];
+	tasks: {
+		action: TaskActions;
+		userID: string;
+		chatID: string;
+		dueDate: number;
+	}[];
 
-	amiQuotes: [
-		{
-			submitter: string;
-			quote: string;
-		}
-	];
+	amiQuotes: {
+		submitter: string;
+		quote: string;
+	}[];
 }

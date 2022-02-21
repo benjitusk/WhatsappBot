@@ -1,6 +1,6 @@
 import { Message } from 'whatsapp-web.js';
-import { Command } from '../../types';
-import { getMeal } from '../../utils';
+import { Command, Meal } from '../../types';
+import { getNextFoodFromDateByMeal } from '../../utils';
 
 const command: Command = {
 	name: 'wfd',
@@ -11,7 +11,7 @@ const command: Command = {
 	cooldown: 60,
 	admin: false,
 	execute: function (message: Message): void {
-		let food = getMeal('dinner', new Date().setHours(19, 30));
+		let food = getNextFoodFromDateByMeal(Meal.DINNER, new Date());
 		message.reply(food);
 	},
 };
