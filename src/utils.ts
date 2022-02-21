@@ -6,8 +6,6 @@ import { Meal, MishnaYomi, PersistantData, TaskActions } from './types';
 export class PersistantStorage {
 	private data: PersistantData;
 	private path: string;
-	constructor(path?: string) {
-		this.path =
 	constructor() {
 		this.path = '../persistantStorage.json';
 		this.data = this.get();

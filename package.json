@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc --build --clean",
     "release": "standard-version",
-    "test": "cd dist && jest"
+    "test": "cd src && jest"
   },
   "nodemonConfig": {
     "ignore": [
