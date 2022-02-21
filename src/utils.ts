@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { readFileSync, writeFileSync } from 'fs';
 import { Contact, GroupChat } from 'whatsapp-web.js';
-import { MishnaYomi, PersistantData, TaskActions } from './types';
+import { Meal, MishnaYomi, PersistantData, TaskActions } from './types';
 
 export class PersistantStorage {
 	private data: PersistantData;
 	private path: string;
+	constructor(path?: string) {
+		this.path =
 	constructor() {
 		this.path = '../persistantStorage.json';
 		this.data = this.get();
@@ -23,16 +25,20 @@ export class PersistantStorage {
 
 	addTask(
 		action: TaskActions,
-		user: Contact,
-		chat: GroupChat,
+		userID: string,
+		chatID: string,
 		dueDate: number
 	): void {
 		this.data.tasks.push({
 			action,
-			userID: user.id._serialized,
-			chatID: chat.id._serialized,
+			userID,
+			chatID,
 			dueDate,
 		});
+		this.set(this.data);
+	}
+	deleteTestTasks(): void {
+		this.data.tasks = this.data.tasks.filter((task) => task.action != 'test');
 		this.set(this.data);
 	}
 }
@@ -71,30 +77,50 @@ export async function getMishnaYomi(
 	};
 }
 
-export function getMeal(meal: string, threshhold: number): string {
-	let tomorrow = threshhold < new Date().getTime();
-	let persistantStorage = new PersistantStorage();
+/**
+ * Retrieve the next food from the database based on the given date
+ *
+ * @param timestamp The timestamp to retreive the food for, in milliseconds
+ */
+export function getNextFoodFromDateByMeal(meal: Meal, date: Date): string {
+	// convert the timestamp from seconds to milliseconds if it is not already
+	const persistantStorage = new PersistantStorage();
 	let storage = persistantStorage.get();
 
-	// Check if we are in an alternate week.
-	let weekNumber = storage.alternateWeek as number;
+	// Get the day of the week
+	let dayIndex = date.getDay();
 
-	// Get the day of the week as a number.
-	let dayOfWeekIndex = new Date().getDay();
+	// If it's after 9:30AM and it's breakfast, increment the day
+	if (shouldGetMealForTomorrow(meal, date)) dayIndex++;
 
-	if (tomorrow) dayOfWeekIndex++;
+	dayIndex %= 7; // Make sure the day index is between 0 and 6
 
-	let dayOfWeek = storage.days[dayOfWeekIndex] as string;
-	// Get the food for the day.
-	let meals = storage.food[meal] as { [key: string]: string | string[] };
-	let food = meals[dayOfWeek];
+	const alternateWeek = 1 - (getWeekNumber(date) % 2); // If it's 0, set it to be 1, if it's 1, set it to be 0
 
-	// check if food is an array.
-	if (Array.isArray(food)) food = food[weekNumber];
+	const dayOfWeek = storage.days[dayIndex];
+	const nextFood = storage.food[meal][dayOfWeek];
+	const food = Array.isArray(nextFood) ? nextFood[alternateWeek] : nextFood;
 
-	// capitalize the first letter of the meal
-	let mealCap = meal.charAt(0).toUpperCase() + meal.slice(1);
+	return food;
+}
 
-	// return the food.
-	return `${mealCap} for to${tomorrow ? 'morrow' : 'day'} is ${food}.`;
+function getWeekNumber(date: Date): number {
+	// Get the first day of the year
+	const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+	// Get the day of the week
+	const dayOfYear = Math.ceil(
+		(date.getTime() - firstDayOfYear.getTime()) / (1000 * 60 * 60 * 24)
+	);
+	// Get the week number
+	return Math.ceil(dayOfYear / 7);
+}
+
+function shouldGetMealForTomorrow(meal: Meal, date: Date): boolean {
+	const hour = date.getHours();
+	const minute = date.getMinutes();
+	return (
+		((hour > 9 || (hour == 9 && minute > 30)) && meal == Meal.BREAKFAST) ||
+		((hour > 13 || (hour == 13 && minute > 30)) && meal == Meal.LUNCH) ||
+		((hour > 19 || (hour == 19 && minute > 45)) && meal == Meal.DINNER)
+	);
 }
