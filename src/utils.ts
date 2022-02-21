@@ -1,4 +1,5 @@
 import axios from 'axios';
+import crypto from 'crypto';
 import { readFileSync, writeFileSync } from 'fs';
 import { Contact, GroupChat } from 'whatsapp-web.js';
 import { Meal, MishnaYomi, PersistantData, TaskActions } from './types';
@@ -100,6 +101,10 @@ export function getNextFoodFromDateByMeal(meal: Meal, date: Date): string {
 	const food = Array.isArray(nextFood) ? nextFood[alternateWeek] : nextFood;
 
 	return food;
+}
+
+export function md5(str: string): string {
+	return crypto.createHash('md5').update(str).digest('hex');
 }
 
 function getWeekNumber(date: Date): number {

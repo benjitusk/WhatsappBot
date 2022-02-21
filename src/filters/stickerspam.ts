@@ -1,5 +1,6 @@
 import { Message } from 'whatsapp-web.js';
 import { Filter } from '../types';
+import { md5, PersistantStorage } from '../utils';
 
 let strikes: { [key: string]: { strikeTimes: number[] } } = {};
 
@@ -12,7 +13,12 @@ const filter: Filter = {
 	reason: 'was removed for spamming stickers and will be added back in',
 	test: async function (message: Message): Promise<boolean> {
 		if (message.type != 'sticker') return false;
-		console.log(`Sticker ID: ${message.mediaKey}`);
+		const stickerBase64 = (await message.downloadMedia()).data;
+		const stickerMD5 = md5(stickerBase64);
+		const persistantStorage = new PersistantStorage();
+		let storage = persistantStorage.get();
+		if (storage.bannedStickerMD5s.includes(stickerMD5)) return true;
+
 		// Add a strike to the user, creating an entry if they don't exist
 		if (strikes[message.from!])
 			strikes[message.from!].strikeTimes.push(Date.now());

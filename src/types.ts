@@ -81,6 +81,8 @@ export interface PersistantData {
 	purimTimestamp: number;
 	pesachTimestamp: number;
 
+	bannedStickerMD5s: Array<string>;
+
 	mishnaYomi: {
 		bookIndex: number;
 		perek: number;
