@@ -30,30 +30,33 @@ module.exports = {
 		 *
 		 */
 
-		// 1. Check message against content filters.
+		// 1. Check message against content filters if it's a group chat.
+
 		client.filters.forEach(async (filter: Filter) => {
 			if (await filter.test(message)) {
 				// Remove the sender from the group.
 				const contact = await message.getContact();
 				const chat = (await message.getChat()) as GroupChat;
-				const name = contact.name || contact.pushname || contact.number;
-				await chat.sendMessage(
-					`${name} ${filter.reason}: *${filter.timeout / 60} minutes*.`
-				);
-				client.sendMessage(
-					chats.BENJI_TUSK,
-					`${name} has triggered the "${filter.name}" filter.`
-				);
+				if (chat.isGroup) {
+					const name = contact.name || contact.pushname || contact.number;
+					await chat.sendMessage(
+						`${name} ${filter.reason}: *${filter.timeout / 60} minutes*.`
+					);
+					client.sendMessage(
+						chats.BENJI_TUSK,
+						`${name} has triggered the "${filter.name}" filter.`
+					);
 
-				chat.removeParticipants([contact.id._serialized]);
-				new PersistantStorage().addTask(
-					TaskActions.ADD_USER,
-					contact,
-					chat,
-					Date.now() + filter.timeout * 1000
-				);
-				// ToDo: Add the ability to automatically add the sender back after the timeout.
-				// This will be done by using a json file that stores the users, chats, and their timeouts.
+					chat.removeParticipants([contact.id._serialized]);
+					new PersistantStorage().addTask(
+						TaskActions.ADD_USER,
+						contact.id._serialized,
+						chat.id._serialized,
+						Date.now() + filter.timeout * 1000
+					);
+					// ToDo: Add the ability to automatically add the sender back after the timeout.
+					// This will be done by using a json file that stores the users, chats, and their timeouts.
+				}
 			}
 		});
 
