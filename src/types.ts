@@ -76,10 +76,13 @@ export interface PersistantData {
 	quotes: {
 		content: string;
 		author: string;
+		id: string;
 	}[];
-	purimTimestamp: number;
-	pesachTimestamp: number;
 
+	countdowns: {
+		purim: number;
+		pesach: number;
+	};
 	bannedStickerMD5s: Array<string>;
 
 	mishnaYomi: {
@@ -107,5 +110,6 @@ export interface PersistantData {
 		userID: string;
 		chatID: string;
 		dueDate: number;
+		taskID: string;
 	}[];
 }

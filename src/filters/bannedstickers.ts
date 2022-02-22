@@ -11,12 +11,8 @@ const filter: Filter = {
 	reason: 'sending a banned sticker',
 	test: async function (message: Message): Promise<boolean> {
 		if (message.type != 'sticker') return false;
-		const stickerBase64 = (await message.downloadMedia()).data;
-		const stickerMD5 = md5(stickerBase64);
-		const persistantStorage = new PersistantStorage();
-		let storage = persistantStorage.get();
-
-		return storage.bannedStickerMD5s.includes(stickerMD5);
+		const sticker = await message.downloadMedia();
+		return PersistantStorage.shared.isStickerBanned(sticker);
 	},
 };
 

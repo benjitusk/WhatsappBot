@@ -17,19 +17,12 @@ const command: Command = {
 	): Promise<void> {
 		const quotedMessage = await message.getQuotedMessage();
 		if (!quotedMessage) return;
-		const stickerBase64 = (await quotedMessage.downloadMedia()).data;
-		const stickerMD5 = md5(stickerBase64);
-		const persistantStorage = new PersistantStorage();
-		let storage = persistantStorage.get();
+		const sticker = await quotedMessage.downloadMedia();
 		if (args.length === 1) {
-			storage.bannedStickerMD5s.push(stickerMD5);
-			persistantStorage.set(storage);
+			PersistantStorage.shared.banSticker(sticker);
 			await message.reply('This sticker has been banned');
 		} else if (args[2] === 'unban') {
-			storage.bannedStickerMD5s = storage.bannedStickerMD5s.filter(
-				(md5) => md5 !== stickerMD5
-			);
-			persistantStorage.set(storage);
+			PersistantStorage.shared.unbanSticker(sticker);
 			await message.reply('This sticker has been unbanned');
 		}
 	},

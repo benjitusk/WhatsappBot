@@ -12,9 +12,9 @@ const command: Command = {
 	admin: false,
 	cooldown: 0,
 	execute(message: Message): void {
-		const persistantStorage = new PersistantStorage();
-		const storage = persistantStorage.get();
-		const timeToPesach: number = storage.pesachTimestamp - Date.now();
+		const persistantStorage = PersistantStorage.shared;
+		const timeToPesach: number =
+			persistantStorage.getCountdowns().pesach - Date.now();
 		const prettyTimeToPurim: string = prettyMilliseconds(timeToPesach, {
 			secondsDecimalDigits: 0,
 			verbose: true,

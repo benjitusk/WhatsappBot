@@ -19,7 +19,7 @@ const command: Command = {
 		args.length > 1 ? (operation = args[1]) : (operation = 'storage');
 		switch (operation) {
 			case 'storage':
-				new PersistantStorage().get();
+				PersistantStorage.shared.load();
 				console.log('[STORAGE] reloaded');
 				break;
 			case 'commands':

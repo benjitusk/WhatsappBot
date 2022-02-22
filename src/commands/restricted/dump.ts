@@ -11,7 +11,7 @@ const command: Command = {
 	aliases: [],
 	cooldown: 0,
 	execute: function (message: Message): void {
-		const storage = new PersistantStorage().get();
+		const storage = PersistantStorage.shared.dump();
 		message.reply(JSON.stringify(storage, null, 2));
 	},
 };

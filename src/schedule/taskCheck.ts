@@ -15,12 +15,7 @@ const task: Task = {
 	silent: true,
 	execute: async function (client: Client): Promise<void> {
 		const now = new Date().getTime();
-		const persistance = new PersistantStorage();
-		let didModifyStorage = false;
-		let storage = persistance.get();
-		// Check for tasks
-		for (let i = 0; i < storage.tasks.length; i++) {
-			let task = storage.tasks[i];
+		PersistantStorage.shared.getTasks().forEach(async (task) => {
 			if (task.dueDate <= now) {
 				let chat = (await client.getChatById(task.chatID)) as GroupChat;
 				switch (task.action) {
@@ -31,12 +26,10 @@ const task: Task = {
 						chat.setMessagesAdminsOnly(false);
 						break;
 				}
-				storage.tasks.splice(storage.tasks.indexOf(task), 1);
-				didModifyStorage = true;
+				PersistantStorage.shared.removeTaskByID(task.taskID);
 				console.log('Task completed: ' + task.action + ' on ' + task.chatID);
 			}
-		}
-		if (didModifyStorage) persistance.set(storage);
+		});
 	},
 };
 

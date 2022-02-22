@@ -7,27 +7,29 @@ import { MessageMedia } from 'whatsapp-web.js';
 jest.mock('axios');
 // const mockedAxios = jest.mocked('axios');
 
-describe.each`
-	date                               | meal              | expectedFood
-	${new Date('2022-02-19T14:53:00')} | ${Meal.BREAKFAST} | ${'eggs'}
-	${new Date('2022-02-20T09:20:00')} | ${Meal.BREAKFAST} | ${'eggs'}
-	${new Date('2022-02-20T08:20:00')} | ${Meal.BREAKFAST} | ${'eggs'}
-	${new Date('2022-02-20T14:53:00')} | ${Meal.BREAKFAST} | ${'potato burekas'}
-	${new Date('2022-02-19T14:53:00')} | ${Meal.LUNCH}     | ${'falafel & orange soup'}
-	${new Date('2022-02-20T13:20:00')} | ${Meal.LUNCH}     | ${'falafel & orange soup'}
-	${new Date('2022-02-20T14:53:00')} | ${Meal.LUNCH}     | ${'panini Monday & tomato soup'}
-	${new Date('2022-02-27T14:53:00')} | ${Meal.LUNCH}     | ${'sweet potato quiche & tomato soup'}
-	${new Date('2022-02-19T22:53:00')} | ${Meal.DINNER}    | ${'stir fry'}
-	${new Date('2022-02-26T22:53:00')} | ${Meal.DINNER}    | ${'sloppy joe and spaghetti'}
-	${new Date('2022-02-20T19:30:00')} | ${Meal.DINNER}    | ${'stir fry'}
-	${new Date('2022-02-27T19:30:00')} | ${Meal.DINNER}    | ${'sloppy joe and spaghetti'}
-	${new Date('2022-02-20T22:53:00')} | ${Meal.DINNER}    | ${'schnitzel'}
-	${new Date('2022-02-27T22:53:00')} | ${Meal.DINNER}    | ${'schnitzel'}
-`('$meal when requested at $date', ({ date, meal, expectedFood }) => {
-	test(`${meal} returns ${expectedFood}`, () => {
-		expect(utils.getNextFoodFromDateByMeal(meal as Meal, date as Date)).toBe(
-			expectedFood
-		);
+describe('Meal schedule', () => {
+	describe.each`
+		date                               | meal              | expectedFood
+		${new Date('2022-02-19T14:53:00')} | ${Meal.BREAKFAST} | ${'eggs'}
+		${new Date('2022-02-20T09:20:00')} | ${Meal.BREAKFAST} | ${'eggs'}
+		${new Date('2022-02-20T08:20:00')} | ${Meal.BREAKFAST} | ${'eggs'}
+		${new Date('2022-02-20T14:53:00')} | ${Meal.BREAKFAST} | ${'potato burekas'}
+		${new Date('2022-02-19T14:53:00')} | ${Meal.LUNCH}     | ${'falafel & orange soup'}
+		${new Date('2022-02-20T13:20:00')} | ${Meal.LUNCH}     | ${'falafel & orange soup'}
+		${new Date('2022-02-20T14:53:00')} | ${Meal.LUNCH}     | ${'panini Monday & tomato soup'}
+		${new Date('2022-02-27T14:53:00')} | ${Meal.LUNCH}     | ${'sweet potato quiche & tomato soup'}
+		${new Date('2022-02-19T22:53:00')} | ${Meal.DINNER}    | ${'stir fry'}
+		${new Date('2022-02-26T22:53:00')} | ${Meal.DINNER}    | ${'sloppy joe and spaghetti'}
+		${new Date('2022-02-20T19:30:00')} | ${Meal.DINNER}    | ${'stir fry'}
+		${new Date('2022-02-27T19:30:00')} | ${Meal.DINNER}    | ${'sloppy joe and spaghetti'}
+		${new Date('2022-02-20T22:53:00')} | ${Meal.DINNER}    | ${'schnitzel'}
+		${new Date('2022-02-27T22:53:00')} | ${Meal.DINNER}    | ${'schnitzel'}
+	`('$meal when requested at $date', ({ date, meal, expectedFood }) => {
+		test(`${meal} returns ${expectedFood}`, () => {
+			expect(utils.getNextFoodFromDateByMeal(meal as Meal, date as Date)).toBe(
+				expectedFood
+			);
+		});
 	});
 });
 
@@ -41,6 +43,7 @@ describe('Persistant data', () => {
 				userID: 'test',
 				chatID: 'test',
 				dueDate: 0,
+				taskID: expect.any(String),
 			});
 		});
 		it('should be able to delete tasks properly', () => {
