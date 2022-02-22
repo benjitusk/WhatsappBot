@@ -65,7 +65,6 @@ export interface MishnaYomi {
 }
 
 export interface PersistantData {
-	alternateWeek: number;
 	food: {
 		[meal: string]: {
 			// breakfast/lunch/dinner
@@ -108,10 +107,5 @@ export interface PersistantData {
 		userID: string;
 		chatID: string;
 		dueDate: number;
-	}[];
-
-	amiQuotes: {
-		submitter: string;
-		quote: string;
 	}[];
 }
