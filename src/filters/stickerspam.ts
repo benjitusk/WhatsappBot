@@ -9,16 +9,10 @@ const filter: Filter = {
 	enabled: true,
 	cooldown: 60, // Density of strikes before being removed.
 	timeout: 60 * 60, // 1 hour
-	tolerance: 5, // how many times to allow a user to send a sticker within `cooldown` before banning
-	reason: 'was removed for spamming stickers and will be added back in',
+	tolerance: 7, // how many times to allow a user to send a sticker within `cooldown` before banning
+	reason: 'spamming stickers',
 	test: async function (message: Message): Promise<boolean> {
 		if (message.type != 'sticker') return false;
-		const stickerBase64 = (await message.downloadMedia()).data;
-		const stickerMD5 = md5(stickerBase64);
-		const persistantStorage = new PersistantStorage();
-		let storage = persistantStorage.get();
-		if (storage.bannedStickerMD5s.includes(stickerMD5)) return true;
-
 		// Add a strike to the user, creating an entry if they don't exist
 		if (strikes[message.from!])
 			strikes[message.from!].strikeTimes.push(Date.now());
@@ -36,18 +30,7 @@ const filter: Filter = {
 		// If the message did trigger the filter, reset the strikes,
 		// because we are going to ban the user
 		if (messageDidTriggerFilter) strikes[message.from] = { strikeTimes: [] };
-		// If the message did not trigger the filter, but the user is banned,
 		return messageDidTriggerFilter;
-		// Get the sticker ID from the message
-		// If the sticker ID is in the list of epilectic stickers,
-		// add a "strike" to the sender's entry in a file,
-		// creating the entry if it doesn't exist.
-
-		// ToDo: Create a command to add stickers to the banned list.
-		// ToDo: Create some way to store the banned stickers and their strikes.
-
-		// If the sender's entry has reached 3 strikes,
-		// remove the sender from the chat for `timeout` seconds.
 	},
 };
 
