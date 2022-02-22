@@ -56,6 +56,8 @@ export async function getMishnaYomi(
 	if (data.text === '') return 'Mishna not in chapter';
 
 	let englishMishna = data.text
+		.replaceAll('&lt;', '<') // replace XSS safe angle brackets with normal ones
+		.replaceAll('&gt;', '>')
 		.replaceAll('<b>', '*') // Replace bold tags with *
 		.replaceAll('</b>', '*')
 		.replaceAll('<i>', '_') // Replace italic tags with _
