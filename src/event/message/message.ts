@@ -39,12 +39,12 @@ module.exports = {
 				const chat = (await message.getChat()) as GroupChat;
 				if (chat.isGroup) {
 					const name = contact.name || contact.pushname || contact.number;
-					await chat.sendMessage(
-						`${name} ${filter.reason}: *${filter.timeout / 60} minutes*.`
-					);
-					client.sendMessage(
-						chats.BENJI_TUSK,
-						`${name} has triggered the "${filter.name}" filter.`
+					console.log(
+						`${name} was removed for ${
+							filter.reason
+						}, and will be unbanned in *${filter.timeout} ${
+							filter.timeout === 1 ? 'hour' : 'hours'
+						}*.`
 					);
 
 					chat.removeParticipants([contact.id._serialized]);
@@ -54,8 +54,6 @@ module.exports = {
 						chat.id._serialized,
 						Date.now() + filter.timeout * 1000
 					);
-					// ToDo: Add the ability to automatically add the sender back after the timeout.
-					// This will be done by using a json file that stores the users, chats, and their timeouts.
 				}
 			}
 		});
