@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.28.3](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.28.2...v3.28.3) (2022-02-22)
+
+
+### Bug Fixes
+
+* divide seconds to hours for ban log ([1466e21](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/1466e21196dd7aee7f69a6dd8306952ebacce560))
+
 ### [3.28.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.28.1...v3.28.2) (2022-02-22)
 
 ### [3.28.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.28.0...v3.28.1) (2022-02-22)
