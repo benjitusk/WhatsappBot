@@ -42,9 +42,9 @@ module.exports = {
 					console.log(
 						`${name} was removed for ${
 							filter.reason
-						}, and will be unbanned in *${filter.timeout} ${
+						}, and will be unbanned in ${filter.timeout / (60 * 60)} ${
 							filter.timeout === 1 ? 'hour' : 'hours'
-						}*.`
+						}.`
 					);
 
 					chat.removeParticipants([contact.id._serialized]);
