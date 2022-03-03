@@ -3,7 +3,7 @@ import WAWebJS, { GroupChat } from 'whatsapp-web.js';
 import { Command, Filter, TaskActions } from '../../types';
 import { chats } from '../../removedInfo';
 import prettyMilliseconds from 'pretty-ms';
-import { PersistantStorage } from '../../utils';
+import { Users } from '../../utils';
 module.exports = {
 	name: 'message',
 	once: false,
@@ -14,10 +14,7 @@ module.exports = {
 	 *
 	 * @returns { Promise<void> }
 	 */
-	async execute(
-		message: WAWebJS.Message,
-		client: WAWebJS.Client
-	): Promise<void> {
+	async execute(message: WAWebJS.Message, client: WAWebJS.Client): Promise<void> {
 		/**
 		 * Any functionality that needs to be executed
 		 * when a message is received can be done here.
@@ -40,20 +37,12 @@ module.exports = {
 				if (chat.isGroup) {
 					const name = contact.name || contact.pushname || contact.number;
 					console.log(
-						`${name} was removed for ${
-							filter.reason
-						}, and will be unbanned in ${filter.timeout / (60 * 60)} ${
-							filter.timeout === 1 ? 'hour' : 'hours'
-						}.`
+						`${name} was removed for ${filter.reason}, and will be unbanned in ${
+							filter.timeout / (60 * 60)
+						} ${filter.timeout === 1 ? 'hour' : 'hours'}.`
 					);
 
-					chat.removeParticipants([contact.id._serialized]);
-					PersistantStorage.shared.addTask(
-						TaskActions.ADD_USER,
-						contact.id._serialized,
-						chat.id._serialized,
-						Date.now() + filter.timeout * 1000
-					);
+					Users.shared.banUserFromChat(contact, chat, filter.timeout * 1000, filter.reason);
 				}
 			}
 		});
@@ -68,9 +57,7 @@ module.exports = {
 			// Get the command if it exists.
 			let commandExists =
 				client.commands.get(commandName) ||
-				client.commands.find(
-					(cmd: Command) => cmd.aliases && cmd.aliases.includes(commandName)
-				);
+				client.commands.find((cmd: Command) => cmd.aliases && cmd.aliases.includes(commandName));
 
 			// If it doesn't exist, return.
 			if (!commandExists) return;
@@ -94,10 +81,7 @@ module.exports = {
 				}
 			} else {
 				// Check if a cooldown is in effect.
-				if (
-					!chats.admins.includes(contact.id._serialized) &&
-					client.cooldowns.has(command.name)
-				) {
+				if (!chats.admins.includes(contact.id._serialized) && client.cooldowns.has(command.name)) {
 					const now = Date.now();
 					// Get the cooldown.
 					const commandCooldown = client.cooldowns.get(command.name);
@@ -110,21 +94,11 @@ module.exports = {
 							secondsDecimalDigits: 0,
 						});
 						// Send a message to the user.
-						message.reply(
-							`You need to wait ${prettyTime} before using this command again.`
-						);
+						message.reply(`You need to wait ${prettyTime} before using this command again.`);
 						shouldExecute = false;
-					} else
-						client.cooldowns.set(
-							command.name,
-							Date.now() + command.cooldown * 1000
-						);
+					} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
 					// Set a cooldown for the command, as we are about to execute it.
-				} else
-					client.cooldowns.set(
-						command.name,
-						Date.now() + command.cooldown * 1000
-					);
+				} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
 			}
 			if (!shouldExecute) return;
 			// Cooldown check: 		PASSED.
@@ -132,9 +106,9 @@ module.exports = {
 			// Execute the command
 			command.execute(message, client, args);
 			console.log(
-				`[Command] ${
-					contact.name || contact.pushname || contact.number
-				} executed${command.admin ? ' [ADMIN] ' : ' '}command: ${command.name}`
+				`[Command] ${contact.name || contact.pushname || contact.number} executed${
+					command.admin ? ' [ADMIN] ' : ' '
+				}command: ${command.name}`
 			);
 		}
 

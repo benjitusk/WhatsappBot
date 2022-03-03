@@ -1,6 +1,16 @@
 import { Client, GroupChat } from 'whatsapp-web.js';
-import { Task } from '../types';
-import { PersistantStorage } from '../utils';
+import { Task, TaskActions } from '../types';
+import { PersistantStorage, Users } from '../utils';
+
+interface ChatWithDueDate {
+	[chatID: string]: {
+		dueDate: number;
+		taskID: string;
+	};
+}
+interface futureTask {
+	[user: string]: ChatWithDueDate;
+}
 
 const task: Task = {
 	name: 'TaskCheck',
@@ -15,21 +25,15 @@ const task: Task = {
 	silent: true,
 	execute: async function (client: Client): Promise<void> {
 		const now = new Date().getTime();
-		PersistantStorage.shared.getTasks().forEach(async (task) => {
-			if (task.dueDate <= now) {
-				let chat = (await client.getChatById(task.chatID)) as GroupChat;
-				switch (task.action) {
-					case 'addUser':
-						chat.addParticipants([task.userID]);
-						break;
-					case 'unmuteChat':
-						chat.setMessagesAdminsOnly(false);
-						break;
-				}
-				PersistantStorage.shared.removeTaskByID(task.taskID);
-				console.log('Task completed: ' + task.action + ' on ' + task.chatID);
+
+		for (let ban of Users.shared.getAllBans()) {
+			if (ban.banExpires <= 0) continue;
+			if (ban.banExpires <= now) {
+				let chat = (await client.getChatById(ban.chatID)) as GroupChat;
+				if (chat.isGroup) chat.removeParticipants([ban.userID]);
+				Users.shared.unsetBanByID(ban.banID);
 			}
-		});
+		}
 	},
 };
 

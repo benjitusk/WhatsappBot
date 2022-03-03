@@ -12,6 +12,40 @@ export enum Meal {
 	DINNER = 'dinner',
 }
 
+export enum MishnaIndex {
+	MISHNA = 'mishna',
+	PEREK = 'perek',
+	BOOK = 'book',
+}
+
+export interface PersistantUserData {
+	[userID: string]: {
+		bans: {
+			[chatID: string]: {
+				chatID: string;
+				banID: string;
+				reason: string;
+				banExpires: number;
+				userID: string;
+			};
+		};
+	};
+}
+
+export interface PersistantMishnaYomiData {
+	books: string[];
+	bookIndex: number;
+	perek: number;
+	mishna: number;
+}
+
+export interface MishnaYomiData {
+	hebrewName: string;
+	englishName: string;
+	english: string;
+	hebrew: string;
+}
+
 export interface Filter {
 	name: string;
 	enabled: boolean;
@@ -57,13 +91,6 @@ export interface Command {
 	__esModule?: boolean;
 }
 
-export interface MishnaYomi {
-	hebrewName: string;
-	englishName: string;
-	english: string;
-	hebrew: string;
-}
-
 export interface PersistantData {
 	food: {
 		[meal: string]: {
@@ -104,12 +131,29 @@ export interface PersistantData {
 			voters: string[];
 		};
 	};
-
-	tasks: {
-		action: TaskActions;
-		userID: string;
-		chatID: string;
-		dueDate: number;
-		taskID: string;
-	}[];
 }
+
+/*
+
+type DayOfTheWeek =
+	| 'sunday'
+	| 'monday'
+	| 'tuesday'
+	| 'wednesday'
+	| 'thursday'
+	| 'friday'
+	| 'saturday';
+
+type DayOfTheWeekMap<T> = { [day in DayOfTheWeek]: T };
+
+const chores: DayOfTheWeekMap<string> = {
+	sunday: 'do the dishes',
+	monday: 'walk the dog',
+	tuesday: 'water the plants',
+	wednesday: 'take out the trash',
+	thursday: 'clean your room',
+	friday: 'mow the lawn',
+	saturday: 'relax',
+};
+
+*/
