@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.29.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.28.5...v3.29.0) (2022-03-03)
+
+
+### Features
+
+* updated wwjs to use new auth method ([7259c39](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/7259c398d643bdece17aab9d7369b5b491336b69))
+
 ### [3.28.5](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.28.4...v3.28.5) (2022-03-03)
 
 ### [3.28.4](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.28.3...v3.28.4) (2022-03-03)
