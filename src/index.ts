@@ -1,4 +1,4 @@
-import { Client } from 'whatsapp-web.js';
+import { Client, LocalAuth } from 'whatsapp-web.js';
 import { existsSync } from 'fs';
 import { Collection } from '@discordjs/collection';
 
@@ -7,10 +7,11 @@ console.log('\n=== [START] ===');
 
 const sessionPath = '../sessions/bot.json';
 const client = new Client({
+	authStrategy: new LocalAuth({ clientId: 'whatsappBot' }),
 	// puppeteer: {
 	// 	headless: true,
 	// },
-	session: existsSync(sessionPath) ? require(sessionPath) : undefined,
+	// session: existsSync(sessionPath) ? require(sessionPath) : undefined,
 });
 
 client.commands = new Collection();
