@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.29.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.29.0...v3.29.1) (2022-03-06)
+
+
+### Bug Fixes
+
+* bantime was set to banduration ([6da235a](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/6da235ae9a9faeeb0cbb8772908cc84872be35cd))
+* increment mishnayomi after fetch ([02712f3](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/02712f385c9378f7a5ceb26bf5890c1d5642dbb6))
+
 ## [3.29.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.28.5...v3.29.0) (2022-03-03)
 
 
