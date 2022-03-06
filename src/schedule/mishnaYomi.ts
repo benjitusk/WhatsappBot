@@ -1,7 +1,7 @@
 import { Client, WAState } from 'whatsapp-web.js';
 import { MishnaYomi } from '../utils';
 import { chats } from '../removedInfo';
-import { MishnaYomiData, Task } from '../types';
+import { MishnaIndex, MishnaYomiData, Task } from '../types';
 
 const task: Task = {
 	name: 'Mishna Yomi',
@@ -22,6 +22,7 @@ const task: Task = {
 		for (let i = 0; i < 2; i++) {
 			// Get the mishna
 			let mishna = await MishnaYomi.shared.fetchNextMishna();
+			MishnaYomi.shared.incrementMishnaYomiIndex(MishnaIndex.MISHNA);
 			if (!mishna) {
 				// Create a large, noticable log message
 				console.log(
