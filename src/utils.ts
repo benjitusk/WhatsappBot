@@ -145,7 +145,7 @@ export class Users {
 	banUserFromChat(user: Contact, chat: GroupChat, duration: number, reason?: string): void {
 		if (!this.userIsBannedFromChat(user.id._serialized, chat.id._serialized))
 			chat.removeParticipants([user.id._serialized]);
-		this.saveBan(user.id._serialized, chat.id._serialized, duration, reason);
+		this.saveBan(user.id._serialized, chat.id._serialized, Date.now() + duration, reason);
 	}
 
 	/**
