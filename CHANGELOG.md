@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.29.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.29.1...v3.29.2) (2022-03-06)
+
+
+### Bug Fixes
+
+* add participants on ban expiry ([97b1db5](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/97b1db531112e4e211b7cdde290d05800f1ed7e3))
+
 ### [3.29.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.29.0...v3.29.1) (2022-03-06)
 
 
