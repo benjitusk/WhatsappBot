@@ -30,7 +30,7 @@ const task: Task = {
 			if (ban.banExpires <= 0) continue;
 			if (ban.banExpires <= now) {
 				let chat = (await client.getChatById(ban.chatID)) as GroupChat;
-				if (chat.isGroup) chat.removeParticipants([ban.userID]);
+				if (chat.isGroup) chat.addParticipants([ban.userID]);
 				Users.shared.unsetBanByID(ban.banID);
 			}
 		}
