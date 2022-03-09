@@ -15,5 +15,4 @@ sessions/
 WWebJS/
 media/
 dist/
-persistant/mishnaYomi.json
-persistant/userInfo.json
+persistant/
