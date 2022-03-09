@@ -18,6 +18,12 @@ export enum MishnaIndex {
 	BOOK = 'book',
 }
 
+export interface FoodData {
+	breakfast: string[];
+	lunch: (string | string[])[];
+	dinner: (string | string[])[];
+}
+
 export interface PersistantUserData {
 	[userID: string]: {
 		bans: {

@@ -10,6 +10,7 @@ import {
 	PersistantMishnaYomiData,
 	MishnaYomiData,
 	MishnaIndex,
+	FoodData,
 } from './types';
 
 export class PersistantStorage {
@@ -116,6 +117,20 @@ export class PersistantStorage {
 				throw new Error('Invalid MishnaYomi index');
 		}
 		this.set(this.data);
+	}
+}
+
+export class FoodManager {
+	private data: FoodData;
+	private path: string;
+
+	private constructor() {
+		this.path = '../persistant/userInfo.json';
+		// Create the file if it doesn't exist
+		if (!fs.existsSync(this.path)) {
+			throw 'Food Data is missing.';
+		}
+		this.data = JSON.parse(readFileSync(this.path) as any) as FoodData;
 	}
 }
 
