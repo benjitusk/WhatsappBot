@@ -25,6 +25,7 @@
   "dependencies": {
     "@discordjs/collection": "^0.4.0",
     "@google-cloud/text-to-speech": "^3.4.0",
+    "@googlemaps/google-maps-services-js": "^3.3.10",
     "axios": "^0.24.0",
     "cron": "^1.8.2",
     "dotenv": "^10.0.0",
@@ -32,9 +33,8 @@
     "mysql": "^2.18.1",
     "parse-duration": "^1.0.1",
     "pretty-ms": "^7.0.1",
-    "puppeteer": "^10.4.0",
     "qrcode-terminal": "^0.12.0",
-    "whatsapp-web.js": "^1.16.2"
+    "whatsapp-web.js": "^1.16.4-alpha.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.0.2",
