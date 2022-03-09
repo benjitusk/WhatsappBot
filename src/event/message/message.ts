@@ -1,7 +1,7 @@
 const prefix = '!';
 import WAWebJS, { GroupChat } from 'whatsapp-web.js';
 import { Command, Filter, TaskActions } from '../../types';
-import { chats } from '../../removedInfo';
+import { Contacts } from '../../removedInfo';
 import prettyMilliseconds from 'pretty-ms';
 import { Users } from '../../utils';
 module.exports = {
@@ -70,7 +70,7 @@ module.exports = {
 			let shouldExecute = true;
 
 			if (command.admin) {
-				if (!chats.admins.includes(contact.id._serialized)) {
+				if (!Contacts.admins.includes(contact.id._serialized)) {
 					// send a private message to the user.
 					let contactChat = await contact.getChat();
 					message.reply(
@@ -81,7 +81,10 @@ module.exports = {
 				}
 			} else {
 				// Check if a cooldown is in effect.
-				if (!chats.admins.includes(contact.id._serialized) && client.cooldowns.has(command.name)) {
+				if (
+					!Contacts.admins.includes(contact.id._serialized) &&
+					client.cooldowns.has(command.name)
+				) {
 					const now = Date.now();
 					// Get the cooldown.
 					const commandCooldown = client.cooldowns.get(command.name);

@@ -1,6 +1,6 @@
 import { Client, WAState } from 'whatsapp-web.js';
 import { MishnaYomi } from '../utils';
-import { chats } from '../removedInfo';
+import { Contacts } from '../removedInfo';
 import { MishnaIndex, MishnaYomiData, Task } from '../types';
 
 const task: Task = {
@@ -43,7 +43,7 @@ const task: Task = {
 		if ((await client.getState()) != WAState.CONNECTED) return;
 
 		// get the chat object
-		let chat = await client.getChatById(chats.MISHNA_YOMI_CHAT_ID);
+		let chat = await client.getChatById(Contacts.MISHNA_YOMI_CHAT_ID);
 
 		// Send both mishnayot
 		for (const [i, mishnaYomi] of mishnayot.entries()) {
