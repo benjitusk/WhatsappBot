@@ -2,7 +2,7 @@ import fs from 'fs';
 import axios from 'axios';
 import crypto from 'crypto';
 import { readFileSync, writeFileSync } from 'fs';
-import { Contact, GroupChat, MessageMedia } from 'whatsapp-web.js';
+import { Client, Contact, GroupChat, MessageMedia } from 'whatsapp-web.js';
 import {
 	Meal,
 	PersistantData,
@@ -137,6 +137,7 @@ export class FoodManager {
 export class Users {
 	private data: PersistantUserData;
 	private path: string;
+	private static VOTEKICKCOUNT = 5;
 
 	private constructor() {
 		this.path = '../persistant/userInfo.json';
@@ -156,8 +157,65 @@ export class Users {
 		if (!this.data[userID] || !this.data[userID][chatID]) this.data[userID] = { [chatID]: {} };
 		this.set(this.data);
 	}
+
+	// ===[ VoteKick ]===
+
+	initVoteKick(userID: string, chatID: string, initiatorID: string): string | undefined {
+		this.createUserWithChatIfNotExists(userID, chatID);
+		// Check if there is an active vote kick
+		if (this.userHasActiveVoteKick(userID, chatID)) return;
+		// Otherwise, create a new vote kick
+		const voteKickID = crypto.randomUUID();
+		this.data[userID][chatID].voteKick = {
+			chatID: chatID,
+			userID: userID,
+			initiatorID: initiatorID,
+			voteKickID,
+			voteExpires: Date.now() + 7 * 60 * 1000, // 7 minutes
+			votes: [] as string[],
+		};
+		this.set(this.data);
+		return voteKickID;
+	}
+
+	userHasActiveVoteKick(userID: string, chatID: string): boolean {
+		if (this.data[userID][chatID].voteKick)
+			if (this.data[userID][chatID].voteKick!.voteExpires < Date.now()) return true;
+		return false;
+	}
+
+	voteKickVote(userID: string, chatID: string, voteKickID: string): void {
+		this.createUserWithChatIfNotExists(userID, chatID);
+		if (!this.data[userID][chatID].voteKick) return;
+		if (this.data[userID][chatID].voteKick!.voteKickID != voteKickID) return;
+		if (this.data[userID][chatID].voteKick!.voteExpires < Date.now()) {
+			// delete vote kick
+			delete this.data[userID][chatID].voteKick;
+			this.set(this.data);
+			return;
+		}
+		if (this.data[userID][chatID].voteKick!.votes.includes(userID)) return;
+		this.data[userID][chatID].voteKick!.votes.push(userID);
 		this.set(this.data);
 	}
+
+	async applyVoteKick(voteKickID: string, client: Client): Promise<void> {
+		for (const userID in this.data)
+			for (const chatID in this.data[userID])
+				if (this.data[userID][chatID].voteKick?.voteKickID == voteKickID) {
+					let voteKick = this.data[userID][chatID].voteKick!;
+					if (voteKick.votes.length >= Users.VOTEKICKCOUNT) {
+						// delete vote kick
+						delete this.data[userID][chatID].voteKick;
+						// ban the user
+						const userContact = await client.getContactById(userID);
+						const chatContact = (await client.getChatById(chatID)) as GroupChat;
+						this.banUserFromChat(userContact, chatContact, 60 * 60 * 1000, 'VoteKick');
+					}
+				}
+	}
+
+	// ===[ BANS ]===
 
 	banUserFromChat(user: Contact, chat: GroupChat, duration: number, reason?: string): void {
 		if (!this.userIsBannedFromChat(user.id._serialized, chat.id._serialized))

@@ -33,7 +33,14 @@ export interface PersistantUserData {
 				banID: string;
 				reason: string;
 				banExpires: number;
+			};
+			voteKick?: {
+				chatID: string;
 				userID: string;
+				voteKickID: string;
+				initiatorID: string;
+				voteExpires: number;
+				votes: string[];
 			};
 		};
 	};
