@@ -26,9 +26,10 @@ export interface FoodData {
 
 export interface PersistantUserData {
 	[userID: string]: {
-		bans: {
-			[chatID: string]: {
+		[chatID: string]: {
+			ban?: {
 				chatID: string;
+				userID: string;
 				banID: string;
 				reason: string;
 				banExpires: number;

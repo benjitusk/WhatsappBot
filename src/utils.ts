@@ -152,8 +152,10 @@ export class Users {
 		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
 	}
 
-	createUserIfNotExists(userID: string): void {
-		if (!this.data[userID]) this.data[userID] = { bans: {} };
+	createUserWithChatIfNotExists(userID: string, chatID: string): void {
+		if (!this.data[userID] || !this.data[userID][chatID]) this.data[userID] = { [chatID]: {} };
+		this.set(this.data);
+	}
 		this.set(this.data);
 	}
 
@@ -175,8 +177,8 @@ export class Users {
 	 * @memberof Users
 	 */
 	saveBan(userID: string, chatID: string, banExpires: number, reason?: string): void {
-		this.createUserIfNotExists(userID);
-		this.data[userID].bans[chatID] = {
+		this.createUserWithChatIfNotExists(userID, chatID);
+		this.data[userID][chatID].ban = {
 			banID: crypto.randomUUID(),
 			reason: reason || '',
 			banExpires,
@@ -198,25 +200,22 @@ export class Users {
 	}[] {
 		let bans = [];
 		for (const userID in this.data)
-			for (const chatID in this.data[userID].bans) bans.push(this.data[userID].bans[chatID]);
-
+			for (const chatID in this.data[userID])
+				if (this.data[userID][chatID].ban) bans.push(this.data[userID][chatID].ban!);
 		return bans;
 	}
 
 	unsetBanByID(banID: string): void {
 		for (const userID in this.data)
-			for (const chatID in this.data[userID].bans)
-				if (this.data[userID].bans[chatID].banID == banID) {
-					delete this.data[userID].bans[chatID];
-					return;
-				}
+			for (const chatID in this.data[userID])
+				if (this.data[userID][chatID].ban?.banID == banID) delete this.data[userID][chatID].ban;
 
 		this.set(this.data);
 	}
 
 	userIsBannedFromChat(userID: string, chatID: string): boolean {
-		this.createUserIfNotExists(userID);
-		return this.data[userID].bans[chatID] != undefined;
+		this.createUserWithChatIfNotExists(userID, chatID);
+		return this.data[userID][chatID].ban != undefined;
 	}
 
 	static shared = new Users();
@@ -339,20 +338,6 @@ export class MishnaYomi {
 
 	static shared = new MishnaYomi();
 }
-
-// export async function getMishnaYomi(
-// 	book: string,
-// 	perek: number,
-// 	mishna: number
-// ): Promise<MishnaYomiData | string> {
-
-// 	// Increase the mishna count
-// 	mishna++;
-// 	// Save changes to file
-
-// 	// Return the mishna
-
-// }
 
 /**
  * Retrieve the next food from the database based on the given date
