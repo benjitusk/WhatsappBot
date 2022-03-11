@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.30.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.29.2...v3.30.0) (2022-03-11)
+
+
+### Features
+
+* added bus info command ([710a811](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/710a8118e3bec2c6e46a3f4028e76b1b0f33b412))
+* added stops command ([fa051c4](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/fa051c4387e81aefdca5f33a9e300d039473ef6c))
+* added votekick command ([fec59b5](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/fec59b57b6a35451b3b39a5b5718f0b6150d8349))
+* rewrote bus command to use bus API, not gMaps ([b11a11c](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/b11a11c40a8ecf6dfc7ae7ff27fda1dafe0cc5cc))
+
+
+### Bug Fixes
+
+* added discription to votekick ([5ae9d1e](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/5ae9d1e5d349af0cd09493d48c81733ef4d4a8b0))
+* applied WWJS patch & added gMaps lib ([cf991b6](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/cf991b660cf4359c98cedce4716122a0dd9e90ff))
+* updated shell.js to use new auth ([ba6f100](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/ba6f10093028a205a16b47522b0ca335d06302e7))
+
 ### [3.29.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.29.1...v3.29.2) (2022-03-06)
 
 
