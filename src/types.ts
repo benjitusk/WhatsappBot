@@ -27,23 +27,27 @@ export interface FoodData {
 export interface PersistantUserData {
 	[userID: string]: {
 		[chatID: string]: {
-			ban?: {
-				chatID: string;
-				userID: string;
-				banID: string;
-				reason: string;
-				banExpires: number;
-			};
-			voteKick?: {
-				chatID: string;
-				userID: string;
-				voteKickID: string;
-				initiatorID: string;
-				voteExpires: number;
-				votes: string[];
-			};
+			ban?: Ban;
+			voteKick?: VoteKick;
 		};
 	};
+}
+
+export interface Ban {
+	chatID: string;
+	userID: string;
+	banID: string;
+	reason: string;
+	banExpires: number;
+}
+
+export interface VoteKick {
+	chatID: string;
+	userID: string;
+	voteKickID: string;
+	initiatorID: string;
+	voteExpires: number;
+	votes: string[];
 }
 
 export interface PersistantMishnaYomiData {
