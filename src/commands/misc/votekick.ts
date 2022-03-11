@@ -6,7 +6,7 @@ import { Users } from '../../utils';
 const command: Command = {
 	name: 'votekick',
 	helpText: 'Initiate a votekick to remove the mentioned user',
-	syntax: '',
+	syntax: '!votekick @contact',
 	enabled: true,
 	admin: true,
 	aliases: [],
