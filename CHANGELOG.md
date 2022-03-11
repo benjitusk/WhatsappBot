@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.31.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.30.0...v3.31.0) (2022-03-11)
+
+
+### Features
+
+* added ability to vote for vkick ([edc63ad](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/edc63add6dacb1eb9afb7ba2673198563a9d5839))
+
 ## [3.30.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.29.2...v3.30.0) (2022-03-11)
 
 
