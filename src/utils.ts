@@ -11,6 +11,8 @@ import {
 	MishnaYomiData,
 	MishnaIndex,
 	FoodData,
+	VoteKick,
+	Ban,
 } from './types';
 
 export class PersistantStorage {
@@ -137,7 +139,7 @@ export class FoodManager {
 export class Users {
 	private data: PersistantUserData;
 	private path: string;
-	private static VOTEKICKCOUNT = 5;
+	static VOTEKICKCOUNT = 5;
 
 	private constructor() {
 		this.path = '../persistant/userInfo.json';
@@ -178,25 +180,58 @@ export class Users {
 		return voteKickID;
 	}
 
+	getVoteKickByID(id: string): VoteKick | undefined {
+		for (const userID in this.data) {
+			for (const chatID in this.data[userID]) {
+				if (this.data[userID][chatID].voteKick) {
+					if (this.data[userID][chatID].voteKick?.voteKickID == id)
+						return this.data[userID][chatID].voteKick;
+				}
+			}
+		}
+		return undefined;
+	}
+
+	deleteVoteKickByID(id: string): void {
+		for (const userID in this.data) {
+			for (const chatID in this.data[userID]) {
+				if (this.data[userID][chatID].voteKick) {
+					if (this.data[userID][chatID].voteKick?.voteKickID == id) {
+						delete this.data[userID][chatID].voteKick;
+						this.set(this.data);
+						return;
+					}
+				}
+			}
+		}
+	}
+
 	userHasActiveVoteKick(userID: string, chatID: string): boolean {
+		this.createUserWithChatIfNotExists(userID, chatID);
 		if (this.data[userID][chatID].voteKick)
-			if (this.data[userID][chatID].voteKick!.voteExpires < Date.now()) return true;
+			if (this.data[userID][chatID].voteKick!.voteExpires > Date.now()) return true;
+			else this.deleteVoteKickByID(this.data[userID][chatID].voteKick!.voteKickID);
 		return false;
 	}
 
-	voteKickVote(userID: string, chatID: string, voteKickID: string): void {
-		this.createUserWithChatIfNotExists(userID, chatID);
-		if (!this.data[userID][chatID].voteKick) return;
-		if (this.data[userID][chatID].voteKick!.voteKickID != voteKickID) return;
-		if (this.data[userID][chatID].voteKick!.voteExpires < Date.now()) {
+	voteKickVote(votingUserID: string, voteKickID: string, client: Client): void {
+		let voteKick = this.getVoteKickByID(voteKickID);
+		if (!voteKick) return;
+		if (voteKick.voteExpires < Date.now()) {
 			// delete vote kick
-			delete this.data[userID][chatID].voteKick;
+			console.log(`Deleting vote kick ${voteKickID}`);
+			this.deleteVoteKickByID(voteKickID);
 			this.set(this.data);
 			return;
 		}
-		if (this.data[userID][chatID].voteKick!.votes.includes(userID)) return;
-		this.data[userID][chatID].voteKick!.votes.push(userID);
+		if (voteKick.votes.includes(votingUserID)) {
+			console.log(`User ${votingUserID} already voted for vote kick ${voteKickID}`);
+			return;
+		}
+		console.log(`User ${votingUserID} is voting for vote kick in chat ${voteKickID}`);
+		this.data[voteKick.userID][voteKick.chatID].voteKick?.votes.push(votingUserID);
 		this.set(this.data);
+		this.applyVoteKick(voteKickID, client);
 	}
 
 	async applyVoteKick(voteKickID: string, client: Client): Promise<void> {
@@ -249,13 +284,7 @@ export class Users {
 	/**
 	 * Returns all bans for all chats for all users
 	 */
-	getAllBans(): {
-		chatID: string;
-		banID: string;
-		reason: string;
-		banExpires: number;
-		userID: string;
-	}[] {
+	getAllBans(): Ban[] {
 		let bans = [];
 		for (const userID in this.data)
 			for (const chatID in this.data[userID])
