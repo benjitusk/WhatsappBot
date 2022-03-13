@@ -51,8 +51,9 @@ module.exports = {
 		if (message.body.startsWith(prefix)) {
 			// Split the message wherever there are one or more spaces or newlines.
 			let args = message.body.trim().split(/[ \n]+/);
+			args[0] = args[0].slice(prefix.length);
 			// Remove the prefix from the first argument. and lowercase it.
-			const commandName = args[0].slice(prefix.length).toLowerCase();
+			const commandName = args[0].toLowerCase();
 
 			// Get the command if it exists.
 			let commandExists =
