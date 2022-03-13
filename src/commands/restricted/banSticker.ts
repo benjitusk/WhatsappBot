@@ -10,18 +10,14 @@ const command: Command = {
 	admin: true,
 	aliases: [],
 	cooldown: 0,
-	execute: async function (
-		message: Message,
-		client: Client,
-		args: string[]
-	): Promise<void> {
+	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		const quotedMessage = await message.getQuotedMessage();
 		if (!quotedMessage) return;
 		const sticker = await quotedMessage.downloadMedia();
 		if (args.length === 1) {
 			PersistantStorage.shared.banSticker(sticker);
 			await message.reply('This sticker has been banned');
-		} else if (args[2] === 'unban') {
+		} else if (args[1] === 'unban') {
 			PersistantStorage.shared.unbanSticker(sticker);
 			await message.reply('This sticker has been unbanned');
 		}
