@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.32.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.32.1...v3.32.2) (2022-03-13)
+
+
+### Bug Fixes
+
+* updated powere command ([86526bb](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/86526bb4109dcba475e24b9d3dd472553b7b60d1))
+
 ### [3.32.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.32.0...v3.32.1) (2022-03-13)
 
 
