@@ -34,12 +34,21 @@ const command: Command = {
 
 		// Vote
 		Users.shared.voteKickVote(message.author!, id, client);
+		voteKick.votes.push(message.author!);
 
 		// Reply with the number of votes
 		// update votekick object b/c it _may_ have changed
-		voteKick = Users.shared.getVoteKickByID(id);
-
 		message.reply(`${voteKick?.votes.length}/${Users.VOTEKICKCOUNT} votes received.`);
+		if (voteKick.votes.length >= Users.VOTEKICKCOUNT) {
+			const contact = await client.getContactById(voteKick.userID)!;
+			message.reply(
+				`${contact.number} has been kicked from this chat for 1 hour. This vote is no longer active.`,
+				undefined,
+				{
+					mentions: [contact],
+				}
+			);
+		}
 		return;
 	},
 };
