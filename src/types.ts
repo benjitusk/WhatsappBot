@@ -18,6 +18,10 @@ export enum MishnaIndex {
 	BOOK = 'book',
 }
 
+export interface BotData {
+	enabled: boolean;
+}
+
 export interface FoodData {
 	breakfast: string[];
 	lunch: (string | string[])[];

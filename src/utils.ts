@@ -13,6 +13,7 @@ import {
 	FoodData,
 	VoteKick,
 	Ban,
+	BotData,
 } from './types';
 
 export class PersistantStorage {
@@ -134,6 +135,40 @@ export class FoodManager {
 		}
 		this.data = JSON.parse(readFileSync(this.path) as any) as FoodData;
 	}
+}
+
+export class Bot {
+	data: BotData;
+	private path: string;
+
+	private constructor() {
+		this.path = '../persistant/bot.json';
+		// Create the file if it doesn't exist
+		if (!fs.existsSync(this.path)) {
+			throw 'Bot Data is missing.';
+		}
+		this.data = JSON.parse(readFileSync(this.path) as any) as BotData;
+	}
+
+	getState(): boolean {
+		return this.data.enabled;
+	}
+
+	toggle(state?: boolean) {
+		if (state !== undefined) {
+			this.data.enabled = state;
+		} else {
+			this.data.enabled = !this.data.enabled;
+		}
+		this.set(this.data);
+	}
+
+	set(data: any) {
+		this.data = data;
+		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
+	}
+
+	static shared = new Bot();
 }
 
 export class Users {
