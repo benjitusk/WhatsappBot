@@ -12,9 +12,12 @@ const command: Command = {
 	aliases: [],
 	cooldown: 0, // 0 minutes
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
-		const contact = await client.getContactById(message.author!);
 		let chatID: string | undefined;
-		if ((await message.getChat()).isGroup) chatID = (await contact.getChat()).id._serialized;
+		if (message.author) {
+			const contact = await message.getContact();
+			const chat = await contact.getChat();
+			const chatID = chat.id._serialized;
+		}
 		if (args.length < 2) {
 			message.reply('Please specify a bus stop ID.', chatID);
 			return;
