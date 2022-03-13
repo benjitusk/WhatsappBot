@@ -48,44 +48,45 @@ module.exports = {
 		});
 
 		// 2. Handle commands.
-		if (Bot.shared.getState())
-			if (message.body.startsWith(prefix)) {
-				// Split the message wherever there are one or more spaces or newlines.
-				let args = message.body.trim().split(/[ \n]+/);
-				// Remove the prefix from the first argument. and lowercase it.
-				const commandName = args[0].slice(prefix.length).toLowerCase();
+		if (message.body.startsWith(prefix)) {
+			// Split the message wherever there are one or more spaces or newlines.
+			let args = message.body.trim().split(/[ \n]+/);
+			// Remove the prefix from the first argument. and lowercase it.
+			const commandName = args[0].slice(prefix.length).toLowerCase();
 
-				// Get the command if it exists.
-				let commandExists =
-					client.commands.get(commandName) ||
-					client.commands.find((cmd: Command) => cmd.aliases && cmd.aliases.includes(commandName));
+			// Get the command if it exists.
+			let commandExists =
+				client.commands.get(commandName) ||
+				client.commands.find((cmd: Command) => cmd.aliases && cmd.aliases.includes(commandName));
 
-				// If it doesn't exist, return.
-				if (!commandExists) return;
+			// If it doesn't exist, return.
+			if (!commandExists) return;
 
-				// If it does exist, check if the user has permission to use it.
-				const command = commandExists as Command;
+			// If it does exist, check if the user has permission to use it.
+			const command = commandExists as Command;
 
-				// Check if the user has permission to use the command.
-				let contact = await message.getContact();
-				let shouldExecute = true;
+			// Check if the user has permission to use the command.
+			let contact = await message.getContact();
+			let shouldExecute = true;
 
-				if (command.admin) {
-					if (!Contacts.admins.includes(contact.id._serialized)) {
-						// send a private message to the user.
-						let contactChat = await contact.getChat();
-						message.reply(
-							`You don't have permission to use this command.`,
-							contactChat.id._serialized
-						);
-						shouldExecute = false;
-					}
-				} else {
-					// Check if a cooldown is in effect.
+			if (command.admin) {
+				if (!Contacts.admins.includes(contact.id._serialized)) {
+					// send a private message to the user.
+					let contactChat = await contact.getChat();
+					message.reply(
+						`You don't have permission to use this command.`,
+						contactChat.id._serialized
+					);
+					shouldExecute = false;
+				}
+			} else {
+				// Check if bot is enabled
+				if (Bot.shared.getState())
 					if (
 						!Contacts.admins.includes(contact.id._serialized) &&
 						client.cooldowns.has(command.name)
 					) {
+						// Check if a cooldown is in effect.
 						const now = Date.now();
 						// Get the cooldown.
 						const commandCooldown = client.cooldowns.get(command.name);
@@ -103,18 +104,18 @@ module.exports = {
 						} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
 						// Set a cooldown for the command, as we are about to execute it.
 					} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
-				}
-				if (!shouldExecute) return;
-				// Cooldown check: 		PASSED.
-				// Permission check: 	PASSED.
-				// Execute the command
-				command.execute(message, client, args);
-				console.log(
-					`[Command] ${contact.name || contact.pushname || contact.number} executed${
-						command.admin ? ' [ADMIN] ' : ' '
-					}command: ${command.name}`
-				);
 			}
+			if (!shouldExecute) return;
+			// Cooldown check: 		PASSED.
+			// Permission check: 	PASSED.
+			// Execute the command
+			command.execute(message, client, args);
+			console.log(
+				`[Command] ${contact.name || contact.pushname || contact.number} executed${
+					command.admin ? ' [ADMIN] ' : ' '
+				}command: ${command.name}`
+			);
+		}
 
 		// 3. Handle poll responses.
 		// if (message.type === 'buttons_response') {
