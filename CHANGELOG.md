@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.32.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.32.0...v3.32.1) (2022-03-13)
+
+
+### Bug Fixes
+
+* bug in handling last vote for kick ([33f0bd1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/33f0bd1bcfd79e40ef6829153bae940c0b52e19c))
+
 ## [3.32.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.5...v3.32.0) (2022-03-13)
 
 
