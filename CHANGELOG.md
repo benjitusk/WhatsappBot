@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.31.4](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.3...v3.31.4) (2022-03-13)
+
+
+### Bug Fixes
+
+* handle PM's for stopIDs ([022011f](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/022011f144e314dde0bc163999868e83dfcce615))
+
 ### [3.31.3](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.2...v3.31.3) (2022-03-13)
 
 ### [3.31.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.1...v3.31.2) (2022-03-13)
