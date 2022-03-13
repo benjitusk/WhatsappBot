@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.32.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.5...v3.32.0) (2022-03-13)
+
+
+### Features
+
+* added easy power switch ([1f34d9b](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/1f34d9bc7f37c1c3f2e0356008c74df6f3d0592a))
+
+
+### Bug Fixes
+
+* pm for stop command ([a773d6b](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/a773d6bf878d7ab959d41bce459990831633be60))
+
 ### [3.31.5](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.4...v3.31.5) (2022-03-13)
 
 
