@@ -13,15 +13,16 @@ const command: Command = {
 	cooldown: 0, // 0 minutes
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		const contact = await client.getContactById(message.author!);
-		const privateChatID = (await contact.getChat()).id._serialized;
+		let chatID: string | undefined;
+		if ((await message.getChat()).isGroup) chatID = (await contact.getChat()).id._serialized;
 		if (args.length < 2) {
-			message.reply('Please specify a bus stop ID.', privateChatID);
+			message.reply('Please specify a bus stop ID.', chatID);
 			return;
 		}
 		const stopIDString = args[1];
 		// ensure bus number is a number
 		if (isNaN(parseInt(stopIDString))) {
-			message.reply('Please specify a valid bus stop ID. (Must be a number)', privateChatID);
+			message.reply('Please specify a valid bus stop ID. (Must be a number)', chatID);
 			return;
 		}
 		const stopIDNumber = parseInt(stopIDString);
@@ -37,9 +38,9 @@ const command: Command = {
 				data +
 				'```';
 
-			message.reply(data, privateChatID);
+			message.reply(data, chatID);
 		} catch (error) {
-			message.reply('Invalid StopID: ' + stopIDNumber + '.', privateChatID);
+			message.reply('Invalid StopID: ' + stopIDNumber + '.', chatID);
 			return;
 		}
 	},
