@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.31.5](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.4...v3.31.5) (2022-03-13)
+
+
+### Bug Fixes
+
+* logic issue in previous fix ([d168843](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/d168843d09b284e4219e7fbaba61322ed8f78802))
+
 ### [3.31.4](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.3...v3.31.4) (2022-03-13)
 
 
