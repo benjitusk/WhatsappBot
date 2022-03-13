@@ -16,7 +16,7 @@ const command: Command = {
 		if (message.author) {
 			const contact = await message.getContact();
 			const chat = await contact.getChat();
-			const chatID = chat.id._serialized;
+			chatID = chat.id._serialized;
 		}
 		if (args.length < 2) {
 			message.reply('Please specify a bus stop ID.', chatID);
