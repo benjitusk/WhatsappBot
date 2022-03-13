@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.31.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.1...v3.31.2) (2022-03-13)
+
+
+### Bug Fixes
+
+* added handling for last vote in votekick ([8cba0b2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/8cba0b28a2e45e3abe85d0230ad8fe8607e20dab))
+* corrected args position to unban sticker ([4d5251a](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/4d5251a0083732f47d0dc60d88298ed4b84666f6))
+* stop command now replies over PM ([6c10e8c](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/6c10e8cc86ad4b9d83dadf165d1fdbd17567d1bf))
+
 ### [3.31.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.31.0...v3.31.1) (2022-03-11)
 
 ## [3.31.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.30.0...v3.31.0) (2022-03-11)
