@@ -1,5 +1,5 @@
 import { Client, Message } from 'whatsapp-web.js';
-import { Command } from '../../types';
+import { BotState, Command } from '../../types';
 import { Bot } from '../../utils';
 
 const command: Command = {
@@ -12,11 +12,11 @@ const command: Command = {
 	cooldown: 0,
 	execute: function (message: Message, client: Client, args: string[]): void {
 		if (args[0] == 'on') {
-			Bot.shared.toggle(true);
+			Bot.shared.setState(BotState.ON);
 			message.reply('Bot commands are enabled.');
 		} else if (args[0] == 'off') {
-			Bot.shared.toggle(false);
-			message.reply('Bot commands are disabled.');
+			Bot.shared.setState(BotState.ADMIN_ONLY);
+			message.reply('Bot commands are now admin only.');
 		} else {
 			message.reply(`${args[0]} is not a valid argument. Use !on or !off.`);
 		}

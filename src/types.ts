@@ -18,8 +18,14 @@ export enum MishnaIndex {
 	BOOK = 'book',
 }
 
+export enum BotState {
+	ON = 'on',
+	OFF = 'off',
+	ADMIN_ONLY = 'adminOnly',
+}
+
 export interface BotData {
-	enabled: boolean;
+	state: BotState;
 }
 
 export interface FoodData {

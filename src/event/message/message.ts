@@ -1,6 +1,6 @@
 const prefix = '!';
 import WAWebJS, { GroupChat } from 'whatsapp-web.js';
-import { Command, Filter, TaskActions } from '../../types';
+import { BotState, Command, Filter, TaskActions } from '../../types';
 import { Contacts } from '../../removedInfo';
 import prettyMilliseconds from 'pretty-ms';
 import { Bot, Users } from '../../utils';
@@ -69,6 +69,15 @@ module.exports = {
 			// Check if the user has permission to use the command.
 			let contact = await message.getContact();
 			let shouldExecute = true;
+			switch (Bot.shared.getState()) {
+				case BotState.OFF:
+					return;
+				case BotState.ADMIN_ONLY:
+					if (!Contacts.admins.includes(contact.id._serialized)) return;
+					break;
+				case BotState.ON:
+					break;
+			}
 
 			if (command.admin) {
 				if (!Contacts.admins.includes(contact.id._serialized)) {
@@ -82,29 +91,28 @@ module.exports = {
 				}
 			} else {
 				// Check if bot is enabled
-				if (Bot.shared.getState())
-					if (
-						!Contacts.admins.includes(contact.id._serialized) &&
-						client.cooldowns.has(command.name)
-					) {
-						// Check if a cooldown is in effect.
-						const now = Date.now();
-						// Get the cooldown.
-						const commandCooldown = client.cooldowns.get(command.name);
+				if (
+					!Contacts.admins.includes(contact.id._serialized) &&
+					client.cooldowns.has(command.name)
+				) {
+					// Check if a cooldown is in effect.
+					const now = Date.now();
+					// Get the cooldown.
+					const commandCooldown = client.cooldowns.get(command.name);
 
-						// Check if there is an active cooldown.
-						if (commandCooldown && commandCooldown > now) {
-							// Get the time remaining.
-							const timeRemaining = commandCooldown - now;
-							const prettyTime = prettyMilliseconds(timeRemaining, {
-								secondsDecimalDigits: 0,
-							});
-							// Send a message to the user.
-							message.reply(`You need to wait ${prettyTime} before using this command again.`);
-							shouldExecute = false;
-						} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
-						// Set a cooldown for the command, as we are about to execute it.
+					// Check if there is an active cooldown.
+					if (commandCooldown && commandCooldown > now) {
+						// Get the time remaining.
+						const timeRemaining = commandCooldown - now;
+						const prettyTime = prettyMilliseconds(timeRemaining, {
+							secondsDecimalDigits: 0,
+						});
+						// Send a message to the user.
+						message.reply(`You need to wait ${prettyTime} before using this command again.`);
+						shouldExecute = false;
 					} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
+					// Set a cooldown for the command, as we are about to execute it.
+				} else client.cooldowns.set(command.name, Date.now() + command.cooldown * 1000);
 			}
 			if (!shouldExecute) return;
 			// Cooldown check: 		PASSED.

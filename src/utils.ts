@@ -14,6 +14,7 @@ import {
 	VoteKick,
 	Ban,
 	BotData,
+	BotState,
 } from './types';
 
 export class PersistantStorage {
@@ -150,16 +151,12 @@ export class Bot {
 		this.data = JSON.parse(readFileSync(this.path) as any) as BotData;
 	}
 
-	getState(): boolean {
-		return this.data.enabled;
+	getState(): BotState {
+		return this.data.state ?? BotState.ON;
 	}
 
-	toggle(state?: boolean) {
-		if (state !== undefined) {
-			this.data.enabled = state;
-		} else {
-			this.data.enabled = !this.data.enabled;
-		}
+	setState(state: BotState) {
+		this.data.state = state;
 		this.set(this.data);
 	}
 
