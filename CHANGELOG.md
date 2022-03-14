@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.33.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.32.4...v3.33.0) (2022-03-14)
+
+
+### Features
+
+* use buttons to votekick ([d843ca4](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/d843ca4354ae205edc8383937b5e4d230abacf3b))
+
+
+### Bug Fixes
+
+* improved master control ([ffe08e3](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/ffe08e3291d3f3e30ca57755b51e92e4b7411a0f))
+
 ### [3.32.4](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.32.3...v3.32.4) (2022-03-13)
 
 ### [3.32.3](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.32.2...v3.32.3) (2022-03-13)
