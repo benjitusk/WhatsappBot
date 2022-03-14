@@ -1,5 +1,5 @@
 import prettyMilliseconds from 'pretty-ms';
-import { Client, GroupChat, Message } from 'whatsapp-web.js';
+import { Buttons, Client, GroupChat, Message } from 'whatsapp-web.js';
 import { Command } from '../../types';
 import { Users } from '../../utils';
 
@@ -56,16 +56,16 @@ const command: Command = {
 			message.author!
 		)!;
 		Users.shared.voteKickVote(message.author!, voteKickID, client);
-		message.reply(
+
+		let button = new Buttons(
 			`@${userContact.number}'s fate is being decided... If ${
 				Users.VOTEKICKCOUNT - 1
-			} replies with "!🥾" are received within 7 minutes, the user will be kicked.` +
-				`\n\n*Votes that are not direct replies to this message will be ignored*\n\nVoteKickID: ${voteKickID}`,
-			undefined,
-			{
-				mentions: [userContact],
-			}
+			} replies with "!🥾" are received within 7 minutes, the user will be kicked.`,
+			[{ id: voteKickID, body: '!🥾' }],
+			'VoteKick',
+			'*Votes that are not sent via THIS BUTTON will be ignored!*'
 		);
+		message.reply(button, undefined, { mentions: [userContact] });
 	},
 };
 
