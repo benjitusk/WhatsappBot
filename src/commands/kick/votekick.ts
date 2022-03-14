@@ -10,7 +10,7 @@ const command: Command = {
 	enabled: true,
 	admin: false,
 	aliases: [],
-	cooldown: 60 * 2, // 2 minutes
+	cooldown: 60 * 60 * 2, // 2 hours
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		// Check if a user was @mentioned
 		const mentionedUser = await message.getMentions();
@@ -57,15 +57,17 @@ const command: Command = {
 		)!;
 		Users.shared.voteKickVote(message.author!, voteKickID, client);
 
-		let button = new Buttons(
-			`@${userContact.number}'s fate is being decided... If ${
+		let vcButton = new Buttons(
+			`${
+				userContact.name || userContact.pushname || userContact.number
+			}'s fate is being decided... If ${
 				Users.VOTEKICKCOUNT - 1
 			} replies with "!🥾" are received within 7 minutes, the user will be kicked.`,
 			[{ id: voteKickID, body: '!🥾' }],
-			'VoteKick',
-			'*Votes that are not sent via THIS BUTTON will be ignored!*'
+			`Vote Kick`,
+			`Votes that are not sent via this button will be ignored.`
 		);
-		message.reply(button, undefined, { mentions: [userContact] });
+		message.reply(vcButton);
 	},
 };
 

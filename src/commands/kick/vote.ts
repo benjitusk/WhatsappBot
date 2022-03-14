@@ -1,4 +1,4 @@
-import { Client, Message } from 'whatsapp-web.js';
+import { ChatTypes, Client, GroupChat, Message } from 'whatsapp-web.js';
 import { Command } from '../../types';
 import { Users } from '../../utils';
 
@@ -34,17 +34,19 @@ const command: Command = {
 		// Reply with the number of votes
 		// update votekick object b/c it _may_ have changed
 		let updatedVoteKick = Users.shared.getVoteKickByID(id);
-		if (!updatedVoteKick) {
+		const chat = (await message.getChat()) as GroupChat;
+		if (updatedVoteKick) {
+			console.log('Replying to message');
+			chat.sendMessage(`${updatedVoteKick?.votes.length}/${Users.VOTEKICKCOUNT} votes received.`);
+		} else {
 			const contact = await client.getContactById(voteKick.userID)!;
-			message.reply(
+			console.log('Replying to message (votekick completed)');
+			chat.sendMessage(
 				`@${contact.number} has been kicked from this chat for 1 hour. This vote is no longer active.`,
-				undefined,
 				{
 					mentions: [contact],
 				}
 			);
-		} else {
-			message.reply(`${updatedVoteKick?.votes.length}/${Users.VOTEKICKCOUNT} votes received.`);
 		}
 	},
 };

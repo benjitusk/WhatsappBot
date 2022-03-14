@@ -149,6 +149,9 @@ export class Bot {
 			throw 'Bot Data is missing.';
 		}
 		this.data = JSON.parse(readFileSync(this.path) as any) as BotData;
+		if (this.getState() == BotState.OFF) {
+			this.setState(BotState.ON);
+		}
 	}
 
 	getState(): BotState {

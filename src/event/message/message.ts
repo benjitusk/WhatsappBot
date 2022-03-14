@@ -73,7 +73,7 @@ module.exports = {
 				case BotState.OFF:
 					return;
 				case BotState.ADMIN_ONLY:
-					if (!Contacts.admins.includes(contact.id._serialized)) return;
+					if (!command.admin) return;
 					break;
 				case BotState.ON:
 					break;
