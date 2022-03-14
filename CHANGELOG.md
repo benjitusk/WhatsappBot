@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.33.2](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.33.1...v3.33.2) (2022-03-14)
+
+
+### Bug Fixes
+
+* added cooldown to votekick ([7b14586](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/7b145867a423535c1832e455b2d67fb231911c63))
+
 ### [3.33.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.33.0...v3.33.1) (2022-03-14)
 
 ## [3.33.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.32.4...v3.33.0) (2022-03-14)
