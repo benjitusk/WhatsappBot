@@ -10,7 +10,7 @@ const command: Command = {
 	enabled: true,
 	admin: false,
 	aliases: [],
-	cooldown: 60 * 60 * 2, // 2 hours
+	cooldown: 60 * 60 * 2 * 24, // 2 days
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		// Check if a user was @mentioned
 		const mentionedUser = await message.getMentions();
