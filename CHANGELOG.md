@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.34.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.33.3...v3.34.0) (2022-03-17)
+
+
+### Features
+
+* daysToPurim now has a post T-0 msg ([b1e2d6f](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/b1e2d6f295ea77b3ecd1ca07b652fefed47a2c3e))
+
+
+### Bug Fixes
+
+* changed votekick to a longer cooldown ([0d75fd8](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/0d75fd813937cacfb14f14f91c632564b769e3ab))
+
 ### [3.33.3](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.33.2...v3.33.3) (2022-03-14)
 
 
