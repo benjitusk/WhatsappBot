@@ -1,5 +1,5 @@
 import { Client, GroupChat } from 'whatsapp-web.js';
-import { Task, TaskActions } from '../types';
+import { Ban, Task, TaskActions } from '../types';
 import { PersistantStorage, Users } from '../utils';
 
 interface ChatWithDueDate {
@@ -25,17 +25,31 @@ const task: Task = {
 	silent: true,
 	execute: async function (client: Client): Promise<void> {
 		const now = new Date().getTime();
+		let bansByChat = {} as { [chatID: string]: Ban[] };
 
 		for (let ban of Users.shared.getAllBans()) {
 			if (ban.banExpires <= 0) continue;
 			if (ban.banExpires <= now) {
-				try {
-					let chat = (await client.getChatById(ban.chatID)) as GroupChat;
-					if (chat.isGroup) chat.addParticipants([ban.userID]);
-					Users.shared.unsetBanByID(ban.banID);
-				} catch (e) {
-					console.error(e);
+				if (bansByChat[ban.chatID] === undefined) bansByChat[ban.chatID] = [] as Ban[];
+				bansByChat[ban.chatID].push(ban);
+				let chat = (await client.getChatById(ban.chatID)) as GroupChat;
+				if (chat.isGroup) chat.addParticipants([ban.userID]);
+			}
+		}
+
+		for (let chatID in bansByChat) {
+			let userIDsToReAdd = [] as string[];
+			let banIDsToUnset = [] as string[];
+			try {
+				for (let ban of bansByChat[chatID]) {
+					userIDsToReAdd.push(ban.userID);
+					banIDsToUnset.push(ban.banID);
 				}
+				let chat = (await client.getChatById(chatID)) as GroupChat;
+				if (chat.isGroup) await chat.addParticipants(userIDsToReAdd);
+				for (let banID of banIDsToUnset) Users.shared.unsetBanByID(banID);
+			} catch (e) {
+				console.error(e);
 			}
 		}
 	},
