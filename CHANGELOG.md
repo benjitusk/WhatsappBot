@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.35.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.34.0...v3.35.0) (2022-04-05)
+
+
+### Features
+
+* added nuke command ([3c08ca5](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/3c08ca535be54bbf3999e038d9f8c92f507f55ae))
+* migrated mishna yomi chat ([b2cb7b4](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/b2cb7b491e7c63d870a49832c887cbe1b5a9f43f))
+
+
+### Bug Fixes
+
+* safer handling of unbanning ([a026c98](https://whatsfordinnerbinny.com/var/git/WhatsappBot/commit/a026c98043111b57d7a50f01a4f4d494eaa478f3))
+
 ## [3.34.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.33.3...v3.34.0) (2022-03-17)
 
 
