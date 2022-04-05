@@ -5,11 +5,11 @@ import { MishnaIndex, MishnaYomiData, Task } from '../types';
 
 const task: Task = {
 	name: 'Mishna Yomi',
-	// 8:30am every day
+	// 7:00am EST every day
 	enabled: true,
 	seconds: '0',
-	minutes: '30',
-	hours: '8',
+	minutes: '0',
+	hours: '14', // Offset because of timezone (IST -> EST)
 	dayMonth: '*',
 	month: '*',
 	dayWeek: '*',
@@ -43,12 +43,13 @@ const task: Task = {
 		if ((await client.getState()) != WAState.CONNECTED) return;
 
 		// get the chat object
-		let chat = await client.getChatById(Contacts.MISHNA_YOMI_CHAT_ID);
+		let chat = await client.getChatById(Contacts.SOTC_MISHNA_YOMI_CHAT_ID);
 
 		// Send both mishnayot
-		for (const [i, mishnaYomi] of mishnayot.entries()) {
+		let shouldSendLinkPreview = true;
+		for (let mishnaYomi of mishnayot) {
 			let text = `*This Mishna Yomi message is powered by Sefaria.org*\n\n_${mishnaYomi.hebrewName}_\n${mishnaYomi.hebrew}\n\n_${mishnaYomi.englishName}_\n${mishnaYomi.english}`;
-			await chat.sendMessage(text, { linkPreview: i == 0 });
+			await chat.sendMessage(text, { linkPreview: shouldSendLinkPreview });
 		}
 		console.log('[Mishna Yomi] Sent Mishna Yomi successfully');
 	},
