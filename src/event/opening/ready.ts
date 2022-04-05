@@ -5,5 +5,6 @@ module.exports = {
 	once: false,
 	async execute(client: Client) {
 		console.log('[Client] Ready');
+		client.setStatus(`Last updated ${new Date().toLocaleString()}`);
 	},
 };
