@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.36.2](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.36.1...v3.36.2) (2022-11-06)
+
+
+### Bug Fixes
+
+* disabled irrelevant commands ([3faee4f](https://benjitusk.ddns.net/var/git/whatsappbot/commit/3faee4f273612ee4afd8664f9855937733c4c91f))
+
 ### [3.36.1](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.36.0...v3.36.1) (2022-06-01)
 
 ## [3.36.0](https://whatsfordinnerbinny.com/var/git/WhatsappBot/compare/v3.35.1...v3.36.0) (2022-04-05)
