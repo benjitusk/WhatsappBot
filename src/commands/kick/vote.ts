@@ -6,7 +6,7 @@ const command: Command = {
 	name: '🥾',
 	helpText: 'Reply to a votekick bot message to vote.',
 	syntax: '!🥾',
-	enabled: true,
+	enabled: false,
 	admin: false,
 	aliases: ['boot'],
 	cooldown: 0,

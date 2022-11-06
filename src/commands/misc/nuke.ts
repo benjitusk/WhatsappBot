@@ -6,7 +6,7 @@ const command: Command = {
 	name: 'nuke',
 	helpText: 'Remove every non-admin member from the group',
 	syntax: 'nuke',
-	enabled: true,
+	enabled: false,
 	admin: true,
 	aliases: [],
 	cooldown: 0,

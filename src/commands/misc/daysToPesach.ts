@@ -7,26 +7,21 @@ const command: Command = {
 	name: 'daystopesach',
 	helpText: 'Get the time remaining until Pesach',
 	syntax: 'dtpesach',
-	enabled: true,
+	enabled: false,
 	aliases: ['daystopesach', 'dtpesach', 'dtpassover'],
 	admin: false,
 	cooldown: 0,
 	execute(message: Message): void {
 		const persistantStorage = PersistantStorage.shared;
-		const timeToPesach: number =
-			persistantStorage.getCountdowns().pesach - Date.now();
+		const timeToPesach: number = persistantStorage.getCountdowns().pesach - Date.now();
 		const prettyTimeToPurim: string = prettyMilliseconds(timeToPesach, {
 			secondsDecimalDigits: 0,
 			verbose: true,
 		});
 		if (timeToPesach > 0)
-			message.reply(
-				`*${prettyTimeToPurim} until Pesach!*\n🍷🍷🍷🍷 Chag Sameach!`
-			);
+			message.reply(`*${prettyTimeToPurim} until Pesach!*\n🍷🍷🍷🍷 Chag Sameach!`);
 		else if (timeToPesach <= 0 && timeToPesach > -86400000)
-			message.reply(
-				`It's Pesach!\n(There's no empty cup emojis...)⬇️ Chag Sameach!`
-			);
+			message.reply(`It's Pesach!\n(There's no empty cup emojis...)⬇️ Chag Sameach!`);
 		// else message.reply(`${timeToPurim + 355} days until Purim!\n🥂 Lchaim!`);
 	},
 };

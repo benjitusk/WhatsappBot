@@ -7,7 +7,7 @@ const command: Command = {
 	name: 'votekick',
 	helpText: 'Initiate a votekick to remove the mentioned user',
 	syntax: '!votekick @contact',
-	enabled: true,
+	enabled: false,
 	admin: false,
 	aliases: [],
 	cooldown: 60 * 60 * 2 * 24, // 2 days

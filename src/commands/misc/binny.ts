@@ -5,7 +5,7 @@ const command: Command = {
 	name: 'binny',
 	helpText: 'Operation B.I.N.D.O.G.',
 	syntax: 'binny',
-	enabled: true,
+	enabled: false,
 	admin: false,
 	aliases: ['bindog', 'bunny'],
 	cooldown: 20,

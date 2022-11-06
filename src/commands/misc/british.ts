@@ -6,15 +6,11 @@ const command: Command = {
 	name: 'british',
 	helpText: "Say it with Bri'ish accent",
 	syntax: 'british <text>',
-	enabled: false,
+	enabled: true,
 	admin: false,
 	aliases: ["bri'ish"],
 	cooldown: 120,
-	execute: async function (
-		message: Message,
-		client: Client,
-		args: string[]
-	): Promise<void> {
+	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		const fs = require('fs');
 		const util = require('util');
 		// Creates a client

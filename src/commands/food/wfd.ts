@@ -7,7 +7,7 @@ const command: Command = {
 	helpText: 'Retreive the next dinner from the WFD Database',
 	syntax: 'wfd',
 	aliases: ['dinner'],
-	enabled: true,
+	enabled: false,
 	cooldown: 60,
 	admin: false,
 	execute: function (message: Message): void {

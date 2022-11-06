@@ -62,7 +62,7 @@ const command: Command = {
 				const prettyTime = prettyMilliseconds(time.getTime() - Date.now(), { compact: true });
 				reply += `${prettyTime} - ${time.toLocaleTimeString([], { timeStyle: 'short' })}\n`;
 			}
-			reply += `The sent location represents the approximate location of the nearest ${busNumber} bus.`;
+			// reply += `The sent location represents the approximate location of the nearest ${busNumber} bus.`;
 		}
 		message.reply(reply);
 	},

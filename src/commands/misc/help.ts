@@ -16,17 +16,16 @@ const command: Command = {
 		// For each command, format the help text
 		// But only include aliases if there are any
 		const responseText = client.commands.map((command: Command) => {
+			if (!command.enabled) return null;
 			let commandText =
-				`*!${command.name}* - ${command.helpText}` +
-				`\n\tSyntax: \`\`\`${command.syntax}\`\`\``;
+				`*!${command.name}* - ${command.helpText}` + `\n\tSyntax: \`\`\`${command.syntax}\`\`\``;
 
-			if (command.aliases.length > 0)
-				commandText += `\n\tAliases: [${command.aliases.join(', ')}]`;
+			if (command.aliases.length > 0) commandText += `\n\tAliases: [${command.aliases.join(', ')}]`;
 			if (command.admin) commandText += `\n\t_Reserved command_`;
 			return commandText;
-		});
+		}) as (string | null)[];
 		// Send the help text
-		message.reply(text + responseText.join('\n\n'), undefined, {
+		message.reply(text + responseText.filter(Boolean).join('\n\n'), undefined, {
 			linkPreview: false,
 		});
 	},
