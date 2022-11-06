@@ -5,13 +5,9 @@ import { Collection } from '@discordjs/collection';
 // Log to the console that we are starting execution
 console.log('\n=== [START] ===');
 
-const sessionPath = '../sessions/bot.json';
 const client = new Client({
+	puppeteer: { headless: false },
 	authStrategy: new LocalAuth({ clientId: 'whatsappBot' }),
-	// puppeteer: {
-	// 	headless: true,
-	// },
-	// session: existsSync(sessionPath) ? require(sessionPath) : undefined,
 });
 
 client.commands = new Collection();

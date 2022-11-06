@@ -16,3 +16,4 @@ WWebJS/
 media/
 dist/
 persistant/
+.wwebjs_auth/
