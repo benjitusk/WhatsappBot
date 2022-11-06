@@ -1,4 +1,5 @@
 import { Client, Message } from 'whatsapp-web.js';
+import { Contacts } from '../../removedInfo';
 import { Command } from '../../types';
 
 const command: Command = {
@@ -9,7 +10,8 @@ const command: Command = {
 	admin: false,
 	aliases: [],
 	cooldown: 60 * 60 * 1, // 1 hour
-	execute: function (message: Message, client: Client, args: string[]): void {
+	execute: async (message: Message, client: Client, args: string[]): Promise<void> => {
+		const sender = await message.getContact();
 		let text = 'These are the commands currently supported:\n';
 		text += "_Here's how to interpret the syntax:_\n";
 		text += '```<required> [optional] {reqired | choices}```\n\n\n';
@@ -17,6 +19,7 @@ const command: Command = {
 		// But only include aliases if there are any
 		const responseText = client.commands.map((command: Command) => {
 			if (!command.enabled) return null;
+			if (command.admin && !Contacts.admins.includes(sender.id._serialized)) return null;
 			let commandText =
 				`*!${command.name}* - ${command.helpText}` + `\n\tSyntax: \`\`\`${command.syntax}\`\`\``;
 
