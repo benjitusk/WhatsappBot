@@ -6,7 +6,7 @@ const sessionPath = '../sessions/bot.json';
 const client = new Client({
 	authStrategy: new LocalAuth({ clientId: 'whatsappBot' }),
 	puppeteer: {
-		headless: false,
+		headless: true,
 	},
 });
 client.commands = new Collection();

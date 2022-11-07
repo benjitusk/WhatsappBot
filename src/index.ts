@@ -6,7 +6,7 @@ import { Collection } from '@discordjs/collection';
 console.log('\n=== [START] ===');
 
 const client = new Client({
-	puppeteer: { headless: false },
+	puppeteer: { headless: true },
 	authStrategy: new LocalAuth({ clientId: 'whatsappBot' }),
 });
 
