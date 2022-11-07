@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.37.3](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.37.2...v3.37.3) (2022-11-07)
+
 ### [3.37.2](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.37.1...v3.37.2) (2022-11-07)
 
 
