@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.37.2](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.37.1...v3.37.2) (2022-11-07)
+
+
+### Bug Fixes
+
+* Do not launch browser window ([cdf9aca](https://benjitusk.ddns.net/var/git/whatsappbot/commit/cdf9aca5f12a96c7f6d5a27cf92f1817ef1bb157))
+
 ### [3.37.1](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.37.0...v3.37.1) (2022-11-07)
 
 ## [3.37.0](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.36.2...v3.37.0) (2022-11-06)
