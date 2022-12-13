@@ -7,16 +7,17 @@ console.log('\n=== [START] ===');
 
 const client = new Client({
 	puppeteer: { headless: true },
-	authStrategy: new LocalAuth({ clientId: 'whatsappBot' }),
+	authStrategy: new LocalAuth({ clientId: 'bot' }),
 });
 
+client.autoResponses = new Collection();
 client.commands = new Collection();
 client.cooldowns = new Collection();
 client.filters = new Collection();
 
 client.initialize();
 
-['events', 'schedules', 'commands', 'filters'].forEach((handler) => {
+['triggers', 'events'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client);
 });
 

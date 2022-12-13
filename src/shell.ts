@@ -4,9 +4,9 @@ import { Collection } from '@discordjs/collection';
 import repl from 'repl';
 const sessionPath = '../sessions/bot.json';
 const client = new Client({
-	authStrategy: new LocalAuth({ clientId: 'whatsappBot' }),
+	authStrategy: new LocalAuth({ clientId: 'bot' }),
 	puppeteer: {
-		headless: true,
+		headless: false,
 	},
 });
 client.commands = new Collection();
@@ -15,7 +15,7 @@ client.filters = new Collection();
 
 client.initialize();
 
-['events', 'schedules', 'commands', 'filters'].forEach((handler) => {
+['events'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client);
 });
 
