@@ -1,6 +1,6 @@
 const prefix = '!';
 import WAWebJS, { GroupChat } from 'whatsapp-web.js';
-import { BotState, Command, Filter, TaskActions } from '../../types';
+import { AutoResponse, BotState, Command, Filter, TaskActions } from '../../types';
 import { Contacts } from '../../removedInfo';
 import prettyMilliseconds from 'pretty-ms';
 import { Bot, Users } from '../../utils';
@@ -23,7 +23,8 @@ module.exports = {
 		 *
 		 * 1. Check message against content filters.
 		 * 2. Handle commands.
-		 * 3. Handle poll responses.
+		 * 3. Handle auto responses.
+		 * 4. Handle poll responses.
 		 *
 		 */
 
@@ -125,6 +126,14 @@ module.exports = {
 				}command: ${command.name}`
 			);
 		}
+
+		// 3. Handle auto responses.
+		client.autoResponses.forEach(async (autoResponse: AutoResponse) => {
+			if (await autoResponse.executeCondition(message)) {
+				autoResponse.execute(message, client);
+				console.log(`[AutoResponse] ${autoResponse.name} was executed.`);
+			}
+		});
 
 		// 3. Handle poll responses.
 		// if (message.type === 'buttons_response') {

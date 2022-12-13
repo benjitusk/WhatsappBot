@@ -85,6 +85,15 @@ export interface Filter {
 	__esModule?: boolean;
 }
 
+export interface AutoResponse {
+	name: string;
+	enabled: boolean;
+	executeCondition: (message: Message) => Promise<boolean>;
+	execute: (message: Message, client: Client) => Promise<void>;
+	/** A variable that is true when there is no module.exports */
+	__esModule?: boolean;
+}
+
 export interface Task {
 	name: string;
 	enabled: boolean;
