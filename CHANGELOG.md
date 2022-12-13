@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.38.0](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.37.3...v3.38.0) (2022-12-13)
+
+
+### Features
+
+* add framework for autoresponse ([7c5880d](https://benjitusk.ddns.net/var/git/whatsappbot/commit/7c5880df03d090f222e8434403eb485e2a3d84aa))
+* Added autoresponse ([d07bea6](https://benjitusk.ddns.net/var/git/whatsappbot/commit/d07bea698508035a808dd67413d650147ffd3e04))
+
+
+### Bug Fixes
+
+* enable autoresponse feature ([b5cc0d1](https://benjitusk.ddns.net/var/git/whatsappbot/commit/b5cc0d152ff5a86b2b5fa44e3afe556ea7943af7))
+
 ### [3.37.3](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.37.2...v3.37.3) (2022-11-07)
 
 ### [3.37.2](https://benjitusk.ddns.net/var/git/whatsappbot/compare/v3.37.1...v3.37.2) (2022-11-07)
