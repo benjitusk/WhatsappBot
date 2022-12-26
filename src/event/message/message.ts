@@ -57,18 +57,29 @@ module.exports = {
 			const commandName = args[0].toLowerCase();
 
 			// Get the command if it exists.
-			let commandExists =
-				client.commands.get(commandName) ||
-				client.commands.find((cmd: Command) => cmd.aliases && cmd.aliases.includes(commandName));
+			let commandExists = client.commands.find(
+				(cmd: Command) => cmd.aliases && cmd.aliases.includes(commandName)
+			);
 
 			// If it doesn't exist, return.
 			if (!commandExists) return;
 
+			// Check if the user has permission to use the command.
+			let contact = await message.getContact();
+
+			// Make sure the command is enabled.
+			if (!commandExists.enabled) {
+				console.log(
+					`[Command] ${
+						contact.name || contact.pushname || contact.number
+					} tried to use command ${commandName} but it is disabled.`
+				);
+				return;
+			}
+
 			// If it does exist, check if the user has permission to use it.
 			const command = commandExists as Command;
 
-			// Check if the user has permission to use the command.
-			let contact = await message.getContact();
 			let shouldExecute = true;
 			switch (Bot.shared.getState()) {
 				case BotState.OFF:

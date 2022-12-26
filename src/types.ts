@@ -26,6 +26,9 @@ export enum BotState {
 
 export interface BotData {
 	state: BotState;
+	featureStates: {
+		[name: string]: boolean;
+	};
 }
 
 export interface FoodData {
@@ -105,6 +108,8 @@ export interface Task {
 	dayWeek: string;
 	silent: boolean;
 	execute: (client: Client) => void;
+	/** A variable that is true when there is no module.exports */
+	__esModule?: boolean;
 }
 
 export interface Command {

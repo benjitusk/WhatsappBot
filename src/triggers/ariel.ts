@@ -3,7 +3,7 @@ import { Contacts } from '../removedInfo';
 import { AutoResponse } from '../types';
 
 const AutoReply: AutoResponse = {
-	name: 'Ariel PregMan',
+	name: 'ArielPregMan',
 	enabled: true,
 	execute: async function (message: Message, client: Client): Promise<void> {
 		let pregnantMen = ['🫃', '🫃🏻', '🫃🏼', '🫃🏽', '🫃🏾', '🫃🏿'];

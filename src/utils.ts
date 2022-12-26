@@ -3,6 +3,7 @@ import axios from 'axios';
 import crypto from 'crypto';
 import { readFileSync, writeFileSync } from 'fs';
 import { Client, Contact, GroupChat, MessageMedia } from 'whatsapp-web.js';
+import { Collection } from '@discordjs/collection';
 import {
 	Meal,
 	PersistantData,
@@ -15,6 +16,7 @@ import {
 	Ban,
 	BotData,
 	BotState,
+	Command,
 } from './types';
 
 export class PersistantStorage {
@@ -166,6 +168,51 @@ export class Bot {
 	set(data: any) {
 		this.data = data;
 		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
+	}
+
+	getFeatureState(featureName: string): boolean {
+		if (this.data.featureStates[featureName] === undefined) return false;
+		return this.data.featureStates[featureName];
+	}
+
+	setFeatureState(featureName: string, state: boolean, client: Client) {
+		// Set the save data
+		this.data.featureStates[featureName] = state;
+		this.set(this.data);
+
+		// Set the live data
+		// We need to do this because the bot is already running
+
+		// Step one: find out if the feature is a command, filter, or autoresponse
+		// We need to check the command name and aliases
+		let command: Command | undefined = client.commands.find(
+			(cmd: Command) => cmd.aliases && cmd.aliases.includes(featureName)
+		);
+		if (command != undefined) {
+			command.enabled = state;
+			client.commands.set(featureName, command);
+			console.log(`Set command ${featureName} to ${state}`);
+		} else if (client.filters.has(featureName)) {
+			let filter = client.filters.get(featureName);
+			if (filter) {
+				filter.enabled = state;
+				client.filters.set(featureName, filter);
+				console.log(`Set filter ${featureName} to ${state}`);
+			} else {
+				console.log(`Could not find filter ${featureName}`);
+			}
+		} else if (client.autoResponses.has(featureName)) {
+			let autoResponse = client.autoResponses.get(featureName);
+			if (autoResponse) {
+				autoResponse.enabled = state;
+				client.autoResponses.set(featureName, autoResponse);
+				console.log(`Set autoResponse ${featureName} to ${state}`);
+			} else {
+				console.log(`Could not find autoResponse ${featureName}`);
+			}
+		} else {
+			console.log(`Could not find feature ${featureName}`);
+		}
 	}
 
 	static shared = new Bot();
