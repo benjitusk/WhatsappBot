@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.39.0](///compare/v3.38.3...v3.39.0) (2022-12-26)
+
+
+### Features
+
+* dynamic feature toggling f74ee6a
+* self constructing bot.json c9d224e
+* strict handler validation 370db8e
+
+
+### Bug Fixes
+
+* filled in missing aliases 2cf2f9c
+
 ### [3.38.3](///compare/v3.38.2...v3.38.3) (2022-12-14)
 
 ### [3.38.2](///compare/v3.38.1...v3.38.2) (2022-12-14)
