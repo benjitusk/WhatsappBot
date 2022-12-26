@@ -13,7 +13,10 @@ module.exports = (client: Client): void => {
 		if (task.__esModule) throw new Error(`schedule/${file} is missing module.exports`);
 		if (task.name.split(' ').length > 1)
 			throw new Error(`schedule/${file} has a space in the name`);
-		task.enabled = Bot.shared.getFeatureState(task.name);
+		let savedState = Bot.shared.getFeatureState(task.name);
+		if (savedState === undefined) {
+			Bot.shared.setFeatureState(task.name, task.enabled, client);
+		} else task.enabled = savedState;
 		if (task.enabled) {
 			console.log(`[Schedule] enabled ${task.name}`);
 			// Create a new cron job

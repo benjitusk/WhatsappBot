@@ -148,7 +148,17 @@ export class Bot {
 		this.path = '../persistant/bot.json';
 		// Create the file if it doesn't exist
 		if (!fs.existsSync(this.path)) {
-			throw 'Bot Data is missing.';
+			writeFileSync(
+				this.path,
+				JSON.stringify(
+					{
+						state: BotState.ON,
+						featureStates: {},
+					},
+					null,
+					2
+				)
+			);
 		}
 		this.data = JSON.parse(readFileSync(this.path) as any) as BotData;
 		if (this.getState() == BotState.OFF) {
@@ -157,6 +167,7 @@ export class Bot {
 	}
 
 	getState(): BotState {
+		if (this.data.featureStates == undefined) this.data.featureStates = {};
 		return this.data.state ?? BotState.ON;
 	}
 
@@ -170,8 +181,7 @@ export class Bot {
 		writeFileSync(this.path, JSON.stringify(this.data, null, 2));
 	}
 
-	getFeatureState(featureName: string): boolean {
-		if (this.data.featureStates[featureName] === undefined) return false;
+	getFeatureState(featureName: string): boolean | undefined {
 		return this.data.featureStates[featureName];
 	}
 

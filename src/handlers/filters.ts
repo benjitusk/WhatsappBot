@@ -12,9 +12,12 @@ module.exports = (client: Client): void => {
 		if (filter.__esModule) throw new Error(`filters/${file} is missing module.exports`);
 		if (filter.name.split(' ').length > 1)
 			throw new Error(`filters/${file} has a space in the name`);
-		filter.enabled = Bot.shared.getFeatureState(filter.name);
+		client.filters.set(filter.name.toLowerCase(), filter);
+		let savedState = Bot.shared.getFeatureState(filter.name);
+		if (savedState === undefined) {
+			Bot.shared.setFeatureState(filter.name, filter.enabled, client);
+		} else filter.enabled = savedState;
 		if (filter.enabled) {
-			client.filters.set(filter.name.toLowerCase(), filter);
 			console.log(`[Filter] enabled ${filter.name}`);
 		} else console.log(`[Filter] DISABLED ${filter.name}`);
 	}

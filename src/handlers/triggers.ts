@@ -13,9 +13,15 @@ module.exports = (client: Client): void => {
 		if (autoResponse.__esModule) throw new Error(`triggers/${file} is missing module.exports`);
 		if (autoResponse.name.split(' ').length > 1)
 			throw new Error(`triggers/${file} has a space in the name`);
-		autoResponse.enabled = Bot.shared.getFeatureState(autoResponse.name);
+
+		client.autoResponses.set(autoResponse.name, autoResponse);
+
+		let savedState = Bot.shared.getFeatureState(autoResponse.name);
+		if (savedState === undefined) {
+			Bot.shared.setFeatureState(autoResponse.name, autoResponse.enabled, client);
+		} else autoResponse.enabled = savedState;
+
 		if (autoResponse.enabled) {
-			client.autoResponses.set(autoResponse.name.toLowerCase(), autoResponse);
 			console.log(`[Trigger] enabled ${autoResponse.name}.`);
 		} else {
 			console.log(`[Trigger] DISABLED ${autoResponse.name}.`);

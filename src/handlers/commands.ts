@@ -16,9 +16,12 @@ module.exports = (client: Client): void => {
 				throw new Error(`commands/${folder}/${file} is missing module.exports`);
 			if (command.name.split(' ').length > 1)
 				throw new Error(`commands/${folder}/${file} has a space in the name`);
-			command.enabled = Bot.shared.getFeatureState(command.name);
+			client.commands.set(command.name, command);
+			let savedState = Bot.shared.getFeatureState(command.name);
+			if (savedState === undefined) {
+				Bot.shared.setFeatureState(command.name, command.enabled, client);
+			} else command.enabled = savedState;
 			if (command.enabled) {
-				client.commands.set(command.name.toLowerCase(), command);
 				console.log(`[Command] enabled ${command.name}.`);
 			} else {
 				console.log(`[Command] DISABLED ${command.name}.`);
