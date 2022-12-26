@@ -9,7 +9,7 @@ const command: Command = {
 	syntax: 'poll <question>',
 	enabled: true,
 	admin: true,
-	aliases: [],
+	aliases: ['poll'],
 	cooldown: 0,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		/*/ Remove the command from the args

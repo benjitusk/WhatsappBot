@@ -6,9 +6,9 @@ const command: Command = {
 	name: 'remove_tc',
 	helpText: 'This command will remove everyone who switched to TC from the group.',
 	syntax: 'remove_tc',
-	enabled: true,
+	enabled: false,
 	admin: false,
-	aliases: [],
+	aliases: ['remove_tc'],
 	cooldown: 0,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		// Get Gavi Gershov's contact

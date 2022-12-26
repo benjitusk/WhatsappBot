@@ -9,7 +9,7 @@ const command: Command = {
 	syntax: '!bus < Stop ID >',
 	enabled: true,
 	admin: false,
-	aliases: [],
+	aliases: ['stop'],
 	cooldown: 0, // 0 minutes
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		let chatID: string | undefined;

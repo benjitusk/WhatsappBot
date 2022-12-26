@@ -7,18 +7,12 @@ const command: Command = {
 	syntax: 'forwardCount',
 	enabled: true,
 	admin: false,
-	aliases: ['forwardScore'],
+	aliases: ['forwardCount', 'forwardScore'],
 	cooldown: 0,
-	execute: async function (
-		message: Message,
-		client: Client,
-		args: string[]
-	): Promise<void> {
+	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		const quotedMessage = await message.getQuotedMessage();
 		if (!quotedMessage)
-			message.reply(
-				'You can quote a message to get the number of times it was forwarded.'
-			);
+			message.reply('You can quote a message to get the number of times it was forwarded.');
 		else {
 			quotedMessage.reply(
 				`This message was forwarded ${quotedMessage.forwardingScore} ${

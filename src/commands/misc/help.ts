@@ -8,7 +8,7 @@ const command: Command = {
 	syntax: 'help',
 	enabled: true,
 	admin: false,
-	aliases: [],
+	aliases: ['help'],
 	cooldown: 60 * 60 * 1, // 1 hour
 	execute: async (message: Message, client: Client, args: string[]): Promise<void> => {
 		const sender = await message.getContact();

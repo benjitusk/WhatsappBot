@@ -9,7 +9,7 @@ const command: Command = {
 	syntax: '!bus <6 | 21 | 39>',
 	enabled: true,
 	admin: false,
-	aliases: [],
+	aliases: ['bus'],
 	cooldown: 0, // 0 minutes
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		if (args.length < 2) {

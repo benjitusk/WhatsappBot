@@ -8,13 +8,9 @@ const command: Command = {
 	syntax: 'indian <text>',
 	enabled: true,
 	admin: false,
-	aliases: [],
+	aliases: [''],
 	cooldown: 120,
-	execute: async function (
-		message: Message,
-		client: Client,
-		args: string[]
-	): Promise<void> {
+	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		// Import other required libraries
 		const fs = require('fs');
 		const util = require('util');

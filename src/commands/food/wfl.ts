@@ -6,7 +6,7 @@ const command: Command = {
 	name: 'wfl',
 	helpText: 'Retreive the next lunch from the WFL Database',
 	syntax: 'wfl',
-	aliases: ['lunch'],
+	aliases: ['wfl', 'lunch'],
 	enabled: false,
 	cooldown: 60,
 	admin: false,

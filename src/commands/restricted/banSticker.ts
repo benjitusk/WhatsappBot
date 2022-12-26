@@ -8,7 +8,7 @@ const command: Command = {
 	syntax: 'bansticker [unban]',
 	enabled: true,
 	admin: true,
-	aliases: [],
+	aliases: ['bansticker'],
 	cooldown: 0,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		const quotedMessage = await message.getQuotedMessage();

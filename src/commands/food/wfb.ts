@@ -6,7 +6,7 @@ const command: Command = {
 	name: 'wfb',
 	helpText: 'Retreive the next breakfast from the WFB Database',
 	syntax: 'wfb',
-	aliases: ['breakfast'],
+	aliases: ['wfb', 'breakfast'],
 	enabled: false,
 	cooldown: 60,
 	admin: false,

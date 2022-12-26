@@ -7,7 +7,7 @@ const command: Command = {
 	syntax: 'binny',
 	enabled: false,
 	admin: false,
-	aliases: ['bindog', 'bunny'],
+	aliases: ['binny', 'bindog', 'bunny'],
 	cooldown: 20,
 	// 🌭 🐰
 	execute: function (message: Message): void {

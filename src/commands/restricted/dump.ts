@@ -8,7 +8,7 @@ const command: Command = {
 	syntax: 'dump',
 	enabled: true,
 	admin: true,
-	aliases: [],
+	aliases: ['dump'],
 	cooldown: 0,
 	execute: function (message: Message): void {
 		const storage = PersistantStorage.shared.dump();

@@ -8,7 +8,7 @@ const command: Command = {
 	syntax: '!🥾',
 	enabled: false,
 	admin: false,
-	aliases: ['boot'],
+	aliases: ['🥾', 'boot'],
 	cooldown: 0,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		if (message.type !== 'buttons_response') {

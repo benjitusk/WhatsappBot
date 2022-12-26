@@ -7,13 +7,9 @@ const command: Command = {
 	syntax: 'device',
 	enabled: true,
 	admin: false,
-	aliases: [],
+	aliases: ['device'],
 	cooldown: 0,
-	execute: async function (
-		message: Message,
-		client: Client,
-		args: string[]
-	): Promise<void> {
+	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		const quotedMessage = await message.getQuotedMessage();
 		if (!quotedMessage)
 			message.reply(
@@ -23,9 +19,7 @@ const command: Command = {
 			);
 		else {
 			quotedMessage.reply(
-				'This message was sent using WhatsApp for ' +
-					quotedMessage.deviceType +
-					'.'
+				'This message was sent using WhatsApp for ' + quotedMessage.deviceType + '.'
 			);
 		}
 	},

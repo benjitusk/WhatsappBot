@@ -8,7 +8,7 @@ const command: Command = {
 	syntax: '!on | !off | !shutdown',
 	enabled: true,
 	admin: true,
-	aliases: ['on', 'off', 'shutdown'],
+	aliases: ['power', 'on', 'off', 'shutdown'],
 	cooldown: 0,
 	execute: function (message: Message, client: Client, args: string[]): void {
 		switch (args[0]) {

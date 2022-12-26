@@ -7,7 +7,7 @@ const command: Command = {
 	syntax: 'weisswisdom',
 	enabled: false,
 	admin: false,
-	aliases: ['amiadvice', 'amiquote'],
+	aliases: ['weisswisdom', 'amiadvice', 'amiquote'],
 	cooldown: 0,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		message.reply(

@@ -7,7 +7,7 @@ const command: Command = {
 	syntax: 'leib',
 	enabled: false,
 	admin: false,
-	aliases: [],
+	aliases: ['leib'],
 	cooldown: 0,
 	execute: function (message: Message): void {
 		// Pick a random emoji from the following: 🥳 👏 🇦🇺

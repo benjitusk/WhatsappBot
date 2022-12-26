@@ -8,13 +8,9 @@ const command: Command = {
 	syntax: 'reload {storage | commands | schedules}',
 	enabled: true,
 	admin: true,
-	aliases: ['load'],
+	aliases: ['reload'],
 	cooldown: 0,
-	execute: function (
-		message: Message,
-		client: Client,
-		args: string[] = []
-	): void {
+	execute: function (message: Message, client: Client, args: string[] = []): void {
 		let operation: string;
 		args.length > 1 ? (operation = args[1]) : (operation = 'storage');
 		switch (operation) {

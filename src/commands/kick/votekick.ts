@@ -9,7 +9,7 @@ const command: Command = {
 	syntax: '!votekick @contact',
 	enabled: false,
 	admin: false,
-	aliases: [],
+	aliases: ['votekick'],
 	cooldown: 60 * 60 * 2 * 24, // 2 days
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		// Check if a user was @mentioned

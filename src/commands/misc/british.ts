@@ -8,7 +8,7 @@ const command: Command = {
 	syntax: 'british <text>',
 	enabled: true,
 	admin: false,
-	aliases: ["bri'ish"],
+	aliases: ['british', "bri'ish"],
 	cooldown: 120,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		const fs = require('fs');

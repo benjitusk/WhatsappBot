@@ -8,7 +8,7 @@ const command: Command = {
 	helpText: 'Get the time remaining until Pesach',
 	syntax: 'dtpesach',
 	enabled: false,
-	aliases: ['daystopesach', 'dtpesach', 'dtpassover'],
+	aliases: ['dtp', 'daystopesach', 'dtpesach', 'dtpassover'],
 	admin: false,
 	cooldown: 0,
 	execute(message: Message): void {
