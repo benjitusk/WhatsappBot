@@ -8,7 +8,7 @@ const command: Command = {
 	syntax: 'nuke',
 	enabled: false,
 	admin: true,
-	aliases: [''],
+	aliases: ['nuke'],
 	cooldown: 0,
 	execute: async function (message: Message): Promise<void> {
 		// make sure it's a group chat

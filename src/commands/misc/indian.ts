@@ -8,7 +8,7 @@ const command: Command = {
 	syntax: 'indian <text>',
 	enabled: true,
 	admin: false,
-	aliases: [''],
+	aliases: ['indian'],
 	cooldown: 120,
 	execute: async function (message: Message, client: Client, args: string[]): Promise<void> {
 		// Import other required libraries
