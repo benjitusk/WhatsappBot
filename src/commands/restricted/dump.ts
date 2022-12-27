@@ -1,6 +1,6 @@
 import { Message } from 'whatsapp-web.js';
 import { Command } from '../../types';
-import { PersistantStorage } from '../../utils';
+import { Bot, PersistantStorage } from '../../utils';
 
 const command: Command = {
 	name: 'dump',
@@ -13,6 +13,7 @@ const command: Command = {
 	execute: function (message: Message): void {
 		const storage = PersistantStorage.shared.dump();
 		message.reply(JSON.stringify(storage, null, 2));
+		message.reply(JSON.stringify(Bot.shared.data, null, 2));
 	},
 };
 
