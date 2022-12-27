@@ -194,9 +194,11 @@ export class Bot {
 		// We need to do this because the bot is already running
 
 		// Step one: find out if the feature is a command, filter, or autoresponse
-		// We need to check the command name and aliases
-		let command: Command | undefined = client.commands.find(
-			(cmd: Command) => cmd.aliases && cmd.aliases.includes(featureName)
+		// We need to check the command name and aliases (case insensitive)
+		let command = client.commands.find(
+			(command: Command) =>
+				command.name.toLowerCase() == featureName.toLowerCase() ||
+				command.aliases?.map((name) => name.toLowerCase()).includes(featureName.toLowerCase())
 		);
 		if (command != undefined) {
 			command.enabled = state;
