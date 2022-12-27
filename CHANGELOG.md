@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.40.0](///compare/v3.39.1...v3.40.0) (2022-12-27)
+
+
+### Features
+
+* dump shows bot state also 7d80a45
+
+
+### Bug Fixes
+
+* Toggle is case insensitive 7e9a2b0
+
 ### [3.39.1](///compare/v3.39.0...v3.39.1) (2022-12-26)
 
 ## [3.39.0](///compare/v3.38.3...v3.39.0) (2022-12-26)
