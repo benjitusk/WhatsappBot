@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.40.2](///compare/v3.40.1...v3.40.2) (2023-01-02)
+
+
+### Bug Fixes
+
+* autoresponse respects disabled property 556a357
+
 ### [3.40.1](///compare/v3.40.0...v3.40.1) (2022-12-27)
 
 ## [3.40.0](///compare/v3.39.1...v3.40.0) (2022-12-27)
