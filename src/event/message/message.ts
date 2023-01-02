@@ -140,9 +140,13 @@ module.exports = {
 
 		// 3. Handle auto responses.
 		client.autoResponses.forEach(async (autoResponse: AutoResponse) => {
-			if (await autoResponse.executeCondition(message)) {
-				autoResponse.execute(message, client);
-				console.log(`[AutoResponse] ${autoResponse.name} was executed.`);
+			if (autoResponse.enabled) {
+				if (await autoResponse.executeCondition(message)) {
+					autoResponse.execute(message, client);
+					console.log(`[AutoResponse] ${autoResponse.name} was executed.`);
+				}
+			} else {
+				console.log(`[AutoResponse] ${autoResponse.name} is disabled.`);
 			}
 		});
 
