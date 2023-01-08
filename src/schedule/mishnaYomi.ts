@@ -4,7 +4,7 @@ import { Contacts } from '../removedInfo';
 import { MishnaIndex, MishnaYomiData, Task } from '../types';
 
 const task: Task = {
-	name: 'Mishna Yomi',
+	name: 'MishnaYomi',
 	enabled: true,
 	seconds: '0',
 	minutes: '0',
