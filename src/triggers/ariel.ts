@@ -12,10 +12,11 @@ const AutoReply: AutoResponse = {
 		message.react(pregMan);
 	},
 	executeCondition: async function (message: Message): Promise<boolean> {
-		if (message.author == Contacts.ARIEL_BLUMSTEIN) {
-			await delay(Math.random() * 4000 + 3000); // between 3k and 7k ms
-			return Promise.resolve(true);
-		} else return Promise.resolve(false);
+		return Promise.resolve(false);
+		// if (message.author == Contacts.ARIEL_BLUMSTEIN) {
+		// 	await delay(Math.random() * 4000 + 3000); // between 3k and 7k ms
+		// 	return Promise.resolve(true);
+		// } else return Promise.resolve(false);
 	},
 };
 
