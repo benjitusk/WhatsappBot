@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.41.4](///compare/v3.41.3...v3.41.4) (2023-01-08)
+
+
+### Bug Fixes
+
+* removed space in schedule name d473929
+
 ### [3.41.3](///compare/v3.41.2...v3.41.3) (2023-01-08)
 
 ### [3.41.2](///compare/v3.41.1...v3.41.2) (2023-01-08)
