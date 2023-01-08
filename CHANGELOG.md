@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.41.0](///compare/v3.40.3...v3.41.0) (2023-01-08)
+
+
+### Features
+
+* enabled mishna yomi 24ab1ca
+
+
+### Bug Fixes
+
+* disabled autoresponse f06ea70
+
 ### [3.40.3](///compare/v3.40.2...v3.40.3) (2023-01-02)
 
 ### [3.40.2](///compare/v3.40.1...v3.40.2) (2023-01-02)
