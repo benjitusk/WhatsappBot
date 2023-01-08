@@ -5,11 +5,10 @@ import { MishnaIndex, MishnaYomiData, Task } from '../types';
 
 const task: Task = {
 	name: 'Mishna Yomi',
-	// 7:00am EST every day
 	enabled: true,
 	seconds: '0',
 	minutes: '0',
-	hours: '14', // Offset because of timezone (IST -> EST)
+	hours: '15', // Offset because of timezone (3pm IST -> 8am EST)
 	dayMonth: '*',
 	month: '*',
 	dayWeek: '*',

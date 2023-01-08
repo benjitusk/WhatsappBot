@@ -17,7 +17,7 @@ client.filters = new Collection();
 
 client.initialize();
 
-['triggers', 'events', 'commands'].forEach((handler) => {
+['triggers', 'events', 'commands', 'schedule'].forEach((handler) => {
 	require(`./handlers/${handler}`)(client);
 });
 
