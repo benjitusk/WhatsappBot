@@ -7,27 +7,29 @@ jest.mock('axios');
 // const mockedAxios = jest.mocked('axios');
 
 describe('Meal schedule', () => {
-	describe.each`
-		date                               | meal              | expectedFood
-		${new Date('2022-02-19T14:53:01')} | ${Meal.BREAKFAST} | ${'eggs'}
-		${new Date('2022-02-20T09:20:02')} | ${Meal.BREAKFAST} | ${'eggs'}
-		${new Date('2022-02-20T08:20:03')} | ${Meal.BREAKFAST} | ${'eggs'}
-		${new Date('2022-02-20T14:53:04')} | ${Meal.BREAKFAST} | ${'potato burekas'}
-		${new Date('2022-02-19T14:53:05')} | ${Meal.LUNCH}     | ${'falafel & orange soup'}
-		${new Date('2022-02-20T13:20:06')} | ${Meal.LUNCH}     | ${'falafel & orange soup'}
-		${new Date('2022-02-20T14:53:07')} | ${Meal.LUNCH}     | ${'sweet potato quiche & tomato soup'}
-		${new Date('2022-02-27T14:53:08')} | ${Meal.LUNCH}     | ${'panini Monday & tomato soup'}
-		${new Date('2022-02-19T22:53:09')} | ${Meal.DINNER}    | ${'sloppy joe and spaghetti'}
-		${new Date('2022-02-26T22:53:10')} | ${Meal.DINNER}    | ${'stir fry'}
-		${new Date('2022-02-20T19:30:11')} | ${Meal.DINNER}    | ${'sloppy joe and spaghetti'}
-		${new Date('2022-02-27T19:30:12')} | ${Meal.DINNER}    | ${'stir fry'}
-		${new Date('2022-02-20T22:53:13')} | ${Meal.DINNER}    | ${'schnitzel'}
-		${new Date('2022-02-27T22:53:14')} | ${Meal.DINNER}    | ${'schnitzel'}
-	`('$meal when requested at $date', ({ date, meal, expectedFood }) => {
-		test(`${meal} returns ${expectedFood}`, () => {
-			expect(utils.getNextFoodFromDateByMeal(meal as Meal, date as Date)).toBe(expectedFood);
-		});
-	});
+    describe.each`
+        date                               | meal              | expectedFood
+        ${new Date('2022-02-19T14:53:01')} | ${Meal.BREAKFAST} | ${'eggs'}
+        ${new Date('2022-02-20T09:20:02')} | ${Meal.BREAKFAST} | ${'eggs'}
+        ${new Date('2022-02-20T08:20:03')} | ${Meal.BREAKFAST} | ${'eggs'}
+        ${new Date('2022-02-20T14:53:04')} | ${Meal.BREAKFAST} | ${'potato burekas'}
+        ${new Date('2022-02-19T14:53:05')} | ${Meal.LUNCH}     | ${'falafel & orange soup'}
+        ${new Date('2022-02-20T13:20:06')} | ${Meal.LUNCH}     | ${'falafel & orange soup'}
+        ${new Date('2022-02-20T14:53:07')} | ${Meal.LUNCH}     | ${'sweet potato quiche & tomato soup'}
+        ${new Date('2022-02-27T14:53:08')} | ${Meal.LUNCH}     | ${'panini Monday & tomato soup'}
+        ${new Date('2022-02-19T22:53:09')} | ${Meal.DINNER}    | ${'sloppy joe and spaghetti'}
+        ${new Date('2022-02-26T22:53:10')} | ${Meal.DINNER}    | ${'stir fry'}
+        ${new Date('2022-02-20T19:30:11')} | ${Meal.DINNER}    | ${'sloppy joe and spaghetti'}
+        ${new Date('2022-02-27T19:30:12')} | ${Meal.DINNER}    | ${'stir fry'}
+        ${new Date('2022-02-20T22:53:13')} | ${Meal.DINNER}    | ${'schnitzel'}
+        ${new Date('2022-02-27T22:53:14')} | ${Meal.DINNER}    | ${'schnitzel'}
+    `('$meal when requested at $date', ({ date, meal, expectedFood }) => {
+        test(`${meal} returns ${expectedFood}`, () => {
+            expect(
+                utils.getNextFoodFromDateByMeal(meal as Meal, date as Date)
+            ).toBe(expectedFood);
+        });
+    });
 });
 
 // describe('Persistant data', () => {

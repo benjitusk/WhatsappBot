@@ -2,10 +2,10 @@ import qrcode from 'qrcode-terminal';
 import { Client } from 'whatsapp-web.js';
 
 module.exports = {
-	name: 'qr',
-	once: false,
-	async execute(qr: string, client: Client) {
-		console.log('[Client] Received QR code');
-		qrcode.generate(qr, { small: true });
-	},
+    name: 'qr',
+    once: false,
+    async execute(qr: string, client: Client) {
+        console.log('[Client] Received QR code');
+        qrcode.generate(qr, { small: true });
+    },
 };

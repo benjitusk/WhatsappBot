@@ -6,8 +6,8 @@ import { Collection } from '@discordjs/collection';
 console.log('\n=== [START] ===');
 
 const client = new Client({
-	puppeteer: { headless: true },
-	authStrategy: new LocalAuth({ clientId: 'bot' }),
+    puppeteer: { headless: true },
+    authStrategy: new LocalAuth({ clientId: 'bot' }),
 });
 
 client.autoResponses = new Collection();
@@ -18,10 +18,10 @@ client.filters = new Collection();
 client.initialize();
 
 ['triggers', 'events', 'commands', 'schedule'].forEach((handler) => {
-	require(`./handlers/${handler}`)(client);
+    require(`./handlers/${handler}`)(client);
 });
 
 // Log to the console on process exit
 process.on('exit', () => {
-	console.log('=== [STOP] ===\n');
+    console.log('=== [STOP] ===\n');
 });
