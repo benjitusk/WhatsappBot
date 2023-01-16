@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.42.0](///compare/v3.41.5...v3.42.0) (2023-01-16)
+
+
+### Features
+
+* send tefillin reminder 4870faa
+
 ### [3.41.5](///compare/v3.41.4...v3.41.5) (2023-01-08)
 
 ### [3.41.4](///compare/v3.41.3...v3.41.4) (2023-01-08)
