@@ -1,8 +1,7 @@
 import axios from 'axios';
 import prettyMilliseconds from 'pretty-ms';
 import { Location, Message } from 'whatsapp-web.js';
-import { Client } from 'whatsapp-web.js';
-import { Command } from '../../types';
+import { Command, CustomClient } from '../../types';
 const command: Command = {
     name: 'bus',
     helpText: 'Get the next scheduled arrival time for the specified bus',
@@ -13,7 +12,7 @@ const command: Command = {
     cooldown: 0, // 0 minutes
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         if (args.length < 2) {

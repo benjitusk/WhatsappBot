@@ -1,10 +1,9 @@
 import Collection from '@discordjs/collection';
 import { readdirSync } from 'fs';
-import { Client } from 'whatsapp-web.js';
-import { Command } from '../types';
+import { Command, CustomClient } from '../types';
 import { Bot } from '../utils';
 
-module.exports = (client: Client): void => {
+module.exports = (client: CustomClient): void => {
     // clear existing commands
     client.commands = new Collection();
     const commandFolders = readdirSync(`./commands`);

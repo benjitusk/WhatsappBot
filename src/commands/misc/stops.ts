@@ -1,8 +1,6 @@
 import axios from 'axios';
-import prettyMilliseconds from 'pretty-ms';
-import { Location, Message } from 'whatsapp-web.js';
-import { Client } from 'whatsapp-web.js';
-import { Command } from '../../types';
+import { Message } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
 const command: Command = {
     name: 'stop',
     helpText: 'Get the bus timetable for any given stop.',
@@ -13,7 +11,7 @@ const command: Command = {
     cooldown: 0, // 0 minutes
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         let chatID: string | undefined;

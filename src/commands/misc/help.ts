@@ -1,6 +1,6 @@
-import { Client, Message } from 'whatsapp-web.js';
+import { Message } from 'whatsapp-web.js';
 import { Contacts } from '../../removedInfo';
-import { Command } from '../../types';
+import { Command, CustomClient } from '../../types';
 
 const command: Command = {
     name: 'help',
@@ -12,7 +12,7 @@ const command: Command = {
     cooldown: 60 * 60 * 1, // 1 hour
     execute: async (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> => {
         const sender = await message.getContact();

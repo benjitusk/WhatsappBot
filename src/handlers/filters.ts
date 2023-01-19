@@ -1,9 +1,8 @@
-import { Client } from 'whatsapp-web.js';
 import { readdirSync } from 'fs';
-import { Filter } from '../types';
+import { CustomClient, Filter } from '../types';
 import { Bot } from '../utils';
 
-module.exports = (client: Client): void => {
+module.exports = (client: CustomClient): void => {
     // Get all js files in the folder. These files are the filter controls.
     const filterFiles = readdirSync(`./filters`).filter((file) =>
         file.endsWith('.js')

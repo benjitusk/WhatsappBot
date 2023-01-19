@@ -1,5 +1,5 @@
-import { ChatTypes, Client, GroupChat, Message } from 'whatsapp-web.js';
-import { Command } from '../../types';
+import { GroupChat, Message } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
 import { Users } from '../../utils';
 
 const command: Command = {
@@ -12,7 +12,7 @@ const command: Command = {
     cooldown: 0,
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         if (message.type !== 'buttons_response') {

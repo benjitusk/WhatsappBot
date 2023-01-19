@@ -1,10 +1,9 @@
 import Collection from '@discordjs/collection';
 import { readdirSync } from 'fs';
-import { Client } from 'whatsapp-web.js';
-import { AutoResponse } from '../types';
+import { AutoResponse, CustomClient } from '../types';
 import { Bot } from '../utils';
 
-module.exports = (client: Client): void => {
+module.exports = (client: CustomClient): void => {
     // clear existing autoResponses
     client.autoResponses = new Collection();
     const triggerFiles = readdirSync(`./triggers`).filter((file) =>

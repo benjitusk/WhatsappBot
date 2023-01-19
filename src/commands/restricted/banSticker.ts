@@ -1,6 +1,6 @@
-import { Client, Message } from 'whatsapp-web.js';
-import { Command } from '../../types';
-import { md5, PersistantStorage } from '../../utils';
+import { Message } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
+import { PersistantStorage } from '../../utils';
 
 const command: Command = {
     name: 'bansticker',
@@ -12,7 +12,7 @@ const command: Command = {
     cooldown: 0,
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         const quotedMessage = await message.getQuotedMessage();

@@ -1,5 +1,5 @@
-import { Client, Message, MessageMedia } from 'whatsapp-web.js';
-import { Command } from '../../types';
+import { Message, MessageMedia } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
 import textToSpeech from '@google-cloud/text-to-speech';
 
 const command: Command = {
@@ -12,7 +12,7 @@ const command: Command = {
     cooldown: 120,
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         const fs = require('fs');

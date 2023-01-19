@@ -1,9 +1,8 @@
-import { Client, ClientSession } from 'whatsapp-web.js';
-import { writeFile } from 'fs';
+import { CustomClient } from '../../types';
 module.exports = {
     name: 'authenticated',
     once: false,
-    async execute(client: Client) {
+    async execute(client: CustomClient) {
         // let sessionString = JSON.stringify(session);
         // writeFile('../sessions/bot.json', sessionString, (err) => {
         // 	if (err) console.error(err);

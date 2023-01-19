@@ -1,6 +1,6 @@
-import { Client, GroupChat } from 'whatsapp-web.js';
-import { Ban, Task, TaskActions } from '../types';
-import { PersistantStorage, Users } from '../utils';
+import { GroupChat } from 'whatsapp-web.js';
+import { Ban, CustomClient, Task } from '../types';
+import { Users } from '../utils';
 
 interface ChatWithDueDate {
     [chatID: string]: {
@@ -23,7 +23,7 @@ const task: Task = {
     month: '*',
     dayWeek: '*',
     silent: true,
-    execute: async function (client: Client): Promise<void> {
+    execute: async function (client: CustomClient): Promise<void> {
         const now = new Date().getTime();
         let bansByChat = {} as { [chatID: string]: Ban[] };
 

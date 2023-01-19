@@ -1,5 +1,5 @@
-import { Client, Message } from 'whatsapp-web.js';
-import { BotState, Command } from '../../types';
+import { Message } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
 import { Bot } from '../../utils';
 
 const command: Command = {
@@ -10,7 +10,11 @@ const command: Command = {
     admin: true,
     aliases: ['toggle'],
     cooldown: 0,
-    execute: function (message: Message, client: Client, args: string[]): void {
+    execute: function (
+        message: Message,
+        client: CustomClient,
+        args: string[]
+    ): void {
         // This command can be used to enable/disable features by name
         // This is useful for testing new features without having to restart the bot
         // This command is restricted to admins only

@@ -1,6 +1,6 @@
-import { Command } from '../../types';
+import { Command, CustomClient } from '../../types';
 import textToSpeech from '@google-cloud/text-to-speech';
-import { Client, Message, MessageMedia } from 'whatsapp-web.js';
+import { Message, MessageMedia } from 'whatsapp-web.js';
 
 const command: Command = {
     name: 'indian',
@@ -12,7 +12,7 @@ const command: Command = {
     cooldown: 120,
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         // Import other required libraries

@@ -1,7 +1,7 @@
-import { Client, WAState } from 'whatsapp-web.js';
+import { WAState } from 'whatsapp-web.js';
 import { MishnaYomi } from '../utils';
 import { Contacts } from '../removedInfo';
-import { MishnaIndex, MishnaYomiData, Task } from '../types';
+import { CustomClient, MishnaIndex, MishnaYomiData, Task } from '../types';
 
 const task: Task = {
     name: 'MishnaYomi',
@@ -13,7 +13,7 @@ const task: Task = {
     month: '*',
     dayWeek: '*',
     silent: false,
-    execute: async function (client: Client) {
+    execute: async function (client: CustomClient) {
         // let persistance = new PersistantStorage();
         let mishnayot: MishnaYomiData[] = [];
 

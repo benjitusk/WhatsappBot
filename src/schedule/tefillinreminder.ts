@@ -1,7 +1,6 @@
-import { Client, WAState } from 'whatsapp-web.js';
 import { MishnaYomi } from '../utils';
 import { Contacts } from '../removedInfo';
-import { MishnaIndex, MishnaYomiData, Task } from '../types';
+import { CustomClient, Task } from '../types';
 
 const task: Task = {
     name: 'TefillinReminder',
@@ -13,7 +12,7 @@ const task: Task = {
     month: '*',
     dayWeek: '0-6',
     silent: false,
-    execute: async function (client: Client) {
+    execute: async function (client: CustomClient) {
         const goldman = await client.getContactById(Contacts.MICHAEL_GOLDMAN);
         const chat = await goldman.getChat();
         await chat.sendMessage(

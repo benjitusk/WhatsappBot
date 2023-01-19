@@ -1,5 +1,5 @@
-import { Client, Message } from 'whatsapp-web.js';
-import { BotState, Command } from '../../types';
+import { Message } from 'whatsapp-web.js';
+import { BotState, Command, CustomClient } from '../../types';
 import { Bot } from '../../utils';
 
 const command: Command = {
@@ -10,7 +10,11 @@ const command: Command = {
     admin: true,
     aliases: ['power', 'on', 'off', 'shutdown'],
     cooldown: 0,
-    execute: function (message: Message, client: Client, args: string[]): void {
+    execute: function (
+        message: Message,
+        client: CustomClient,
+        args: string[]
+    ): void {
         switch (args[0]) {
             case 'on':
                 Bot.shared.setState(BotState.ON);

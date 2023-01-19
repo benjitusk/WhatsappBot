@@ -1,9 +1,10 @@
 const prefix = '!';
-import WAWebJS, { GroupChat } from 'whatsapp-web.js';
+import { GroupChat, Message } from 'whatsapp-web.js';
 import {
     AutoResponse,
     BotState,
     Command,
+    CustomClient,
     Filter,
     TaskActions,
 } from '../../types';
@@ -15,15 +16,12 @@ module.exports = {
     once: false,
     /**
      *
-     * @param {WAWebJS.Message} message The message object triggering the event.
-     * @param {WAWebJS.Client} client   The client object that received the message.
+     * @param {Message} message The message object triggering the event.
+     * @param {CustomClient} client   The client object that received the message.
      *
      * @returns { Promise<void> }
      */
-    async execute(
-        message: WAWebJS.Message,
-        client: WAWebJS.Client
-    ): Promise<void> {
+    async execute(message: Message, client: CustomClient): Promise<void> {
         /**
          * Any functionality that needs to be executed
          * when a message is received can be done here.

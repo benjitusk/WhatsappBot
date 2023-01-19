@@ -1,6 +1,6 @@
 import prettyMilliseconds from 'pretty-ms';
-import { Buttons, Client, GroupChat, Message } from 'whatsapp-web.js';
-import { Command } from '../../types';
+import { Buttons, GroupChat, Message } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
 import { Users } from '../../utils';
 
 const command: Command = {
@@ -13,7 +13,7 @@ const command: Command = {
     cooldown: 60 * 60 * 2 * 24, // 2 days
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         // Check if a user was @mentioned

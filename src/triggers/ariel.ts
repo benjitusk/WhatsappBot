@@ -1,11 +1,13 @@
-import { Client, Message } from 'whatsapp-web.js';
-import { Contacts } from '../removedInfo';
-import { AutoResponse } from '../types';
+import { Message } from 'whatsapp-web.js';
+import { AutoResponse, CustomClient } from '../types';
 
 const AutoReply: AutoResponse = {
     name: 'ArielPregMan',
     enabled: true,
-    execute: async function (message: Message, client: Client): Promise<void> {
+    execute: async function (
+        message: Message,
+        client: CustomClient
+    ): Promise<void> {
         let pregnantMen = ['🫃', '🫃🏻', '🫃🏼', '🫃🏽', '🫃🏾', '🫃🏿'];
         let pregManIndex = Math.floor(Math.random() * pregnantMen.length);
         let pregMan = pregnantMen[pregManIndex];

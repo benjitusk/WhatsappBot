@@ -1,5 +1,5 @@
-import { Client, Message } from 'whatsapp-web.js';
-import { Command } from '../../types';
+import { Message } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
 import { PersistantStorage } from '../../utils';
 
 const command: Command = {
@@ -12,7 +12,7 @@ const command: Command = {
     cooldown: 0,
     execute: function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[] = []
     ): void {
         let operation: string;

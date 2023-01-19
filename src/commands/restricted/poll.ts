@@ -1,7 +1,5 @@
-import { Client, Message, Buttons } from 'whatsapp-web.js';
-// import { chats } from '../../removedInfo';
-import { Command } from '../../types';
-// import { PersistantStorage } from '../../utils';
+import { Message } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
 
 const command: Command = {
     name: 'poll',
@@ -13,7 +11,7 @@ const command: Command = {
     cooldown: 0,
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         /*/ Remove the command from the args

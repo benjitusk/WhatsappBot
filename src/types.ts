@@ -1,4 +1,25 @@
-import { Client, Message } from 'whatsapp-web.js';
+import { Collection } from '@discordjs/collection';
+import {
+    Client,
+    ClientOptions,
+    Message,
+    MessageContent,
+    MessageSendOptions,
+} from 'whatsapp-web.js';
+
+export class CustomClient extends Client {
+    autoResponses: Collection<string, any>;
+    commands: Collection<string, any>;
+    cooldowns: Collection<string, any>;
+    filters: Collection<string, any>;
+    constructor(options: ClientOptions) {
+        super(options);
+        this.autoResponses = new Collection();
+        this.commands = new Collection();
+        this.cooldowns = new Collection();
+        this.filters = new Collection();
+    }
+}
 
 export enum TaskActions {
     ADD_USER = 'addUser',
@@ -92,7 +113,7 @@ export interface AutoResponse {
     name: string;
     enabled: boolean;
     executeCondition: (message: Message) => Promise<boolean>;
-    execute: (message: Message, client: Client) => Promise<void>;
+    execute: (message: Message, client: CustomClient) => Promise<void>;
     /** A variable that is true when there is no module.exports */
     __esModule?: boolean;
 }
@@ -107,7 +128,7 @@ export interface Task {
     month: string;
     dayWeek: string;
     silent: boolean;
-    execute: (client: Client) => void;
+    execute: (client: CustomClient) => void;
     /** A variable that is true when there is no module.exports */
     __esModule?: boolean;
 }
@@ -128,7 +149,7 @@ export interface Command {
     /** Time to wait between executions, in seconds */
     cooldown: number;
     /** The function to execute when the command is triggered */
-    execute: (message: Message, client: Client, args: string[]) => void;
+    execute: (message: Message, client: CustomClient, args: string[]) => void;
     /** A variable that is true when there is no module.exports */
     __esModule?: boolean;
 }

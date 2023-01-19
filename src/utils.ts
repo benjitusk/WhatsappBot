@@ -2,7 +2,7 @@ import fs from 'fs';
 import axios from 'axios';
 import crypto from 'crypto';
 import { readFileSync, writeFileSync } from 'fs';
-import { Client, Contact, GroupChat, MessageMedia } from 'whatsapp-web.js';
+import { Contact, GroupChat, MessageMedia } from 'whatsapp-web.js';
 import { Collection } from '@discordjs/collection';
 import {
     Meal,
@@ -17,6 +17,7 @@ import {
     BotData,
     BotState,
     Command,
+    CustomClient,
 } from './types';
 
 export class PersistantStorage {
@@ -187,7 +188,7 @@ export class Bot {
         return this.data.featureStates[featureName];
     }
 
-    setFeatureState(featureName: string, state: boolean, client: Client) {
+    setFeatureState(featureName: string, state: boolean, client: CustomClient) {
         // Set the save data
         this.data.featureStates[featureName] = state;
         this.set(this.data);
@@ -326,7 +327,7 @@ export class Users {
     voteKickVote(
         votingUserID: string,
         voteKickID: string,
-        client: Client
+        client: CustomClient
     ): void {
         let voteKick = this.getVoteKickByID(voteKickID);
         if (!voteKick) return;
@@ -353,7 +354,10 @@ export class Users {
         this.applyVoteKick(voteKickID, client);
     }
 
-    async applyVoteKick(voteKickID: string, client: Client): Promise<void> {
+    async applyVoteKick(
+        voteKickID: string,
+        client: CustomClient
+    ): Promise<void> {
         for (const userID in this.data)
             for (const chatID in this.data[userID])
                 if (

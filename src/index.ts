@@ -1,11 +1,11 @@
-import { Client, LocalAuth } from 'whatsapp-web.js';
-import { existsSync } from 'fs';
+import { LocalAuth } from 'whatsapp-web.js';
 import { Collection } from '@discordjs/collection';
+import { CustomClient } from './types';
 
 // Log to the console that we are starting execution
 console.log('\n=== [START] ===');
 
-const client = new Client({
+const client = new CustomClient({
     puppeteer: { headless: true },
     authStrategy: new LocalAuth({ clientId: 'bot' }),
 });

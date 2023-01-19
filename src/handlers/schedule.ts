@@ -1,10 +1,9 @@
-import { Client } from 'whatsapp-web.js';
 import { readdirSync } from 'fs';
 import { CronJob } from 'cron';
-import { Task } from '../types';
+import { CustomClient, Task } from '../types';
 import { Bot } from '../utils';
 
-module.exports = (client: Client): void => {
+module.exports = (client: CustomClient): void => {
     // Get all js files in the folder. These files are the event handlers.
     const eventFiles = readdirSync(`./schedule`).filter((file) =>
         file.endsWith('.js')
@@ -35,7 +34,7 @@ module.exports = (client: Client): void => {
     }
 };
 
-function generateTaskFunction(task: Task, client: Client): () => void {
+function generateTaskFunction(task: Task, client: CustomClient): () => void {
     return function () {
         if (!task.silent) console.log(`[${task.name}] Executing task`);
         try {

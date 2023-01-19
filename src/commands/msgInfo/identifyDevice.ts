@@ -1,5 +1,5 @@
-import { Message, Client } from 'whatsapp-web.js';
-import { Command } from '../../types';
+import { Message } from 'whatsapp-web.js';
+import { Command, CustomClient } from '../../types';
 
 const command: Command = {
     name: 'device',
@@ -11,7 +11,7 @@ const command: Command = {
     cooldown: 0,
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         const quotedMessage = await message.getQuotedMessage();

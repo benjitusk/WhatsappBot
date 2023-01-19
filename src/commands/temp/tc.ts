@@ -1,6 +1,6 @@
-import { Client, GroupChat, Message } from 'whatsapp-web.js';
+import { GroupChat, Message } from 'whatsapp-web.js';
 import { Contacts } from '../../removedInfo';
-import { Command } from '../../types';
+import { Command, CustomClient } from '../../types';
 
 const command: Command = {
     name: 'remove_tc',
@@ -13,7 +13,7 @@ const command: Command = {
     cooldown: 0,
     execute: async function (
         message: Message,
-        client: Client,
+        client: CustomClient,
         args: string[]
     ): Promise<void> {
         // Get Gavi Gershov's contact
