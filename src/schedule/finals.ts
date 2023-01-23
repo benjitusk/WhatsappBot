@@ -4,7 +4,7 @@ import { CustomClient, Task } from '../types';
 
 const task: Task = {
     name: 'finalsReminder',
-    enabled: true,
+    enabled: false,
     seconds: '0',
     minutes: '0',
     hours: '9-20',
@@ -26,14 +26,14 @@ const task: Task = {
         const chat = await eyal.getChat();
         const messageCount = 3;
         const randomTimes = [];
-        const EYALS_FIRST_FINAL = new Date('2023-01-26T13:07:00.000Z');
+        const EYALS_FIRST_FINAL = new Date('2023-01-26T07:00:00.000Z');
         for (let i = 0; i < messageCount; i++) {
             randomTimes.push(Math.floor(Math.random() * 60));
         }
         for (let time of randomTimes) {
             setTimeout(async () => {
                 let timeToFinal = prettyMilliseconds(
-                    EYALS_FIRST_FINAL.getTime() - now.getTime(),
+                    EYALS_FIRST_FINAL.getTime() - Date.now(),
                     {
                         secondsDecimalDigits: 3,
                         verbose: true,

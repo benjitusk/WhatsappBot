@@ -4,7 +4,7 @@ import { CustomClient, Task } from '../types';
 
 const task: Task = {
     name: 'TefillinReminder',
-    enabled: true,
+    enabled: false,
     seconds: '0',
     minutes: '30',
     hours: '6',
