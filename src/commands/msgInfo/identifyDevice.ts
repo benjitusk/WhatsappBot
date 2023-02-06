@@ -22,11 +22,17 @@ const command: Command = {
                     '.\nYou can quote a message to get the device that message was sent from.'
             );
         else {
-            quotedMessage.reply(
-                'This message was sent using WhatsApp for ' +
-                    quotedMessage.deviceType +
-                    '.'
-            );
+            if (quotedMessage.fromMe) {
+                message.reply(
+                    `Mind your own business, ${message.deviceType} user.`
+                );
+            } else {
+                quotedMessage.reply(
+                    'This message was sent using WhatsApp for ' +
+                        quotedMessage.deviceType +
+                        '.'
+                );
+            }
         }
     },
 };
