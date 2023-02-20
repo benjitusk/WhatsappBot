@@ -1,6 +1,6 @@
 {
     "name": "whatsapp",
-    "version": "3.43.8",
+    "version": "3.43.9",
     "description": "whatsapp bot",
     "main": "dist/index.js",
     "scripts": {
