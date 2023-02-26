@@ -10,7 +10,7 @@ const client = new CustomClient({
 
 client.initialize();
 
-['events'].forEach((handler) => {
+['events', 'commands'].forEach((handler) => {
     require(`./handlers/${handler}`)(client);
 });
 

@@ -27,7 +27,6 @@ const command: Command = {
             message.reply(
                 `It's Pesach!\n(There's no empty cup emojis...)⬇️ Chag Sameach!`
             );
-        // else message.reply(`${timeToPurim + 355} days until Purim!\n🥂 Lchaim!`);
     },
 };
 

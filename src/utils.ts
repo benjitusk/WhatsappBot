@@ -3,7 +3,6 @@ import axios from 'axios';
 import crypto from 'crypto';
 import { readFileSync, writeFileSync } from 'fs';
 import { Contact, GroupChat, MessageMedia } from 'whatsapp-web.js';
-import { Collection } from '@discordjs/collection';
 import {
     Meal,
     PersistantData,
@@ -434,7 +433,7 @@ export class Users {
      * Returns all bans for all chats for all users
      */
     getAllBans(): Ban[] {
-        let bans = [];
+        let bans: Ban[] = [];
         for (const userID in this.data)
             for (const chatID in this.data[userID])
                 if (this.data[userID][chatID].ban)
@@ -631,4 +630,22 @@ function shouldGetMealForTomorrow(meal: Meal, date: Date): boolean {
         ((hour > 13 || (hour == 13 && minute > 30)) && meal == Meal.LUNCH) ||
         ((hour > 19 || (hour == 19 && minute > 45)) && meal == Meal.DINNER)
     );
+}
+
+export function parseMilliseconds(milliseconds: number) {
+    if (typeof milliseconds !== 'number') {
+        throw new TypeError('Expected a number');
+    }
+
+    const roundTowardsZero = milliseconds > 0 ? Math.floor : Math.ceil;
+
+    return {
+        days: roundTowardsZero(milliseconds / 86400000),
+        hours: roundTowardsZero(milliseconds / 3600000) % 24,
+        minutes: roundTowardsZero(milliseconds / 60000) % 60,
+        seconds: roundTowardsZero(milliseconds / 1000) % 60,
+        milliseconds: roundTowardsZero(milliseconds) % 1000,
+        microseconds: roundTowardsZero(milliseconds * 1000) % 1000,
+        nanoseconds: roundTowardsZero(milliseconds * 1e6) % 1000,
+    };
 }
