@@ -1,4 +1,5 @@
-import { LocalAuth, Client } from 'whatsapp-web.js';
+import { LocalAuth } from 'whatsapp-web.js';
+import { CustomClient } from './types';
 const commandLineArgs = require('command-line-args');
 
 // Hard limit of 45 seconds
@@ -13,7 +14,7 @@ const optionDefinitions = [
 ];
 const options = commandLineArgs(optionDefinitions);
 
-const client = new Client({
+const client = new CustomClient({
     puppeteer: { headless: true },
     authStrategy: new LocalAuth({
         clientId: 'benji',
@@ -26,6 +27,7 @@ const client = new Client({
 
 client.once('ready', async () => {
     await client.sendMessage(options.contact, options.message);
+    await new Promise((resolve) => setTimeout(resolve, 5000));
     console.log('Message sent!');
     await new Promise((resolve) => setTimeout(resolve, 5000));
     await client.destroy();
