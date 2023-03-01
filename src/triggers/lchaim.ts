@@ -11,13 +11,9 @@ const AutoReply: AutoResponse = {
         message.react('🍾');
     },
     executeCondition: async function (message: Message): Promise<boolean> {
-        return Promise.resolve(
-            message.body.toLowerCase().replaceAll('=', '').includes('lchaim')
-        );
-        // if (message.author == Contacts.ARIEL_BLUMSTEIN) {
-        // 	await delay(Math.random() * 4000 + 3000); // between 3k and 7k ms
-        // 	return Promise.resolve(true);
-        // } else return Promise.resolve(false);
+        // Remove all non-alphanumeric characters
+        message.body = message.body.replace(/[^a-zA-Z0-9]/g, '');
+        return Promise.resolve(message.body.toLowerCase().includes('lchaim'));
     },
 };
 
