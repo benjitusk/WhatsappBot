@@ -17,7 +17,43 @@ import {
     BotState,
     Command,
     CustomClient,
+    Assignment,
 } from './types';
+import { resolve, join } from 'path';
+
+export function getRelativePath(path: string): string {
+    return resolve(join(process.cwd(), path));
+}
+
+export function getAssignmentFromRow(
+    id: string,
+    subject: string,
+    dueDate: number,
+    assignment: string
+): Assignment {
+    return {
+        subject: subject,
+        dueDate,
+        assignment: assignment,
+        id: id,
+        mutedBy: [],
+        messageIDs: [],
+        reminders: {
+            week: {
+                time: dueDate - 604800000,
+                sent: dueDate < Date.now() + 604800000, // If the assignment is due in less than a week, don't send a reminder
+            },
+            day: {
+                time: dueDate - 86400000,
+                sent: dueDate < Date.now() + 86400000, // If the assignment is due in less than a day, don't send a reminder
+            },
+            hour: {
+                time: dueDate - 3600000,
+                sent: dueDate < Date.now() + 3600000, // If the assignment is due in less than an hour, don't send a reminder
+            },
+        },
+    };
+}
 
 export class PersistantStorage {
     private data: PersistantData;

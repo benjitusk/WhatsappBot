@@ -5,6 +5,7 @@ import {
     Message,
     MessageContent,
     MessageSendOptions,
+    Reaction,
 } from 'whatsapp-web.js';
 
 export class CustomClient extends Client {
@@ -50,6 +51,40 @@ export interface BotData {
     featureStates: {
         [name: string]: boolean;
     };
+}
+
+export interface ReactionHandler {
+    emoji: string;
+    execute: (reaction: Reaction, client: CustomClient) => void;
+}
+
+interface Reminder {
+    time: number;
+    sent: boolean;
+}
+
+export interface Assignment {
+    subject: string;
+    dueDate: number;
+    assignment: string;
+    id: string;
+    mutedBy: string[];
+    messageIDs: string[];
+    reminders: {
+        [key: string]: Reminder;
+        week: Reminder;
+        day: Reminder;
+        hour: Reminder;
+    };
+}
+export interface Student {
+    name: string;
+    subscribedSubjects: string[];
+    whatsappID: string;
+}
+export interface HomeworkDatabase {
+    assignments: { [id: string]: Assignment };
+    students: { [id: string]: Student };
 }
 
 export interface FoodData {

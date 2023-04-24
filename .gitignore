@@ -17,3 +17,4 @@ media/
 dist/
 persistant/
 .wwebjs_auth/
+googlecreds.json
