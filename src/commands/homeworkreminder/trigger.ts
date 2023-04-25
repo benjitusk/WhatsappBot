@@ -1,19 +1,10 @@
 import { Message } from 'whatsapp-web.js';
-import {
-    Assignment,
-    CustomClient,
-    HomeworkDatabase,
-    Command,
-} from '../../types';
-import fs from 'fs';
-import { UUID, getRelativePath } from '../../utils';
+import { Assignment, CustomClient, Command } from '../../types';
+import { UUID } from '../../utils';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import HomeworkManager from '../../HomeworkManager';
 const creds = require('../../../googlecreds.json');
-const HOMEWORK_DB_PATH = getRelativePath('../persistant/homework.json');
-const doc = new GoogleSpreadsheet(
-    '1P6I1UX82mVJnCr0BTjrlo_JTR5s8MK1QxiW6rgmwvvk'
-);
+const doc = new GoogleSpreadsheet(HomeworkManager.GOOGLE_SHEET_ID);
 
 const command: Command = {
     name: 'homework',

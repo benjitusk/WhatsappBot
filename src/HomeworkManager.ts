@@ -3,11 +3,12 @@ import { Assignment, CustomClient, HomeworkDatabase, Student } from './types';
 import { getRelativePath } from './utils';
 import { readFileSync, writeFileSync } from 'fs';
 import prettyMilliseconds from 'pretty-ms';
-import { Contacts } from './removedInfo';
+import { Contacts, HomeworkAuth } from './removedInfo';
 const HOMEWORK_DB_PATH = getRelativePath('../persistant/homework.json');
 
 export default class HomeworkManager {
     private database: HomeworkDatabase;
+    public static GOOGLE_SHEET_ID = HomeworkAuth.GOOGLE_SHEET_ID;
     private static CHAT_ID = Contacts.HOMEWORK_REMINDER_CHAT_ID;
     static shared = new HomeworkManager();
 

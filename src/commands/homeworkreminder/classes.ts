@@ -2,11 +2,9 @@ import { Message } from 'whatsapp-web.js';
 import { Command, CustomClient } from '../../types';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
 import HomeworkManager from '../../HomeworkManager';
+import { HomeworkAuth } from '../../removedInfo';
 const creds = require('../../../googlecreds.json');
-const doc = new GoogleSpreadsheet(
-    '1P6I1UX82mVJnCr0BTjrlo_JTR5s8MK1QxiW6rgmwvvk'
-);
-const CLASSES_SHEET_ID = '128174630';
+const doc = new GoogleSpreadsheet(HomeworkManager.GOOGLE_SHEET_ID);
 
 const command: Command = {
     name: 'classes',
@@ -33,7 +31,7 @@ const command: Command = {
         const classes = [];
         await doc.useServiceAccountAuth(creds);
         await doc.loadInfo();
-        const sheet = doc.sheetsById[CLASSES_SHEET_ID]; // The classes sheet
+        const sheet = doc.sheetsById[HomeworkAuth.METADATA_SHEET_ID]; // The classes sheet
         await sheet.loadCells('A2:A999');
         for (let i = 2; i <= 999; i++) {
             const cell = sheet.getCell(i, 0);
