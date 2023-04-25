@@ -28,6 +28,7 @@ const command: Command = {
                 `You are already registered as ${registeredStudent.name}! I will update your name to ${username}.`
             );
             registeredStudent.name = username;
+            HomeworkManager.shared.setStudent(registeredStudent);
             return;
         }
 
