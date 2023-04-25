@@ -4,7 +4,7 @@ import { CustomClient } from './types';
 const client = new CustomClient({
     authStrategy: new LocalAuth({ clientId: 'bot' }),
     puppeteer: {
-        headless: false,
+        headless: true,
     },
 });
 
