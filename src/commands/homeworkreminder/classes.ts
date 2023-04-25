@@ -1,6 +1,7 @@
 import { Message } from 'whatsapp-web.js';
 import { Command, CustomClient } from '../../types';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
+import HomeworkManager from '../../HomeworkManager';
 const creds = require('../../../googlecreds.json');
 const doc = new GoogleSpreadsheet(
     '1P6I1UX82mVJnCr0BTjrlo_JTR5s8MK1QxiW6rgmwvvk'
@@ -20,6 +21,14 @@ const command: Command = {
         client: CustomClient,
         args: string[]
     ): Promise<void> {
+        const registeredStudent = HomeworkManager.shared.getStudentByID(
+            message.from
+        );
+        if (registeredStudent === undefined) {
+            message.reply("You're not registered yet.");
+            return;
+        }
+
         // This will list all the classes a user can subscribe to
         const classes = [];
         await doc.useServiceAccountAuth(creds);
@@ -34,9 +43,17 @@ const command: Command = {
             classes.push(`${i - 1}) ${cell.value}`);
         }
         message.reply(
-            `Here are the classes you can subscribe to:\n${classes.join(
-                '\n'
-            )}\n\nYou can subscribe to a class by typing !subscribe <class number> or !subscribe <class name>.`
+            `Here are the classes you can subscribe to:\n${classes
+                .map((c) =>
+                    registeredStudent.subscribedSubjects.includes(
+                        c.split(') ')[1]
+                    )
+                        ? `*${c} ✨*`
+                        : c
+                )
+                .join(
+                    '\n'
+                )}\n\nYou can subscribe to a class by typing !subscribe <class number> or !subscribe <class name>.`
         );
     },
 };
