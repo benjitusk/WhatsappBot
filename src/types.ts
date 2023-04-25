@@ -2,6 +2,7 @@ import { Collection } from '@discordjs/collection';
 import {
     Client,
     ClientOptions,
+    Contact,
     Message,
     MessageContent,
     MessageSendOptions,
@@ -72,6 +73,7 @@ export interface Assignment {
     messageIDs: string[];
     reminders: {
         [key: string]: Reminder;
+        initial: Reminder;
         week: Reminder;
         day: Reminder;
         hour: Reminder;
@@ -80,7 +82,8 @@ export interface Assignment {
 export interface Student {
     name: string;
     subscribedSubjects: string[];
-    whatsappID: string;
+    id: string;
+    _contact: Contact;
 }
 export interface HomeworkDatabase {
     assignments: { [id: string]: Assignment };
