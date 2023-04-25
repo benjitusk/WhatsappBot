@@ -24,7 +24,7 @@ const command: Command = {
         const classes = [];
         await doc.useServiceAccountAuth(creds);
         await doc.loadInfo();
-        const sheet = doc.sheetsById['128174630']; // The classes sheet
+        const sheet = doc.sheetsById[CLASSES_SHEET_ID]; // The classes sheet
         await sheet.loadCells('A2:A999');
         for (let i = 2; i <= 999; i++) {
             const cell = sheet.getCell(i, 0);
@@ -34,7 +34,7 @@ const command: Command = {
             classes.push(`${i - 1}) ${cell.value}`);
         }
         message.reply(
-            `Here are the classes you can subscribe to: ${classes.join(
+            `Here are the classes you can subscribe to:\n${classes.join(
                 '\n'
             )}\n\nYou can subscribe to a class by typing !subscribe <class number> or !subscribe <class name>.`
         );
