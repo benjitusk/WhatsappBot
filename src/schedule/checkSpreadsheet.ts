@@ -9,7 +9,7 @@ const task: Task = {
     name: 'homeworkspreadsheet',
     enabled: true,
     seconds: '0',
-    minutes: '*5',
+    minutes: '*/5',
     hours: '*',
     dayMonth: '*',
     month: '*',
