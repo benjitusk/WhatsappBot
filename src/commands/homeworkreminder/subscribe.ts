@@ -47,7 +47,7 @@ const command: Command = {
         const classNumber = Number(className);
         // check if the name is a number
         if (!isNaN(Number(className))) {
-            className = classes[classNumber];
+            className = classes[classNumber + 1]; // -1 because the first class is 1, not 0
         }
 
         // Now that we have a name, check if it's valid
@@ -66,6 +66,7 @@ const command: Command = {
 
         // Subscribe the user
         registeredStudent.subscribedSubjects.push(className);
+        HomeworkManager.shared.setStudent(registeredStudent);
         // and reply
         message.reply(
             'You have been subscribed to ' +
