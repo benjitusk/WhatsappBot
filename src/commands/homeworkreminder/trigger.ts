@@ -5,12 +5,12 @@ import {
     HomeworkDatabase,
     Command,
 } from '../../types';
-import { GoogleSpreadsheet } from 'google-spreadsheet';
 import fs from 'fs';
 import { Contact } from 'whatsapp-web.js';
 import { Contacts } from '../../removedInfo';
 import prettyMilliseconds from 'pretty-ms';
-import { getAssignmentFromRow, getRelativePath } from '../../utils';
+import { UUID, getAssignmentFromRow, getRelativePath } from '../../utils';
+import { GoogleSpreadsheet } from 'google-spreadsheet';
 const creds = require('../../../googlecreds.json');
 const HOMEWORK_DB_PATH = getRelativePath('../persistant/homework.json');
 const doc = new GoogleSpreadsheet(
@@ -40,10 +40,17 @@ const command: Command = {
         const rows = await sheet.getRows();
         // Check for new assignments
         for (let row of rows) {
-            const id = row.ID as string;
-            // Check if the row is empty
-            if (!(row.Subject && row['Due Date'] && row.Assignment && row.ID))
-                continue;
+            let id = row.ID as string;
+            // Check if the row is valid
+            if (!(row.Subject && row['Due Date'] && row.Assignment)) continue;
+            // Check if an ID is present
+            if (!id) {
+                // If not, generate one
+                id = UUID();
+                row.ID = id;
+                // Update the sheet
+                row.save();
+            }
             const dateTimestamp = new Date(row['Due Date'] as number).getTime();
 
             // Check if the assignment is already in the database

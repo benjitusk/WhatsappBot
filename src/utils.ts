@@ -178,6 +178,8 @@ export class FoodManager {
     }
 }
 
+export const UUID = () => crypto.randomUUID();
+
 export class Bot {
     data: BotData;
     private path: string;
