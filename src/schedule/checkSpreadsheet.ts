@@ -1,24 +1,21 @@
 import { Message } from 'whatsapp-web.js';
-import { Assignment, CustomClient, Command } from '../../types';
-import { UUID } from '../../utils';
+import { Assignment, CustomClient, Task } from '../types';
+import { UUID } from '../utils';
 import { GoogleSpreadsheet } from 'google-spreadsheet';
-import HomeworkManager from '../../HomeworkManager';
-const creds = require('../../../googlecreds.json');
+import HomeworkManager from '../HomeworkManager';
+const creds = require('../../googlecreds.json');
 const doc = new GoogleSpreadsheet(HomeworkManager.GOOGLE_SHEET_ID);
-
-const command: Command = {
-    name: 'homework',
-    helpText: 'trigger the homework check',
-    syntax: '!homework',
+const task: Task = {
+    name: 'homeworkspreadsheet',
     enabled: true,
-    admin: true,
-    aliases: ['homework', 'hw'],
-    cooldown: 0,
-    execute: async function (
-        message: Message,
-        client: CustomClient,
-        args: string[]
-    ): Promise<void> {
+    seconds: '0',
+    minutes: '*5',
+    hours: '*',
+    dayMonth: '*',
+    month: '*',
+    dayWeek: '0-6',
+    silent: false,
+    execute: async function (client: CustomClient): Promise<void> {
         await doc.useServiceAccountAuth(creds);
         await doc.loadInfo();
         const sheet = doc.sheetsByIndex[0];
@@ -66,11 +63,7 @@ const command: Command = {
                     HomeworkManager.getAssignmentFromRow(homeworkRow);
                 // Add the assignment to the database
                 HomeworkManager.shared.setAssignment(homework);
-                continue;
-            }
-
-            // If the assignment is already in the database, check if it has been updated
-            if (
+            } else if (
                 homework.subject !== row.Subject ||
                 homework.assignment !== row.Assignment ||
                 homework.dueDate !== dateTimestamp
@@ -92,4 +85,4 @@ const command: Command = {
     },
 };
 
-module.exports = command;
+module.exports = task;
