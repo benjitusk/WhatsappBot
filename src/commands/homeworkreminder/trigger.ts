@@ -12,7 +12,7 @@ const command: Command = {
     syntax: '!homework',
     enabled: true,
     admin: true,
-    aliases: ['homework'],
+    aliases: ['homework', 'hw'],
     cooldown: 0,
     execute: async function (
         message: Message,
@@ -26,11 +26,11 @@ const command: Command = {
         // Check for new assignments
         for (let row of rows) {
             const homeworkRow = {
-                id: row.ID,
-                subject: row.Subject,
-                dueDate: row['Due Date'],
-                assignment: row.Assignment,
-            };
+                id: row.ID as string,
+                subject: row.Subject as string,
+                dueDate: new Date(row['Due Date']).getTime(),
+                assignment: row.Assignment as string,
+            } as Assignment;
             // Check if the row is valid
             if (
                 !(
@@ -40,6 +40,12 @@ const command: Command = {
                 )
             )
                 continue;
+            // Check if row is expired
+            if (homeworkRow.dueDate < Date.now()) {
+                row.delete();
+                continue;
+            }
+
             // Check if an ID is present
             if (!homeworkRow.id) {
                 // If not, generate one
@@ -60,9 +66,7 @@ const command: Command = {
                     HomeworkManager.getAssignmentFromRow(homeworkRow);
                 // Add the assignment to the database
                 HomeworkManager.shared.setAssignment(homework);
-                // ALERT THE POPULACE
-                HomeworkManager.shared.alertChat(client, homework, true);
-                return;
+                continue;
             }
 
             // If the assignment is already in the database, check if it has been updated
@@ -82,9 +86,9 @@ const command: Command = {
                 // Update the database
                 HomeworkManager.shared.setAssignment(newHomework);
             }
-
-            HomeworkManager.shared.sendAllReminders(client);
         }
+        HomeworkManager.shared.sendAllReminders(client);
+        HomeworkManager.shared.clearOldAssignments();
     },
 };
 

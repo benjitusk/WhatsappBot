@@ -75,7 +75,7 @@ export default class HomeworkManager {
     public sendAllReminders(client: CustomClient): void {
         for (let assignment of this.getAllAssignments()) {
             if (this.shouldSendReminder(assignment)) {
-                this.alertChat(client, assignment, false);
+                this.alertChat(client, assignment);
                 // Update the reminder
                 for (let reminder of Object.values(assignment.reminders)) {
                     if (!reminder.sent && reminder.time < Date.now()) {
@@ -87,14 +87,22 @@ export default class HomeworkManager {
         }
     }
 
+    public clearOldAssignments(): void {
+        const assignments = this.getAllAssignments();
+        for (let assignment of assignments) {
+            if (assignment.dueDate < Date.now()) {
+                this.deleteAssignment(assignment.id);
+            }
+        }
+    }
+
     public async alertChat(
         client: CustomClient,
-        assignment: Assignment,
-        isNew: boolean
+        assignment: Assignment
     ): Promise<void> {
         const dueDate = new Date(assignment.dueDate);
         let message = `*${assignment.subject} Homework`;
-        if (isNew) message += ' (New)';
+        if (!assignment.reminders.initial.sent) message += ' (New) ✨';
         message += '*\n\n';
         message += `*Assignment*: ${assignment.assignment}\n`;
         message += `*Due Date*: ${dueDate.toDateString()} ${dueDate.toTimeString()}\n`;
