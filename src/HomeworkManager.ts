@@ -170,6 +170,11 @@ export default class HomeworkManager {
         return Object.values(this.database.assignments);
     }
 
+    public subscribeStudentToSubject(student: Student, subject: string): void {
+        student.subscribedSubjects.push(subject);
+        this.setStudent(student);
+    }
+
     public getStudentsToNotifyForAssignment(assignment: Assignment): Student[] {
         const students = [] as Student[];
         for (const student of this.getAllStudents()) {
