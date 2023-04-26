@@ -145,6 +145,8 @@ export default class HomeworkManager {
     }
 
     public setStudent(student: Student): void {
+        // Remove duplicates in subjects
+        student.subscribedSubjects = [...new Set(student.subscribedSubjects)];
         this.database.students[student.id] = student;
         this.saveDatabase(this.database);
     }
