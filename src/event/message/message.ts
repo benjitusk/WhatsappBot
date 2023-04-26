@@ -22,6 +22,7 @@ module.exports = {
      * @returns { Promise<void> }
      */
     async execute(message: Message, client: CustomClient): Promise<void> {
+        if (Bot.shared.getState() === BotState.OFF) return;
         /**
          * Any functionality that needs to be executed
          * when a message is received can be done here.
@@ -66,7 +67,7 @@ module.exports = {
         // 2. Handle commands.
         if (message.body.startsWith(prefix)) {
             // Split the message wherever there are one or more spaces or newlines.
-            let args = message.body.trim().split(/[ \n]+/);
+            let args = message.body.trim().split(/[ \n]+/g);
             args[0] = args[0].slice(prefix.length);
             // Remove the prefix from the first argument. and lowercase it.
             const commandName = args[0].toLowerCase();
@@ -98,8 +99,6 @@ module.exports = {
 
             let shouldExecute = true;
             switch (Bot.shared.getState()) {
-                case BotState.OFF:
-                    return;
                 case BotState.ADMIN_ONLY:
                     if (!command.admin) return;
                     break;
