@@ -38,7 +38,10 @@ const task: Task = {
             )
                 continue;
             // Check if row is expired
-            if (homeworkRow.dueDate < Date.now()) {
+            if (
+                homeworkRow.dueDate <
+                Date.now() + HomeworkManager.OVERDUE_ALLOWANCE
+            ) {
                 row.delete();
                 continue;
             }

@@ -9,6 +9,7 @@ const HOMEWORK_DB_PATH = getRelativePath('../persistant/homework.json');
 export default class HomeworkManager {
     private database: HomeworkDatabase;
     public static GOOGLE_SHEET_ID = HomeworkAuth.GOOGLE_SHEET_ID;
+    public static OVERDUE_ALLOWANCE = 3 * 24 * 60 * 60 * 1000;
     private static CHAT_ID = Contacts.HOMEWORK_REMINDER_CHAT_ID;
     static shared = new HomeworkManager();
 
