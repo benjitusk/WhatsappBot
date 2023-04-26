@@ -27,7 +27,7 @@ const command: Command = {
         message.reply(`You are subscribed to the following classes:\n${registeredStudent.subscribedSubjects
             .map((c, i) => `*${i + 1}) ${c}*`)
             .join('\n')}
-        \nTo unsubscribe from a class, type !unsubscribe <class name>, or !unsubscribe <class number>.
+        \nTo unsubscribe from a class, type !unsubscribe <class number> [...<class number>]\nwhere \`\`\`number\`\`\` corresponds to the number of the class in *this list*.
         `);
     },
 };

@@ -24,13 +24,15 @@ Here is a brief overview of how this chat works:
 -   To see a list of all the classes you can subscribe to, send a message in the following format:
     \`\`\`!classes\`\`\`
 
--   To subscribe to a class, send a message in the following format:
-    \`\`\`!subscribe <class name>\`\`\`, or \`\`\`!subscribe <class number>\`\`\`
-    For example, to subscribe to the class "Linear Algebra I", you would send the following message:
-    \`\`\`!subscribe Linear Algebra I\`\`\`
+-   To subscribe to classes, send a message in the following format:
+    \`\`\`!subscribe <class number> [...<class number>]\`\`\`
+    where number refers to the number of the class in the *!classes* list.
+    For example, to subscribe to the class "Linear Algebra 1", you would send the following message:
+    \`\`\`!subscribe 28\`\`\`
 
 -   To unsubscribe from a class, send a message in the following format:    
-    \`\`\`!unsubscribe <class name>\`\`\` or \`\`\`!unsubscribe <class number>\`\`\`
+    \`\`\`!unsubscribe <class number> [...<class number>]\`\`\`
+    where number refers to the number of the class in the *!list* list. (Note that this is different from the *!classes* list, see below.)
 
 -   To see a list of all the classes you are subscribed to, send a message in the following format:    
     \`\`\`!list\`\`\`

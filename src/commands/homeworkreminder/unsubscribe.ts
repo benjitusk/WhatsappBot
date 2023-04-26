@@ -5,7 +5,7 @@ import HomeworkManager from '../../HomeworkManager';
 const command: Command = {
     name: 'unsubscribe',
     helpText: 'Unsubscribe from a class to stop receiving homework reminders',
-    syntax: '!unsubscribe {class number | class name}',
+    syntax: '!unsubscribe <class number> [...<class number>]',
     enabled: true,
     admin: false,
     aliases: ['unsubscribe'],
@@ -24,34 +24,34 @@ const command: Command = {
             );
             return;
         }
-        let className = args.slice(1).join(' ');
-        const classNumber = Number(className);
-        // check if the name is a number
-        if (!isNaN(Number(className))) {
-            className = registeredStudent.subscribedSubjects[classNumber - 1]; // -1 because the first class is 1, not 0
-        }
-
-        // Now that we have a name, check if it's valid
-        if (!registeredStudent.subscribedSubjects.includes(className)) {
-            message.reply(
-                `You are not subscribed to that class. No changes have been made.`
-            );
+        let classNumberStrings = args.slice(1);
+        const classNumbers = classNumberStrings.map((classNumber) =>
+            Number(classNumber)
+        );
+        if (classNumbers.some((classNumber) => isNaN(classNumber))) {
+            message.reply(`Invalid class number. Please try again.`);
             return;
         }
-
-        // Unsubscribe the user
+        const classNames = classNumbers.map(
+            (classNumber) =>
+                registeredStudent.subscribedSubjects[classNumber - 1]
+        );
         registeredStudent.subscribedSubjects =
             registeredStudent.subscribedSubjects.filter(
-                (subject) => subject !== className
+                (subject) => !classNames.includes(subject)
             );
+
         HomeworkManager.shared.setStudent(registeredStudent);
         // and reply
         message.reply(
-            'You have been unsubscribed from ' +
-                className +
-                '. To resubscribe, type !subscribe ' +
-                className +
-                '.'
+            'You have been unsubscribed from\n' +
+                classNames
+                    .map((name, i) => {
+                        return `${i + 1}) ${name}`;
+                    })
+                    .join('\n') +
+                '\n\n' +
+                'To resubscribe, use the !subscribe command.'
         );
     },
 };

@@ -9,7 +9,7 @@ const doc = new GoogleSpreadsheet(HomeworkManager.GOOGLE_SHEET_ID);
 const command: Command = {
     name: 'subscribe',
     helpText: 'Subscribe to a class to receive homework reminders',
-    syntax: '!subscribe {class number | class name}',
+    syntax: '!subscribe <class number> [...<class number>]',
     enabled: true,
     admin: false,
     aliases: ['subscribe'],
@@ -41,37 +41,47 @@ const command: Command = {
             classes[i] = cell.value as string;
         }
 
-        let className = args.slice(1).join(' ');
-        const classNumber = Number(className);
-        // check if the name is a number
-        if (!isNaN(Number(className))) {
-            className = classes[classNumber + 1]; // -1 because the first class is 1, not 0
-        }
+        const classNumbers = args.slice(1).map((classNumber) => {
+            return Number(classNumber);
+        });
+        // check that all numbers are valid
+        let valid = classNumbers.every(
+            (classNumber) =>
+                !Number.isNaN(classNumber) && classes[classNumber] !== undefined
+        );
 
         // Now that we have a name, check if it's valid
-        if (!Object.values(classes).includes(className)) {
+        if (!valid) {
             message.reply(`Invalid class name or number. Please try again.`);
             return;
         }
 
-        // Now that we have a valid class name, make sure the user isn't already subscribed
-        if (registeredStudent.subscribedSubjects.includes(className)) {
-            message.reply(
-                `You are already subscribed to ${className}. To unsubscribe, type !unsubscribe ${className}.`
-            );
-            return;
-        }
+        // // Now that we have a valid class name, make sure the user isn't already subscribed
+        // if (registeredStudent.subscribedSubjects.includes(classes)) {
+        //     message.reply(
+        //         `You are already subscribed to ${className}. To unsubscribe, type !unsubscribe ${className}.`
+        //     );
+        //     return;
+        // }
 
         // Subscribe the user
-        registeredStudent.subscribedSubjects.push(className);
+        classNumbers.forEach((number) => {
+            registeredStudent.subscribedSubjects.push(classes[number]);
+        });
+
         HomeworkManager.shared.setStudent(registeredStudent);
         // and reply
         message.reply(
-            'You have been subscribed to ' +
-                className +
-                '. To unsubscribe, type !unsubscribe ' +
-                className +
-                '.'
+            'You have been subscribed to the following subjects:\n' +
+                classNumbers
+                    .map((number, i) => {
+                        return `${i + 1}) ${classes[number]}${
+                            i === classNumbers.length - 1 ? '' : ', '
+                        }`;
+                    })
+                    .join('\n') +
+                '\n\nTo unsubscribe, type !unsubscribe <class number> [...<class number>]' +
+                '\nwhere <class number> corresponds to the number next to the class in the *!list* command.'
         );
     },
 };
