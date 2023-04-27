@@ -33,12 +33,12 @@ const command: Command = {
         await doc.loadInfo();
         const sheet = doc.sheetsById[HomeworkAuth.METADATA_SHEET_ID]; // The classes sheet
         await sheet.loadCells('A2:A999');
-        for (let i = 2; i <= 999; i++) {
+        for (let i = 1; i <= 999; i++) {
             const cell = sheet.getCell(i, 0);
             if (cell.value === null || cell.value === undefined) {
                 break;
             }
-            classes.push(`${i - 1}) ${cell.value}`);
+            classes.push(`${i}) ${cell.value}`);
         }
         message.reply(
             `Here are the classes you can subscribe to:\n${classes

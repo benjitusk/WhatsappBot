@@ -233,28 +233,3 @@ export interface PersistantData {
         };
     };
 }
-
-/*
-
-type DayOfTheWeek =
-	| 'sunday'
-	| 'monday'
-	| 'tuesday'
-	| 'wednesday'
-	| 'thursday'
-	| 'friday'
-	| 'saturday';
-
-type DayOfTheWeekMap<T> = { [day in DayOfTheWeek]: T };
-
-const chores: DayOfTheWeekMap<string> = {
-	sunday: 'do the dishes',
-	monday: 'walk the dog',
-	tuesday: 'water the plants',
-	wednesday: 'take out the trash',
-	thursday: 'clean your room',
-	friday: 'mow the lawn',
-	saturday: 'relax',
-};
-
-*/
